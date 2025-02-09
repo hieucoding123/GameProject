@@ -1,25 +1,30 @@
 ﻿#include <iostream>
 #include <SDL.h>
+#include "Game.h"
 
-using std::cout;
-using std::cin;
-using std::endl;
+const int WIDTH = 800;
+const int HIGH = 600;
+
+Game* game = nullptr;
 
 int main(int argc, char* argv[])
 {
-	SDL_Init(SDL_INIT_EVERYTHING); // Khởi tạo mọi thứ (video, hình ảnh, ... )
+	game = new Game;
 
-	SDL_Window* window = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
-	// tạo cửa sổ ở giữa màn hình
+	int xpos = SDL_WINDOWPOS_CENTERED;
+	int ypos = SDL_WINDOWPOS_CENTERED;
 
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
-	// tạo trình dựng
+	game->init("Game", xpos, ypos, WIDTH, HIGH, false);
+	while (game->running())
+	{
+		game->handleEvents();
+		game->update();
+		game->render();
+	}
 
-	SDL_SetRenderDrawColor(renderer, 255, 200, 200, 255); // tô màu rgb và alpha
-	SDL_RenderClear(renderer); // xóa trình dựng trước đó bằng màu ở trên
-	SDL_RenderPresent(renderer);
-
-	SDL_Delay(1000);	// Thời gian show cửa sổ
+	game->clean();
+	
+	std::cout << "GAME OVER!" << std::endl;
 
 	return 0;
 }
