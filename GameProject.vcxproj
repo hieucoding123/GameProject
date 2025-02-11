@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Admin\Downloads\SDL2-devel-2.32.0-VC\SDL2-2.32.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Admin\Downloads\SDL2-devel-2.32.0-VC\SDL2-2.32.0\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Admin\Downloads\SDL2_image-devel-2.8.5-VC\SDL2_image-2.8.5\include;C:\Users\Admin\Downloads\SDL2-devel-2.32.0-VC\SDL2-2.32.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Admin\Downloads\SDL2_image-devel-2.8.5-VC\SDL2_image-2.8.5\lib\x64;C:\Users\Admin\Downloads\SDL2-devel-2.32.0-VC\SDL2-2.32.0\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>C:\Users\Admin\Downloads\SDL2-devel-2.32.0-VC\SDL2-2.32.0\include;$(IncludePath)</IncludePath>
@@ -112,13 +112,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Admin\source\repos\GameProject\src;C:\Users\Admin\source\repos\GameProject\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Admin\Downloads\SDL2-devel-2.32.0-VC\SDL2-2.32.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Admin\Downloads\SDL2_image-devel-2.8.5-VC\SDL2_image-2.8.5\lib\x64;C:\Users\Admin\Downloads\SDL2-devel-2.32.0-VC\SDL2-2.32.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -147,11 +147,11 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="include\Game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

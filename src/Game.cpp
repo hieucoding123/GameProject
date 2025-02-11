@@ -1,6 +1,7 @@
-#include <iostream>
-#include <SDL.h>
+﻿#include <iostream>
 #include "Game.h"
+
+SDL_Texture* playerTex;
 
 Game::Game()
 { }
@@ -38,6 +39,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	else {
 		isRunning = false;
 	}
+	SDL_Surface* tmpSurface = IMG_Load("C:/Users/Admin/source/repos/GameProject/images/player.png");
+	playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+	SDL_FreeSurface(tmpSurface);	// giải phóng bộ nhớ khi không dùng tmpSurface nữa
 }
 
 void Game::handleEvents()
@@ -65,7 +69,9 @@ void Game::render()
 {
 	// render
 	SDL_RenderClear(renderer);
+	// add render stuff
 
+	SDL_RenderCopy(renderer, playerTex, NULL, NULL); // dùng để vẽ texture
 	SDL_RenderPresent(renderer);
 }
 

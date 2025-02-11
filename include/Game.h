@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <SDL_image.h>
 #include <SDL.h>
 
 class Game

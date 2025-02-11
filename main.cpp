@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include <SDL.h>
+#include <SDL_image.h>
 #include "Game.h"
 
 const int WIDTH = 800;
