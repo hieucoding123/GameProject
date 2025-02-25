@@ -56,3 +56,56 @@ Vector2D& operator/ (Vector2D& v1, const Vector2D& v2)
 {
 	return v1.add(v2);
 }
+
+Vector2D& Vector2D::operator+= (const Vector2D& v)
+{
+	return this->add(v);
+}
+Vector2D& Vector2D::operator-= (const Vector2D& v)
+{
+	return this->subtract(v);
+}
+Vector2D& Vector2D::operator*= (const Vector2D& v)
+{
+	return this->multiply(v);
+}
+Vector2D& Vector2D::operator/= (const Vector2D& v)
+{
+	return this->divide(v);
+}
+
+Vector2D& Vector2D::operator+ (const double& n)
+{
+	this->x += n;
+	this->y += n;
+
+	return *this;
+}
+Vector2D& Vector2D::operator- (const double& n)
+{
+	this->x -= n;
+	this->y -= n;
+
+	return *this;
+}
+Vector2D& Vector2D::operator* (const double& n)
+{
+	this->x *= n;
+	this->y *= n;
+
+	return *this;
+}
+Vector2D& Vector2D::operator/ (const double& n)
+{
+	this->x /= n;
+	this->y /= n;
+
+	return *this;
+}
+
+std::ostream& operator<< (std::ostream& stream, const Vector2D& v)
+{
+	stream << "(" << v.x << ", " << v.y << ")" << std::endl;
+
+	return stream;
+}

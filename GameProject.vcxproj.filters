@@ -57,4 +57,32 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\CollisionsMap.txt" />
+    <Text Include="assets\map16x16.txt" />
+    <Text Include="assets\TileMap.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\dirt.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\grass.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\imageTileMap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\map.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\sasuke.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\water.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

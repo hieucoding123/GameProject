@@ -26,7 +26,7 @@ inline ComponentID getComponentID()
 
 
 // mỗi T nhận 1 ID riêng
-template<class T> Component getComponentID() noexcept
+template<class T> inline ComponentID getComponentID() noexcept
 {
 	static ComponentID typeID = getComponentID();
 	return typeID;
@@ -36,10 +36,12 @@ template<class T> Component getComponentID() noexcept
 class Component
 {
 public:
-	
+	Entity* entity;
+		
 	virtual void init() {}
 	virtual void update() {}
 	virtual void draw() {}
+
 	virtual ~Component() {}
 };
 
@@ -68,9 +70,9 @@ public:
 	template<class T, class ... TArgs>
 	T& addComponent(TArgs&& ... mArgs)
 	{
-		T* c(new T(std::forward(TArgs) < mArgs > ...));
+		T* c(new T(std::forward<TArgs>(mArgs)...));
 		c->entity = this;
-		std::unique_ptr<T> uPtr{ c };
+		std::unique_ptr<Component> uPtr{ c };
 		components.emplace_back(std::move(uPtr));
 
 		componentArray[getComponentID<T>()] = c;
@@ -91,7 +93,7 @@ public:
 	// có T trong Entity không
 	template<class T> bool hasComponent() const
 	{
-		return ComponentBitset[getComponentID<T>()];
+		return componentBitset[getComponentID<T>()];
 	}
 };
 
@@ -123,7 +125,7 @@ public:
 	void refresh()
 	{
 		entities.erase(std::remove_if(std::begin(entities), std::end(entities),
-			[](Entity* mEntity) {
+			[](const std::unique_ptr<Entity>& mEntity) {
 				return !mEntity->isActive();
 			}), std::end(entities));
 	}

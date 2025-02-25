@@ -2,12 +2,15 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "Map.h"
+#include "ECS/Components.h"
 
-SDL_Texture* playerTex;
+Manager manager;
+
 
 SDL_Renderer* Game::renderer = nullptr;
 
 Map* map;
+auto& player(manager.addEntity());
 
 SDL_Rect srcRect, destRect;
 
@@ -48,7 +51,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 		isRunning = false;
 	}
 
-	playerTex = TextureManager::LoadTexture("assets/player.png");
+	player.addComponent<TransformComponent>(50, 50);
 }
 
 void Game::handleEvents()
@@ -71,21 +74,19 @@ int k = 0;
 
 void Game::update()
 {
-	k++;
-	srcRect.x = srcRect.y = 0;
+	manager.refresh();
+	manager.update();
 
-	srcRect.w = destRect.w = 32;
-	srcRect.h = destRect.h = 64;
+	player.getComponent<TransformComponent>().position + 1;
 
-	destRect.x = destRect.y = k;
+	std::cout << player.getComponent<TransformComponent>().position;
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-	
+	manager.draw();
 
-	SDL_RenderCopy(renderer, playerTex, &srcRect, &destRect);
 	SDL_RenderPresent(renderer);
 }
 
