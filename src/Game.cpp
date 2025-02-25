@@ -48,7 +48,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 		isRunning = false;
 	}
 
-	playerTex = TextureManager::LoadTexture("C:/Users/Admin/source/repos/GameProject/assets/player.png");
+	playerTex = TextureManager::LoadTexture("assets/player.png");
 }
 
 void Game::handleEvents()

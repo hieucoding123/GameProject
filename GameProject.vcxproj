@@ -151,12 +151,17 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
+    <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Const.h" />
+    <ClInclude Include="include\ECS\Components.h" />
+    <ClInclude Include="include\ECS\ECS.h" />
+    <ClInclude Include="include\ECS\TransformComponent.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Map.h" />
     <ClInclude Include="include\TextureManager.h" />
+    <ClInclude Include="include\Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
