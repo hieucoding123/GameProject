@@ -6,6 +6,8 @@ SDL_Texture* playerTex;
 
 SDL_Renderer* Game::renderer = nullptr;
 
+SDL_Rect srcRect, destRect;
+
 Game::Game()
 { }
 
@@ -32,7 +34,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		if (renderer)
 		{
-			SDL_SetRenderDrawColor(renderer, 0, 100, 200, 255);
+			SDL_SetRenderDrawColor(renderer, 0, 200, 100, 255);
 
 			std::cout << "Renderer created!" << std::endl;
 		}
@@ -42,7 +44,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	else {
 		isRunning = false;
 	}
-	playerTex = TextureManager::LoadTexture("C:/Users/Admin/source/repos/GameProject/assets/luffy's_standing2.png");
+	playerTex = TextureManager::LoadTexture("C:/Users/Admin/source/repos/GameProject/assets/player.png");
+
+	srcRect.x = srcRect.y = 0;
+
+	srcRect.w = destRect.w = 32;
+	srcRect.h = destRect.h = 64;
+
+	destRect.x = destRect.y = 0;
 }
 
 void Game::handleEvents()
@@ -61,9 +70,17 @@ void Game::handleEvents()
 	}
 }
 
+int k = 0;
+
 void Game::update()
 {
+	k++;
+	srcRect.x = srcRect.y = 0;
 
+	srcRect.w = destRect.w = 32;
+	srcRect.h = destRect.h = 64;
+
+	destRect.x = destRect.y = k;
 }
 
 void Game::render()
@@ -71,7 +88,7 @@ void Game::render()
 	SDL_RenderClear(renderer);
 	
 
-	SDL_RenderCopy(renderer, playerTex, NULL, NULL); // dùng để vẽ texture
+	SDL_RenderCopy(renderer, playerTex, &srcRect, &destRect);
 	SDL_RenderPresent(renderer);
 }
 
