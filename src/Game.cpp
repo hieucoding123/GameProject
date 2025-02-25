@@ -1,10 +1,13 @@
 ﻿#include <iostream>
 #include "Game.h"
 #include "TextureManager.h"
+#include "Map.h"
 
 SDL_Texture* playerTex;
 
 SDL_Renderer* Game::renderer = nullptr;
+
+Map* map;
 
 SDL_Rect srcRect, destRect;
 
@@ -44,14 +47,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	else {
 		isRunning = false;
 	}
+
 	playerTex = TextureManager::LoadTexture("C:/Users/Admin/source/repos/GameProject/assets/player.png");
-
-	srcRect.x = srcRect.y = 0;
-
-	srcRect.w = destRect.w = 32;
-	srcRect.h = destRect.h = 64;
-
-	destRect.x = destRect.y = 0;
 }
 
 void Game::handleEvents()
