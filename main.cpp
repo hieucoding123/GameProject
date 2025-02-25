@@ -1,9 +1,7 @@
 ﻿#include <iostream>
 #include <SDL_image.h>
 #include "Game.h"
-
-const int WIDTH = 800;
-const int HIGH = 600;
+#include "Const.h"
 
 Game* game = nullptr;
 
