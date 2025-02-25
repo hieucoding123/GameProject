@@ -9,13 +9,13 @@ private:
 	
 public:
 	Vector2D position;
-	int high;
-	int width;
-	int scale;
+	int high = 64;
+	int width = 32;
+	int scale = 2;
 	TransformComponent()
 	{
-		position.x = 0;
-		position.y = 0;
+		/*position.x = 0.0f;
+		position.y = 0.0f;*/
 	}
 	TransformComponent(float xpos, float ypos)
 	{
@@ -25,8 +25,8 @@ public:
 
 	void init() override
 	{
-		position.x = 0;
-		position.y = 0;
+		/*position.x = 0.0f;
+		position.y = 0.0f;*/
 	}
 	void update() override
 	{
