@@ -17,6 +17,9 @@ public:
 	bool running() { return isRunning; };
 
 	static SDL_Renderer* renderer;
+	static SDL_Event event;
+
+	static void addTile(int tileX, int tileY, int xpos, int ypos);
 private:
 	bool isRunning;
 	SDL_Window* window;

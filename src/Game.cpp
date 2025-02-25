@@ -1,13 +1,16 @@
 ﻿#include <iostream>
 #include "Game.h"
+#include "Const.h"
 #include "TextureManager.h"
 #include "Map.h"
 #include "ECS/Components.h"
 
-Manager manager;
 
 
 SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
+
+Manager manager;
 
 Map* map;
 auto& player(manager.addEntity());
@@ -50,13 +53,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	else {
 		isRunning = false;
 	}
+	map->LoadMap("assets/TileMap.txt");
 
-	player.addComponent<TransformComponent>(50, 50);
+	player.addComponent<TransformComponent>(100, 100);
+	player.addComponent<SpriteComponent>("assets/player.png");
 }
 
 void Game::handleEvents()
 {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 
 	switch (event.type)
@@ -69,8 +73,6 @@ void Game::handleEvents()
 		break;
 	}
 }
-
-int k = 0;
 
 void Game::update()
 {
@@ -85,6 +87,7 @@ void Game::update()
 void Game::render()
 {
 	SDL_RenderClear(renderer);
+
 	manager.draw();
 
 	SDL_RenderPresent(renderer);
@@ -97,4 +100,11 @@ void Game::clean()
 	SDL_Quit();
 
 	std::cout << "Game cleaned" << std::endl;
+}
+
+void Game::addTile(int tileX, int tileY, int xpos, int ypos)
+{
+	auto& tile(manager.addEntity());
+
+	tile.addComponent<TileComponent>(tileX, tileY, xpos, ypos);
 }

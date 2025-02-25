@@ -157,6 +157,8 @@
     <ClInclude Include="include\Const.h" />
     <ClInclude Include="include\ECS\Components.h" />
     <ClInclude Include="include\ECS\ECS.h" />
+    <ClInclude Include="include\ECS\SpriteComponent.h" />
+    <ClInclude Include="include\ECS\TileComponent.h" />
     <ClInclude Include="include\ECS\TransformComponent.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Map.h" />
