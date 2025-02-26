@@ -1,7 +1,7 @@
 #pragma once
 
 const int WIDTH = 800;
-const int HIGH = 600;
+const int HIGH = 640;
 
 const int FPS = 60;
 const int frameDelay = 1000 / FPS;
