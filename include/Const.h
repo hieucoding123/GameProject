@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 const int WIDTH = 800;
 const int HIGH = 640;
 
@@ -20,3 +22,13 @@ const int DEFAULT_X1 = 64;
 const int DEFAULT_X2 = 736;
 const int DEFAULT_Y = 568;
 
+constexpr const char* imageTilePath = "assets/imageTileMap.png";
+constexpr const char* tileMapPath = "assets/TileMap.txt";
+
+const std::vector<std::vector<int>> SASUKE = {
+	// frames - speed - srcX - srcY - W - H
+	{4, 150, 0,  0, 48, 75},		// idle
+	{6, 110, 0, 75, 67, 75},			// walk
+	{3, 200, 0, 150, 56, 75},		// jump
+	{1, 1, 0, 150, 56, 75}
+};

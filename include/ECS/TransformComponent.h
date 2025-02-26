@@ -17,6 +17,14 @@ public:
 		/*position.x = 0.0f;
 		position.y = 0.0f;*/
 	}
+	TransformComponent(float xpos, float ypos, int w, int h, int s)
+	{
+		position.x = xpos;
+		position.y = ypos;
+		high = h;
+		width = w;
+		scale = s;
+	}
 	TransformComponent(float xpos, float ypos)
 	{
 		position.x = xpos;

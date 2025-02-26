@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Const.h" />
+    <ClInclude Include="include\ECS\Animation.h" />
     <ClInclude Include="include\ECS\Components.h" />
     <ClInclude Include="include\ECS\ECS.h" />
     <ClInclude Include="include\ECS\SpriteComponent.h" />

@@ -63,10 +63,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	else {
 		isRunning = false;
 	}
-	map->LoadMap("assets/TileMap.txt");
+	map->LoadMap(tileMapPath);
 
-	player1.addComponent<TransformComponent>(100, 100);
-	player1.addComponent<SpriteComponent>("assets/player.png");
+	player1.addComponent<TransformComponent>(100, 100, 48, 75, 2);
+	player1.addComponent<SpriteComponent>("assets/sasuke.png", true);
 	player1.addGroup(p1Group);
 }
 
@@ -90,9 +90,9 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	player1.getComponent<TransformComponent>().position + 1;
+	//player1.getComponent<TransformComponent>().position + 1;
 
-	std::cout << player1.getComponent<TransformComponent>().position;
+	//std::cout << player1.getComponent<TransformComponent>().position;
 }
 
 void Game::render()

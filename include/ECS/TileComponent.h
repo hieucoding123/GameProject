@@ -11,7 +11,7 @@ public:
 	TileComponent() = default;
 	TileComponent(int tileX, int tileY, int xpos, int ypos)
 	{
-		texture = TextureManager::LoadTexture("assets/imageTileMap.png");
+		texture = TextureManager::LoadTexture(imageTilePath);
 
 		srcRect.x = tileX;
 		srcRect.y = tileY;
