@@ -30,7 +30,7 @@ public:
 
 		animated = isAnimated;
 		Animation idle = Animation(SASUKE[0]);
-		animations.emplace("idle", idle);
+		animations.emplace("idle", idle);		// đứng yên
 		
 		use("idle");
 	}
@@ -53,7 +53,7 @@ public:
 		srcRect.w = transform->width;
 		srcRect.h = transform->high;
 
-		destRect.w = transform->width * transform->scale;	// thay đổi khung ảnh
+		destRect.w = transform->width * transform->scale;
 		destRect.h = transform->high * transform->scale;
 
 		destRect.x = destRect.y = 0;
@@ -68,6 +68,7 @@ public:
 
 		srcRect.y = animations[state].srcY;
 
+		// cập nhật theo trạng thái
 		transform->high = animations[state].h;
 		transform->width = animations[state].w;
 
@@ -83,6 +84,7 @@ public:
 		TextureManager::Draw(texture, &srcRect, &destRect);
 	}
 
+	// sử dụng hoạt ảnh
 	void use(const char* animation)
 	{
 		state = animation;

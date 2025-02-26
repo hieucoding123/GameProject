@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 
@@ -7,6 +7,8 @@ class Animation
 public:
 	int frames;
 	int speed;
+
+	// thông số khung hình gốc
 	int srcX;
 	int srcY;
 	int w;
