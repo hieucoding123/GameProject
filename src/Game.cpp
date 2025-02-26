@@ -5,17 +5,27 @@
 #include "Map.h"
 #include "ECS/Components.h"
 
-
-
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
 Manager manager;
 
 Map* map;
-auto& player(manager.addEntity());
 
-SDL_Rect srcRect, destRect;
+enum groupLabels : Group
+{
+	p1Group,
+	p2Group,
+	mapGroup
+
+};
+
+auto& tiles(manager.getGroup(mapGroup));
+auto& player1Group(manager.getGroup(p1Group));
+auto& player2Group(manager.getGroup(p2Group));
+
+auto& player1(manager.addEntity());
+auto& player2(manager.addEntity());
 
 Game::Game()
 { }
@@ -55,8 +65,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	}
 	map->LoadMap("assets/TileMap.txt");
 
-	player.addComponent<TransformComponent>(100, 100);
-	player.addComponent<SpriteComponent>("assets/player.png");
+	player1.addComponent<TransformComponent>(100, 100);
+	player1.addComponent<SpriteComponent>("assets/player.png");
+	player1.addGroup(p1Group);
 }
 
 void Game::handleEvents()
@@ -79,16 +90,27 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	player.getComponent<TransformComponent>().position + 1;
+	player1.getComponent<TransformComponent>().position + 1;
 
-	std::cout << player.getComponent<TransformComponent>().position;
+	std::cout << player1.getComponent<TransformComponent>().position;
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
 
-	manager.draw();
+	for (auto& e : tiles)
+	{
+		e->draw();
+	}
+	for (auto& e : player1Group)
+	{
+		e->draw();
+	}
+	for (auto& e : player2Group)
+	{
+		e->draw();
+	}
 
 	SDL_RenderPresent(renderer);
 }
@@ -105,6 +127,7 @@ void Game::clean()
 void Game::addTile(int tileX, int tileY, int xpos, int ypos)
 {
 	auto& tile(manager.addEntity());
-
+	
 	tile.addComponent<TileComponent>(tileX, tileY, xpos, ypos);
+	tile.addGroup(mapGroup);
 }

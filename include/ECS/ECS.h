@@ -17,6 +17,9 @@ constexpr ComponentID maxComponents = 32;
 using ComponentBitset = std::bitset<maxComponents>;
 using ComponentArray = std::array<Component*, maxComponents>;
 
+using Group = std::size_t;
+constexpr std::size_t maxGroups = 32;
+using GroupBitset = std::bitset<maxGroups>;
 
 inline ComponentID getComponentID()
 {
@@ -48,12 +51,18 @@ public:
 class Entity
 {
 private:
+	Manager& manager;
 	ComponentBitset componentBitset;
 	ComponentArray componentArray;
+	GroupBitset groupBitset;
+
 	std::vector<std::unique_ptr<Component>> components;
 	bool active = true;
 
 public:
+	Entity(Manager& mManager) : manager(mManager)
+	{ }
+
 	void update()
 	{
 		for (auto& c : components) c->update();
@@ -95,13 +104,26 @@ public:
 	{
 		return componentBitset[getComponentID<T>()];
 	}
+
+	void delGroup(Group mGroup)
+	{
+		groupBitset[mGroup] = false;
+	}
+
+	// thêm 
+	void addGroup(Group mGroup);
+
+	bool hasGroup(Group mGroup)
+	{
+		return groupBitset[mGroup];
+	}
 };
 
 class Manager
 {
 private:
 	std::vector<std::unique_ptr<Entity>> entities;
-	
+	std::array<std::vector<Entity*>, maxGroups> groupedEntities;
 public:
 	void update()
 	{
@@ -115,7 +137,7 @@ public:
 	// thêm entity
 	Entity& addEntity()
 	{
-		Entity* e = new Entity;
+		Entity* e = new Entity(*this);
 		std::unique_ptr<Entity> uPtr{ e };
 		entities.emplace_back(std::move(uPtr));
 
@@ -124,9 +146,30 @@ public:
 	// xóa entity không hoạt động
 	void refresh()
 	{
+	
+		for (auto i(0u); i < maxGroups; i++)
+		{
+			auto& v(groupedEntities[i]);
+			v.erase(std::remove_if(std::begin(v), std::end(v),
+				[i](Entity* mEntity) {
+					return !mEntity->isActive() || !mEntity->hasGroup(i);
+				}), std::end(v));
+		}
+
 		entities.erase(std::remove_if(std::begin(entities), std::end(entities),
 			[](const std::unique_ptr<Entity>& mEntity) {
 				return !mEntity->isActive();
 			}), std::end(entities));
+	}
+	
+	// thêm entity vào group
+	void addToGroup(Entity* mEntity, Group mGroup)
+	{
+		groupedEntities[mGroup].emplace_back(mEntity);
+	}
+
+	std::vector<Entity*>& getGroup(Group mGroup)
+	{
+		return groupedEntities[mGroup];
 	}
 };
