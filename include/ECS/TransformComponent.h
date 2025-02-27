@@ -9,6 +9,9 @@ private:
 	
 public:
 	Vector2D position;
+	Vector2D velocity;
+	int speed = 3;
+
 	int high = 64;
 	int width = 32;
 	int scale = 2;
@@ -29,6 +32,8 @@ public:
 	{
 		position.x = xpos;
 		position.y = ypos;
+
+		velocity.x = velocity.y = 0;
 	}
 
 	void init() override
@@ -39,5 +44,11 @@ public:
 	void update() override
 	{
 
+		position.x += velocity.x * speed;
+		position.y += velocity.y * speed;
+
+		position.y += GRAVITY;
+
+		if (position.x <= 0) position.x = 0;
 	}
 };
