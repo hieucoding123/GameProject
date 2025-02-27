@@ -18,8 +18,9 @@ private:
 
 	int frames = 4;		// số khung hình
 	int speed = 150;	// tốc độ
-
 public:
+	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;	// lật bản vẽ
+
 	std::map<const char*, Animation> animations;	// thông tin hoạt ảnh
 
 	//SpriteComponent() = default;
@@ -30,7 +31,9 @@ public:
 
 		animated = isAnimated;
 		Animation idle = Animation(SASUKE[0]);
+		Animation run = Animation(SASUKE[1]);
 		animations.emplace("idle", idle);		// đứng yên
+		animations.emplace("run", run);
 		
 		use("idle");
 	}
@@ -81,7 +84,7 @@ public:
 	
 	void draw() override
 	{
-		TextureManager::Draw(texture, &srcRect, &destRect);
+		TextureManager::Draw(texture, &srcRect, &destRect, spriteFlip);
 	}
 
 	// sử dụng hoạt ảnh
