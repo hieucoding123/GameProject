@@ -64,8 +64,10 @@ public:
 		if (animated)
 		{
 			srcRect.x = ((SDL_GetTicks() / speed) % frames) * srcRect.w;
+			
 		}
 
+		// cập nhật vị trí lấy sprite sheet
 		srcRect.y = animations[state].srcY;
 
 		// cập nhật theo trạng thái

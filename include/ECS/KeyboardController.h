@@ -9,6 +9,9 @@ public:
 	TransformComponent* transform;
 	SpriteComponent* sprite;
 
+	// lưu sdl_flip hiện tại
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+
 	void init() override
 	{
 		transform = &entity->getComponent<TransformComponent>();
@@ -28,15 +31,23 @@ public:
 				break;
 			case SDLK_d:
 				transform->velocity.x = 1;
+				sprite->spriteFlip = SDL_FLIP_NONE;
 				sprite->use("run");
 				break;
 			case SDLK_a:
 				transform->velocity.x = -1;
 				sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
 				sprite->use("run");
+				break;
+			case SDLK_u:
+				transform->velocity.x = 0;
+				sprite->use("attackcb");
+				break;
 			default:
 				break;
 			}
+			// cập nhật hiện tại
+			flip = sprite->spriteFlip;
 		}
 
 		if (Game::event.type == SDL_KEYUP)
@@ -49,10 +60,15 @@ public:
 				break;
 			case SDLK_a:
 				transform->velocity.x = 0;
-				sprite->spriteFlip = SDL_FLIP_NONE;
+				sprite->spriteFlip = flip;		// nhân vật giữ yên hướng vẽ
 				sprite->use("idle");
 				break;
 			case SDLK_d:
+				transform->velocity.x = 0;
+				sprite->spriteFlip = flip;
+				sprite->use("idle");
+				break;
+			case SDLK_u:
 				transform->velocity.x = 0;
 				sprite->use("idle");
 				break;
