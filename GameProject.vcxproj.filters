@@ -68,6 +68,9 @@
     <ClInclude Include="include\ECS\Animation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\ECS\KeyboardController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\CollisionsMap.txt" />
