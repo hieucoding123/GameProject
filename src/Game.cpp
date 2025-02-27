@@ -67,6 +67,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 
 	player1.addComponent<TransformComponent>(100, 100, 48, 75, 2);
 	player1.addComponent<SpriteComponent>("assets/sasuke.png", true);
+	player1.addComponent<KeyboardController>();
 	player1.addGroup(p1Group);
 }
 
