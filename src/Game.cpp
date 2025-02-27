@@ -7,6 +7,7 @@
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
+SDL_Rect Game::camera = { 0, 0, WIDTH, HIGH };
 
 Manager manager;
 
@@ -91,9 +92,15 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	//player1.getComponent<TransformComponent>().position + 1;
+	// camera chạy theo
+	camera.x = player1.getComponent<TransformComponent>().position.x - (WIDTH / 2);
+	camera.y = player1.getComponent<TransformComponent>().position.y - (HIGH / 2);
 
-	//std::cout << player1.getComponent<TransformComponent>().position;
+	if (camera.x < 0) camera.x = 0;
+	if (camera.x > WIDTH) camera.x = WIDTH;
+	if (camera.y < 0) camera.y = 0;
+	if (camera.y > HIGH) camera.y = HIGH;
+
 }
 
 void Game::render()
