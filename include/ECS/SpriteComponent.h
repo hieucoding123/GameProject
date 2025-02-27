@@ -30,10 +30,7 @@ public:
 		texture = TextureManager::LoadTexture(path);
 
 		animated = isAnimated;
-		Animation idle = Animation(SASUKE[0]);
-		Animation run = Animation(SASUKE[1]);
-		animations.emplace("idle", idle);		// đứng yên
-		animations.emplace("run", run);
+		loadAnimations(SASUKE);
 		
 		use("idle");
 	}
@@ -75,8 +72,8 @@ public:
 		transform->high = animations[state].h;
 		transform->width = animations[state].w;
 
-		destRect.x = (int)transform->position.x;
-		destRect.y = (int)transform->position.y;
+		destRect.x = (int)transform->position.x - Game::camera.x;
+		destRect.y = (int)transform->position.y - Game::camera.y;
 
 		destRect.w = transform->width * transform->scale;
 		destRect.h = transform->high * transform->scale;
@@ -95,5 +92,14 @@ public:
 		speed = animations[animation].speed;
 		srcRect.w = animations[animation].w;
 		srcRect.h = animations[animation].h;
+	}
+
+	// tải các hoạt ảnh
+	void loadAnimations(const std::map<const char*, std::vector<int>>& aniInfor)
+	{
+		for (const auto& pair : aniInfor)
+		{
+			animations.emplace(pair.first, Animation(pair.second));
+		}
 	}
 };
