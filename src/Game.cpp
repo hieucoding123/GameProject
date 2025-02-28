@@ -70,6 +70,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	player1.addComponent<SpriteComponent>("assets/sasuke.png", true);
 	player1.addComponent<KeyboardController>();
 	player1.addGroup(p1Group);
+
+	player2.addComponent<TransformComponent>(200, 100, 46, 80, 2);
+	player2.addComponent<SpriteComponent>("assets/akainu_stand.png", true);
+	player2.addComponent<KeyboardController>();
+	player2.addGroup(p2Group);
 }
 
 void Game::handleEvents()
