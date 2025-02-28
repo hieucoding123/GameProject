@@ -24,57 +24,63 @@ public:
 		// khi nhấn phím xuống
 		if (Game::event.type == SDL_KEYDOWN)
 		{
-			switch (Game::event.key.keysym.sym)
+			if (sprite->ID == PLAYER1ID)
 			{
-			case SDLK_w:
-				transform->velocity.y = -1;
-				break;
-			case SDLK_d:
-				transform->velocity.x = 1;
-				sprite->spriteFlip = SDL_FLIP_NONE;
-				sprite->use("run");
-				break;
-			case SDLK_a:
-				transform->velocity.x = -1;
-				sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
-				sprite->use("run");
-				break;
-			case SDLK_u:
-				transform->velocity.x = 0;
-				sprite->use("attackcb");
-				break;
-			default:
-				break;
+				switch (Game::event.key.keysym.sym)
+				{
+				case SDLK_w:
+					transform->velocity.y = -1;
+					break;
+				case SDLK_d:
+					transform->velocity.x = 1;
+					sprite->spriteFlip = SDL_FLIP_NONE;
+					sprite->use("run");
+					break;
+				case SDLK_a:
+					transform->velocity.x = -1;
+					sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
+					sprite->use("run");
+					break;
+				case SDLK_u:
+					transform->velocity.x = 0;
+					sprite->use("attackcb");
+					break;
+				default:
+					break;
+				}
+				// cập nhật hiện tại
+				flip = sprite->spriteFlip;
 			}
-			// cập nhật hiện tại
-			flip = sprite->spriteFlip;
 		}
 
-		if (Game::event.type == SDL_KEYUP)
+		if (Game::event.type == SDL_KEYUP && sprite->state == "idle")
 		{
-			switch (Game::event.key.keysym.sym)
-			{
-			case SDLK_w:
-				transform->velocity.y = 0;
-				sprite->use("idle");
-				break;
-			case SDLK_a:
-				transform->velocity.x = 0;
-				sprite->spriteFlip = flip;		// nhân vật giữ yên hướng vẽ
-				sprite->use("idle");
-				break;
-			case SDLK_d:
-				transform->velocity.x = 0;
-				sprite->spriteFlip = flip;
-				sprite->use("idle");
-				break;
-			case SDLK_u:
-				transform->velocity.x = 0;
-				sprite->use("idle");
-				break;
-			default:
-				break;
-			}
+				/*transform->velocity.y = 0;
+				transform->velocity.x = 0;*/
+			
+			//switch (Game::event.key.keysym.sym)
+			//{
+			//case SDLK_w:
+			//	transform->velocity.y = 0;
+			//	sprite->use("idle");
+			//	break;
+			//case SDLK_a:
+			//	transform->velocity.x = 0;
+			//	sprite->spriteFlip = flip;		// nhân vật giữ yên hướng vẽ
+			//	sprite->use("idle");
+			//	break;
+			//case SDLK_d:
+			//	transform->velocity.x = 0;
+			//	sprite->spriteFlip = flip;
+			//	sprite->use("idle");
+			//	break;
+			//case SDLK_u:
+			//	transform->velocity.x = 0;
+			//	sprite->use("idle");
+			//	break;
+			//default:
+			//	break;
+			//}
 		}
 	}
 };

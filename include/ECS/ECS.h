@@ -21,6 +21,7 @@ using Group = std::size_t;
 constexpr std::size_t maxGroups = 32;
 using GroupBitset = std::bitset<maxGroups>;
 
+
 inline ComponentID getComponentID()
 {
 	static ComponentID lastID = 0;
@@ -58,8 +59,9 @@ private:
 
 	std::vector<std::unique_ptr<Component>> components;
 	bool active = true;
-
 public:
+	bool onGround = true;	// chạm đất
+
 	Entity(Manager& mManager) : manager(mManager)
 	{ }
 

@@ -10,7 +10,7 @@ private:
 public:
 	Vector2D position;
 	Vector2D velocity;
-	int speed = 3;
+	int speed = 5;
 
 	int high = 64;
 	int width = 32;
@@ -50,5 +50,10 @@ public:
 		position.y += GRAVITY;
 
 		if (position.x <= 0) position.x = 0;
+		if (position.y + high >= (GROUND * MAP_SCALE))
+		{
+			position.y = (GROUND * MAP_SCALE) - high;
+			entity->onGround = true;
+		}
 	}
 };

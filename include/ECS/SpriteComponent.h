@@ -6,6 +6,13 @@
 #include "Animation.h"
 #include <map>
 
+// lấy id của nhân vật
+inline int getID()
+{
+	static int ID = 1;
+	return ID++;
+}
+
 class SpriteComponent : public Component
 {
 private:
@@ -14,11 +21,16 @@ private:
 	SDL_Rect srcRect, destRect;		
 
 	bool animated;
-	const char* state;	// trạng thái
 
 	int frames = 4;		// số khung hình
 	int speed = 150;	// tốc độ
+
+	Uint32 lastUpdate;
+	int currentFrame;
 public:
+	int ID = getID();
+	const char* state;	// trạng thái
+	bool onGround;
 	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;	// lật bản vẽ
 
 	std::map<const char*, Animation> animations;	// thông tin hoạt ảnh
@@ -30,9 +42,11 @@ public:
 		texture = TextureManager::LoadTexture(path);
 
 		animated = isAnimated;
-		loadAnimations(SASUKE);
+		loadAnimations(GAMECHARACTERS.at(ID));
 		
 		use("idle");
+		/*lastUpdate = SDL_GetTicks();
+		currentFrame = 0;*/
 	}
 
 	~SpriteComponent()
@@ -57,15 +71,35 @@ public:
 		destRect.h = transform->high * transform->scale;
 
 		destRect.x = destRect.y = 0;
+		lastUpdate = SDL_GetTicks();
+		currentFrame = 0;
 	}
 
 	void update() override
 	{
 		if (animated)
 		{
-			srcRect.x = ((SDL_GetTicks() / speed) % frames) * srcRect.w;
-			
+			Uint32 now = SDL_GetTicks();
+			if (now - lastUpdate > speed) {
+				currentFrame++; 
+				lastUpdate = now;
+
+				if (currentFrame >= frames) {
+					if (state != "run")
+					{
+						use("idle");
+						transform->velocity.x = 0;
+						transform->velocity.y = 0;
+					}
+					else
+					{
+						currentFrame = 0;	// nếu đang chạy -> chạy tiếp
+					}
+				}
+			}
 		}
+
+		srcRect.x = currentFrame * srcRect.w;
 
 		// cập nhật vị trí lấy sprite sheet
 		srcRect.y = animations[state].srcY;
@@ -94,6 +128,9 @@ public:
 		speed = animations[animation].speed;
 		srcRect.w = animations[animation].w;
 		srcRect.h = animations[animation].h;
+
+		lastUpdate = SDL_GetTicks();		// đặt lại tgian
+		currentFrame = 0;
 	}
 
 	// tải các hoạt ảnh
