@@ -29,13 +29,15 @@ private:
 	int currentFrame;
 public:
 	int ID = getID();
-	const char* state;	// trạng thái
+	const char* state;			// trạng thái
 	bool onGround;
+	bool animFinished = true;
+
 	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;	// lật bản vẽ
 
 	std::map<const char*, Animation> animations;	// thông tin hoạt ảnh
 
-	//SpriteComponent() = default;
+	SpriteComponent() = default;
 
 	SpriteComponent(const char* path, bool isAnimated)
 	{
@@ -95,6 +97,8 @@ public:
 					{
 						currentFrame = 0;	// nếu đang chạy -> chạy tiếp
 					}
+					animFinished = true;
+					entity->isHitting = false;
 				}
 			}
 		}

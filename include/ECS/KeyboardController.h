@@ -9,9 +9,6 @@ public:
 	TransformComponent* transform;
 	SpriteComponent* sprite;
 
-	// lưu sdl_flip hiện tại
-	SDL_RendererFlip flip = SDL_FLIP_NONE;
-
 	void init() override
 	{
 		transform = &entity->getComponent<TransformComponent>();
@@ -24,36 +21,41 @@ public:
 		// khi nhấn phím xuống
 		if (Game::event.type == SDL_KEYDOWN)
 		{
-			if (sprite->ID == PLAYER1ID)
+			// khi đang đứng yên hoặc chạy
+			if (sprite->ID == PLAYER1ID && sprite->animFinished)
 			{
 				switch (Game::event.key.keysym.sym)
 				{
 				case SDLK_w:
 					transform->velocity.y = -1;
+					sprite->animFinished = false;
 					break;
 				case SDLK_d:
 					transform->velocity.x = 1;
 					sprite->spriteFlip = SDL_FLIP_NONE;
+					sprite->animFinished = true;		// sẵn sàng nhận phím tiếp theo
 					sprite->use("run");
 					break;
 				case SDLK_a:
 					transform->velocity.x = -1;
 					sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
+					sprite->animFinished = true;		// sẵn sàng nhận phím tiếp theo
 					sprite->use("run");
 					break;
 				case SDLK_u:
 					transform->velocity.x = 0;
 					sprite->use("attackcb");
+					entity->isHitting = true;			// đang đánh
+					sprite->animFinished = false;
 					break;
 				default:
 					break;
 				}
-				// cập nhật hiện tại
-				flip = sprite->spriteFlip;
+				
 			}
 		}
 
-		if (Game::event.type == SDL_KEYUP && sprite->state == "idle")
+		if (Game::event.type == SDL_KEYUP)
 		{
 				/*transform->velocity.y = 0;
 				transform->velocity.x = 0;*/
@@ -82,5 +84,7 @@ public:
 			//	break;
 			//}
 		}
+
+		std::cout << sprite->animFinished << ' ';
 	}
 };
