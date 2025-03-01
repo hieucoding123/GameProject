@@ -64,9 +64,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	else {
 		isRunning = false;
 	}
+
+	camera.x = (WIDTH * MAP_SCALE - WIDTH) / 2;
+	camera.y = (HIGH * MAP_SCALE - HIGH) / 2;
+
 	map->LoadMap(tileMapPath);
 
-	player1.addComponent<TransformComponent>(100, 100, 48, 75, 2);
+	player1.addComponent<TransformComponent>(camera.x + WIDTH/2, GROUND*MAP_SCALE, 48, 75, 2);
 	player1.addComponent<SpriteComponent>("assets/sasuke.png", true);
 	player1.addComponent<KeyboardController>();
 	player1.addGroup(p1Group);
@@ -143,4 +147,9 @@ void Game::addTile(int tileX, int tileY, int xpos, int ypos)
 	
 	tile.addComponent<TileComponent>(tileX, tileY, xpos, ypos);
 	tile.addGroup(mapGroup);
+}
+
+bool Game::AABB(const SDL_Rect& rect1, const SDL_Rect& rect2)
+{
+	return SDL_HasIntersection(&rect1, &rect2);
 }
