@@ -132,7 +132,7 @@ public:
 		speed = animations[animation].speed;
 		srcRect.w = animations[animation].w;
 		srcRect.h = animations[animation].h;
-
+		
 		lastUpdate = SDL_GetTicks();		// đặt lại tgian
 		currentFrame = 0;
 	}

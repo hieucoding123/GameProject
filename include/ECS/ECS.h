@@ -6,6 +6,7 @@
 #include <array>
 #include <memory>
 #include <algorithm>
+#include "Const.h"
 
 class Manager;
 class Entity;
@@ -49,6 +50,14 @@ public:
 	virtual ~Component() {}
 };
 
+struct Attribute
+{
+	int hp = HP;
+	int energy = 0;
+	int damage = 0;
+	int defense = DEFENSE;
+};
+
 class Entity
 {
 private:
@@ -60,7 +69,9 @@ private:
 	std::vector<std::unique_ptr<Component>> components;
 	bool active = true;
 public:
+	Attribute attrib;
 	bool onGround = true;	// chạm đất
+	bool isHitting = false;	// đánh / không
 
 	Entity(Manager& mManager) : manager(mManager)
 	{ }
@@ -124,8 +135,8 @@ public:
 class Manager
 {
 private:
-	std::vector<std::unique_ptr<Entity>> entities;
 	std::array<std::vector<Entity*>, maxGroups> groupedEntities;
+	std::vector<std::unique_ptr<Entity>> entities;
 public:
 	void update()
 	{
