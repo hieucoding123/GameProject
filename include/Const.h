@@ -30,19 +30,22 @@ const int GRAVITY = 7;
 const int PLAYER1ID = 1;
 const int PLAYER2ID = 2;
 
+const int HP = 200;
+const int DEFENSE = 10;
+
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
 constexpr const char* tileMapPath = "assets/TileMap.txt";
 
 const std::unordered_map<int, const std::map<const char*, std::vector<int>>> GAMECHARACTERS = {
-		// frames - speed - srcX - srcY - W - H
-	{ 1, {{ "idle", {4, 150, 0,  0, 48, 75} },		// idle
-		{ "run", {6, 110, 0, 75, 67, 75}},			// walk
-		{ "jump", {3, 200, 0, 150, 56, 75}},		// jump
-		{ "fall", {1, 1, 0, 150, 56, 74}},
-		{ "guard", {1, 1, 0, 224, 58, 71}},
-		{"airguard", {1, 1, 0, 296, 58, 74}},
-		{"attackcb", {7, 200, 0, 371, 91, 75}}}},
-	{ 2, {{"idle", {6, 150, 0, 0, 46, 80}}}}
+		// frames - speed - srcX - srcY - W - H - isHitting - damage
+	{ 1, {{ "idle", {4, 150, 0,  0, 48, 75, 0, 0} },		// idle
+		{ "run", {6, 110, 0, 75, 67, 75, 0, 0}},			// walk
+		{ "jump", {3, 200, 0, 150, 56, 75, 0, 0}},		// jump
+		{ "fall", {1, 1, 0, 150, 56, 74, 0, 0}},
+		{ "guard", {1, 1, 0, 224, 58, 71, 0, 0}},
+		{"airguard", {1, 1, 0, 296, 58, 74, 0, 0}},
+		{"attackcb", {7, 200, 0, 371, 91, 75, 1, 20}}}},
+	{ 2, {{"idle", {6, 150, 0, 0, 46, 80, 0, 0}}}}
 };
 
 //const std::map<const char*, std::vector<int>> SASUKE = {
