@@ -25,4 +25,5 @@ void Map::LoadMap(const char* path)
 			myFile.ignore();
 		}
 	}
+	myFile.close();
 }
