@@ -157,8 +157,10 @@
   <ItemGroup>
     <ClInclude Include="include\Const.h" />
     <ClInclude Include="include\ECS\Animation.h" />
+    <ClInclude Include="include\ECS\AttributeComponent.h" />
     <ClInclude Include="include\ECS\Components.h" />
     <ClInclude Include="include\ECS\ECS.h" />
+    <ClInclude Include="include\ECS\ColliderComponent.h" />
     <ClInclude Include="include\ECS\KeyboardController.h" />
     <ClInclude Include="include\ECS\SpriteComponent.h" />
     <ClInclude Include="include\ECS\TileComponent.h" />

@@ -13,6 +13,8 @@ public:
 	int srcY;
 	int w;
 	int h;
+	bool hit;
+	int damage;
 
 	Animation() = default;
 	Animation(std::vector<int> spriteInfo)
@@ -23,5 +25,7 @@ public:
 		srcY = spriteInfo[3];
 		w = spriteInfo[4];
 		h = spriteInfo[5];
+		hit = spriteInfo[6];
+		damage = spriteInfo[7];
 	}
 };

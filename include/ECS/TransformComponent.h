@@ -15,6 +15,7 @@ public:
 	int high = 64;
 	int width = 32;
 	int scale = 2;
+
 	TransformComponent()
 	{
 		/*position.x = 0.0f;
@@ -55,5 +56,6 @@ public:
 			position.y = (GROUND * MAP_SCALE) - high;
 			entity->onGround = true;
 		}
+
 	}
 };
