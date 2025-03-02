@@ -73,11 +73,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	player1.addComponent<TransformComponent>(camera.x + WIDTH/2, GROUND*MAP_SCALE, 48, 75, 2);
 	player1.addComponent<SpriteComponent>("assets/sasuke.png", true);
 	player1.addComponent<KeyboardController>();
+	player1.addComponent<ColliderComponent>();
 	player1.addGroup(p1Group);
 
 	player2.addComponent<TransformComponent>(200, 100, 46, 80, 2);
 	player2.addComponent<SpriteComponent>("assets/akainu_stand.png", true);
 	player2.addComponent<KeyboardController>();
+	player2.addComponent<ColliderComponent>();
 	player2.addGroup(p2Group);
 }
 
@@ -110,6 +112,16 @@ void Game::update()
 	if (camera.y < 0) camera.y = 0;
 	if (camera.y > HIGH) camera.y = HIGH;
 
+	if (Game::AABB(player1.getComponent<ColliderComponent>().attackBox,
+		player2.getComponent<ColliderComponent>().rect))
+	{
+		if (player1.attrib.isHitting) {
+			std::cout << "Var ";
+			player2.attrib.hp -= player1.attrib.damage;
+			std::cout << player2.attrib.hp << std::endl;
+			player1.attrib.energy++;
+		}
+	}
 }
 
 void Game::render()
