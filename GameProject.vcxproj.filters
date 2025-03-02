@@ -71,9 +71,6 @@
     <ClInclude Include="include\ECS\KeyboardController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ECS\AttributeComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\ECS\ColliderComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
