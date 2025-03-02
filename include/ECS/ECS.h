@@ -52,10 +52,12 @@ public:
 
 struct Attribute
 {
-	int hp = HP;
-	int energy = 0;
-	int damage = 0;
-	int defense = DEFENSE;
+	double hp = HP;			// máu
+	int energy = 0;			// năng lượng
+	double damage = 0;		// sát thương
+	int defense = DEFENSE;	// phòng thủ
+	bool onGround = true;	// chạm đất
+	bool isHitting = false;	// đánh / không
 };
 
 class Entity
@@ -70,8 +72,6 @@ private:
 	bool active = true;
 public:
 	Attribute attrib;
-	bool onGround = true;	// chạm đất
-	bool isHitting = false;	// đánh / không
 
 	Entity(Manager& mManager) : manager(mManager)
 	{ }
