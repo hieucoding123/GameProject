@@ -45,13 +45,43 @@ public:
 				case SDLK_u:
 					transform->velocity.x = 0;
 					sprite->use("attackcb");
-					entity->isHitting = true;			// đang đánh
+					entity->attrib.isHitting = true;			// đang đánh
 					sprite->animFinished = false;
 					break;
 				default:
 					break;
 				}
 				
+			}
+			else if (sprite->ID == PLAYER2ID && sprite->animFinished)
+			{
+				switch (Game::event.key.keysym.sym)
+				{
+				case SDLK_UP:
+					transform->velocity.y = -1;
+					sprite->animFinished = false;
+					break;
+				case SDLK_RIGHT:
+					transform->velocity.x = 0.5;
+					sprite->spriteFlip = SDL_FLIP_NONE;
+					sprite->animFinished = true;		// sẵn sàng nhận phím tiếp theo
+					sprite->use("run");
+					break;
+				case SDLK_LEFT:
+					transform->velocity.x = -0.5;
+					sprite->spriteFlip = SDL_FLIP_HORIZONTAL;
+					sprite->animFinished = true;		// sẵn sàng nhận phím tiếp theo
+					sprite->use("run");
+					break;
+				case SDLK_1:
+					transform->velocity.x = 0;
+					sprite->use("attackcb");
+					entity->attrib.isHitting = true;			// đang đánh
+					sprite->animFinished = false;
+					break;
+				default:
+					break;
+				}
 			}
 		}
 
@@ -84,7 +114,5 @@ public:
 			//	break;
 			//}
 		}
-
-		std::cout << sprite->animFinished << ' ';
 	}
 };

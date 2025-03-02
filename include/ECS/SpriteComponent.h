@@ -98,10 +98,13 @@ public:
 						currentFrame = 0;	// nếu đang chạy -> chạy tiếp
 					}
 					animFinished = true;
-					entity->isHitting = false;
+					entity->attrib.isHitting = false;
 				}
 			}
 		}
+
+		entity->attrib.damage = animations[state].damage * 1.0 / animations[state].speed;
+		entity->attrib.isHitting = animations[state].hit;
 
 		srcRect.x = currentFrame * srcRect.w;
 
@@ -117,6 +120,11 @@ public:
 
 		destRect.w = transform->width * transform->scale;
 		destRect.h = transform->high * transform->scale;
+	}
+
+	SDL_Rect getDestRect() const
+	{
+		return destRect;
 	}
 	
 	void draw() override

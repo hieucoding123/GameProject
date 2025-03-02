@@ -30,7 +30,7 @@ const int GRAVITY = 7;
 const int PLAYER1ID = 1;
 const int PLAYER2ID = 2;
 
-const int HP = 200;
+const double HP = 200;
 const int DEFENSE = 10;
 
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
@@ -45,7 +45,9 @@ const std::unordered_map<int, const std::map<const char*, std::vector<int>>> GAM
 		{ "guard", {1, 1, 0, 224, 58, 71, 0, 0}},
 		{"airguard", {1, 1, 0, 296, 58, 74, 0, 0}},
 		{"attackcb", {7, 200, 0, 371, 91, 75, 1, 20}}}},
-	{ 2, {{"idle", {6, 150, 0, 0, 46, 80, 0, 0}}}}
+	{ 2, {{"idle", {6, 150, 0, 0, 46, 80, 0, 0}},
+		{"attackcb", {9, 110, 0, 80, 88, 86, 1, 50}},
+		{"run", {8, 150, 0, 166, 58, 77, 0, 0}}}}
 };
 
 //const std::map<const char*, std::vector<int>> SASUKE = {

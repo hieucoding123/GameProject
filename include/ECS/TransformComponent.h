@@ -54,8 +54,11 @@ public:
 		if (position.y + high >= (GROUND * MAP_SCALE))
 		{
 			position.y = (GROUND * MAP_SCALE) - high;
-			entity->onGround = true;
+			entity->attrib.onGround = true;
 		}
-
+		if (position.x + width >= (WIDTH * MAP_SCALE))
+		{
+			position.x = WIDTH * MAP_SCALE - width;
+		}
 	}
 };
