@@ -120,10 +120,17 @@ void Game::update()
 		if (player1.attrib.isHitting) {
 			std::cout << "Var ";
 			player2.attrib.hp -= player1.attrib.damage;
-			std::cout << player2.attrib.hp << std::endl;
 			player1.attrib.energy++;
+			std::cout << "Player 2 :" << "HP = " << player2.attrib.hp << std::endl;
 		}
+		if (player2.attrib.isHitting) {
+			player1.attrib.hp -= player2.attrib.damage;
+			player2.attrib.energy++;
+			std::cout << "Player 1 :" << "HP = " << player1.attrib.hp << std::endl;
+		}
+
 	}
+
 }
 
 void Game::render()
@@ -143,6 +150,13 @@ void Game::render()
 		e->draw();
 	}
 
+	int barWidth = 200;  // Chiều rộng thanh máu
+	int barHeight = 20;
+
+	int fillWidth = (player1.attrib.hp * barWidth) / HP;
+	SDL_Rect fillRect = { 0, 0, fillWidth, barHeight };
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_RenderFillRect(renderer, &fillRect);
 	SDL_RenderPresent(renderer);
 }
 
