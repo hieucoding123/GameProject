@@ -12,7 +12,7 @@ const int frameDelay = 1000 / FPS;
 
 const int BLOCK_W = 32;			// kích cỡ tile trong ảnh gốc
 const int BLOCK_H = 32;
-const int MAP_SCALE = 2;		// tỉ lệ phóng to map
+//const int MAP_SCALE = 2;		// tỉ lệ phóng to map
 
 const int FILE_COL = 25;		// HIGH / BLOCK_H
 const int FILE_ROW = 20;		// WIDTH / BLOCK_W
@@ -30,7 +30,7 @@ const int GRAVITY = 7;
 const int PLAYER1ID = 1;
 const int PLAYER2ID = 2;
 
-const double HP = 200;
+const double HP = 500;
 const int DEFENSE = 10;
 
 constexpr const char* imageTilePath = "assets/imageTileMap.png";

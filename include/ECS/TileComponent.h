@@ -22,7 +22,7 @@ public:
 
 		destRect.x = x = xpos;
 		destRect.y = y = ypos;
-		destRect.w = destRect.h = BLOCK_H * MAP_SCALE;
+		destRect.w = destRect.h = BLOCK_H * Game::MAP_SCALE;
 	}
 
 	void draw() override

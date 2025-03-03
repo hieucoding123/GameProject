@@ -51,14 +51,14 @@ public:
 		position.y += GRAVITY;
 
 		if (position.x <= 0) position.x = 0;
-		if (position.y + high >= (GROUND * MAP_SCALE))
+		if (position.y + high >= (GROUND * Game::MAP_SCALE))
 		{
-			position.y = (GROUND * MAP_SCALE) - high;
+			position.y = (GROUND * Game::MAP_SCALE) - high;
 			entity->attrib.onGround = true;
 		}
-		if (position.x + width >= (WIDTH * MAP_SCALE))
+		if (position.x + width >= (WIDTH * Game::MAP_SCALE))
 		{
-			position.x = WIDTH * MAP_SCALE - width;
+			position.x = WIDTH * Game::MAP_SCALE - width;
 		}
 	}
 };

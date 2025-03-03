@@ -8,6 +8,7 @@
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 SDL_Rect Game::camera = { 0, 0, WIDTH, HIGH };
+int Game::MAP_SCALE = 2;
 
 Manager manager;
 
@@ -65,19 +66,20 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 		isRunning = false;
 	}
 
+	// đặt camera ở giữa
 	camera.x = (WIDTH * MAP_SCALE - WIDTH) / 2;
-	camera.y = (HIGH * MAP_SCALE - HIGH) / 2;
+	camera.y = (HIGH * MAP_SCALE - HIGH);
 
 	map->LoadMap(tileMapPath);
 
-	player1.addComponent<TransformComponent>(camera.x + WIDTH/2, GROUND*MAP_SCALE, 48, 75, 2);
+	player1.addComponent<TransformComponent>(camera.x + 100, GROUND*MAP_SCALE, 48, 75, 2);
 	player1.addComponent<SpriteComponent>("assets/sasuke.png", true);
 	player1.addComponent<AnimationComponent>();
 	player1.addComponent<KeyboardController>();
 	player1.addComponent<ColliderComponent>();
 	player1.addGroup(p1Group);
 
-	player2.addComponent<TransformComponent>(200, 100, 46, 80, 2);
+	player2.addComponent<TransformComponent>(camera.x + WIDTH - 100, GROUND*MAP_SCALE, 46, 80, 2);
 	player2.addComponent<SpriteComponent>("assets/akainu_stand.png", true);
 	player2.addComponent<AnimationComponent>();
 	player2.addComponent<KeyboardController>();
@@ -105,9 +107,17 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
+	int distance = std::abs(player1.getComponent<TransformComponent>().position.x - player2.getComponent<TransformComponent>().position.x);
+
+	if (distance >= camera.w) {
+		;
+	}
+
 	// camera chạy theo
-	camera.x = player1.getComponent<TransformComponent>().position.x - (WIDTH / 2);
-	camera.y = player1.getComponent<TransformComponent>().position.y - (HIGH / 2);
+	//camera.x = player1.getComponent<TransformComponent>().position.x - (WIDTH * 1.0 / 2);
+	//camera.y = player1.getComponent<TransformComponent>().position.y - (HIGH * 1.0 / 2);
+
+
 
 	if (camera.x < 0) camera.x = 0;
 	if (camera.x > WIDTH) camera.x = WIDTH;
@@ -155,7 +165,7 @@ void Game::render()
 
 	int fillWidth = (player1.attrib.hp * barWidth) / HP;
 	SDL_Rect fillRect = { 0, 0, fillWidth, barHeight };
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_SetRenderDrawColor(renderer, 234, 164, 31, 255);
 	SDL_RenderFillRect(renderer, &fillRect);
 	SDL_RenderPresent(renderer);
 }
