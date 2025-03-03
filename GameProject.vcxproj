@@ -177,6 +177,8 @@
   <ItemGroup>
     <Image Include="assets\akainu_stand.png" />
     <Image Include="assets\dirt.png" />
+    <Image Include="assets\fight\p1.png" />
+    <Image Include="assets\fight\p2.png" />
     <Image Include="assets\grass.png" />
     <Image Include="assets\imageTileMap.png" />
     <Image Include="assets\map.png" />

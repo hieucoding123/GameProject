@@ -105,5 +105,11 @@
     <Image Include="assets\akainu_stand.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\fight\p1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\fight\p2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
