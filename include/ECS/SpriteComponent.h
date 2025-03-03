@@ -3,7 +3,6 @@
 #include "SDL.h"
 #include "TextureManager.h"
 #include "TransformComponent.h"
-#include "Animation.h"
 #include <map>
 
 // lấy id của nhân vật
@@ -19,23 +18,11 @@ private:
 	TransformComponent* transform;
 	SDL_Texture* texture;
 	SDL_Rect srcRect, destRect;		
-
 	bool animated;
-
-	int frames = 4;		// số khung hình
-	int speed = 150;	// tốc độ
-
-	Uint32 lastUpdate;
-	int currentFrame;
 public:
 	int ID = getID();
-	const char* state;			// trạng thái
-	bool onGround;
-	bool animFinished = true;
 
 	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;	// lật bản vẽ
-
-	std::map<const char*, Animation> animations;	// thông tin hoạt ảnh
 
 	SpriteComponent() = default;
 
@@ -44,11 +31,6 @@ public:
 		texture = TextureManager::LoadTexture(path);
 
 		animated = isAnimated;
-		loadAnimations(GAMECHARACTERS.at(ID));
-		
-		use("idle");
-		/*lastUpdate = SDL_GetTicks();
-		currentFrame = 0;*/
 	}
 
 	~SpriteComponent()
@@ -73,48 +55,11 @@ public:
 		destRect.h = transform->high * transform->scale;
 
 		destRect.x = destRect.y = 0;
-		lastUpdate = SDL_GetTicks();
-		currentFrame = 0;
 	}
 
 	void update() override
 	{
-		if (animated)
-		{
-			Uint32 now = SDL_GetTicks();
-			if (now - lastUpdate > speed) {
-				currentFrame++; 
-				lastUpdate = now;
-
-				if (currentFrame >= frames) {
-					if (state != "run")
-					{
-						use("idle");
-						transform->velocity.x = 0;
-						transform->velocity.y = 0;
-					}
-					else
-					{
-						currentFrame = 0;	// nếu đang chạy -> chạy tiếp
-					}
-					animFinished = true;
-					entity->attrib.isHitting = false;
-				}
-			}
-		}
-
-		entity->attrib.damage = animations[state].damage * 1.0 / animations[state].speed;
-		entity->attrib.isHitting = animations[state].hit;
-
-		srcRect.x = currentFrame * srcRect.w;
-
-		// cập nhật vị trí lấy sprite sheet
-		srcRect.y = animations[state].srcY;
-
-		// cập nhật theo trạng thái
-		transform->high = animations[state].h;
-		transform->width = animations[state].w;
-
+		// theo camera
 		destRect.x = (int)transform->position.x - Game::camera.x;
 		destRect.y = (int)transform->position.y - Game::camera.y;
 
@@ -132,25 +77,30 @@ public:
 		TextureManager::Draw(texture, &srcRect, &destRect, spriteFlip);
 	}
 
-	// sử dụng hoạt ảnh
-	void use(const char* animation)
-	{
-		state = animation;
-		frames = animations[animation].frames;
-		speed = animations[animation].speed;
-		srcRect.w = animations[animation].w;
-		srcRect.h = animations[animation].h;
-		
-		lastUpdate = SDL_GetTicks();		// đặt lại tgian
-		currentFrame = 0;
-	}
+	bool isAnimated() const { return animated; }
 
-	// tải các hoạt ảnh
-	void loadAnimations(const std::map<const char*, std::vector<int>>& aniInfor)
+	void setSrcW(int w)
 	{
-		for (const auto& pair : aniInfor)
-		{
-			animations.emplace(pair.first, Animation(pair.second));
-		}
+		srcRect.w = w;
+	}
+	void setSrcH(int h)
+	{
+		srcRect.h = h;
+	}
+	void setSrcX(int x)
+	{
+		srcRect.x = x;
+	}
+	void setSrcY(int y)
+	{
+		srcRect.y = y;
+	}
+	void setDestH(int h)
+	{
+		destRect.h = h;
+	}
+	void setDestW(int w)
+	{
+		destRect.w = w;
 	}
 };
