@@ -3,7 +3,6 @@
 #include "SDL.h"
 #include "TextureManager.h"
 #include "TransformComponent.h"
-#include <map>
 
 // lấy id của nhân vật
 inline int getID()
@@ -17,7 +16,9 @@ class SpriteComponent : public Component
 private:
 	TransformComponent* transform;
 	SDL_Texture* texture;
-	SDL_Rect srcRect, destRect;		
+	SDL_Texture* maskTexture;
+	SDL_Rect srcRect, destRect;
+	SDL_Rect mSrcRect, mDestRect;
 	bool animated;
 public:
 	int ID = getID();
@@ -29,6 +30,7 @@ public:
 	SpriteComponent(const char* path, bool isAnimated)
 	{
 		texture = TextureManager::LoadTexture(path);
+		maskTexture = TextureManager::LoadTexture(MASKS[ID - 1]);
 
 		animated = isAnimated;
 	}
@@ -55,6 +57,10 @@ public:
 		destRect.h = transform->high * transform->scale;
 
 		destRect.x = destRect.y = 0;
+
+		mSrcRect.x = mSrcRect.y = 0;
+		mSrcRect.w = MASK_W;
+		mSrcRect.h = MASK_H;
 	}
 
 	void update() override
@@ -65,6 +71,11 @@ public:
 
 		destRect.w = transform->width * transform->scale;
 		destRect.h = transform->high * transform->scale;
+
+		mDestRect.x = (destRect.x + (destRect.w - MASK_W) * 1.0 / 2);
+		mDestRect.y = (destRect.y - MASK_H);
+		mDestRect.w = MASK_W;
+		mDestRect.h = MASK_H;
 	}
 
 	SDL_Rect getDestRect() const
@@ -75,6 +86,7 @@ public:
 	void draw() override
 	{
 		TextureManager::Draw(texture, &srcRect, &destRect, spriteFlip);
+		TextureManager::Draw(maskTexture, &mSrcRect, &mDestRect, SDL_FLIP_NONE);
 	}
 
 	bool isAnimated() const { return animated; }

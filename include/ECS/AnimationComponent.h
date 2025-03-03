@@ -73,7 +73,7 @@ public:
 		sprite->setSrcW(animInfor[4]);
 		sprite->setSrcH(animInfor[5]);
 		entity->attrib.isHitting = (bool)animInfor[6];
-		entity->attrib.damage = animInfor[7] / speed;
+		entity->attrib.damage = animInfor[7] * 1.0 / speed;
 
 		lastUpdate = SDL_GetTicks();		// đặt lại tgian
 		currentFrame = 0;

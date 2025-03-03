@@ -46,9 +46,18 @@ const std::unordered_map<int, const std::map<const char*, std::vector<int>>> GAM
 		{"airguard", {1, 1, 0, 296, 58, 74, 0, 0}},
 		{"attackcb", {7, 180, 0, 371, 91, 75, 1, 20}}}},
 	{ 2, {{"idle", {6, 150, 0, 0, 46, 80, 0, 0}},
-		{"attackcb", {9, 110, 0, 80, 88, 86, 1, 50}},
+		{"attackcb", {9, 110, 0, 80, 88, 86, 1, 35}},
 		{"run", {8, 150, 0, 166, 58, 77, 0, 0}}}}
 };
+
+const std::vector<const char*> MASKS = {
+	"assets/fight/p1.png",
+	"assets/fight/p2.png"
+};
+
+const int MASK_W = 39;
+const int MASK_H = 55;
+
 
 //const std::map<const char*, std::vector<int>> SASUKE = {
 //	// frames - speed - srcX - srcY - W - H
