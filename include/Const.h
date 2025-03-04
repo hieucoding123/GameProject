@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "SDL.h"
 #include <unordered_map>
 #include <map>
 #include <vector>
@@ -31,7 +32,19 @@ const int PLAYER1ID = 1;
 const int PLAYER2ID = 2;
 
 const double HP = 500;
+const double ENERGY = 2000;
 const int DEFENSE = 10;
+
+// chiều dài và rộng thanh máu
+const int HP_W = 200;
+const int HP_H = 20;
+
+// màu nền và màu thanh máu và thanh năng lượng
+const SDL_Color HPBG_COLOR = { 255, 0, 0, 255 };
+const SDL_Color HP_COLOR = { 234, 164, 31, 255 };
+
+const SDL_Color ENGBG_COLOR = { 155, 159, 191, 255 };
+const SDL_Color ENG_COLOR = { 73, 222, 255, 255 };
 
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
 constexpr const char* tileMapPath = "assets/TileMap.txt";
@@ -46,7 +59,7 @@ const std::unordered_map<int, const std::map<const char*, std::vector<int>>> GAM
 		{"airguard", {1, 1, 0, 296, 58, 74, 0, 0}},
 		{"attackcb", {7, 180, 0, 371, 91, 75, 1, 20}}}},
 	{ 2, {{"idle", {6, 150, 0, 0, 46, 80, 0, 0}},
-		{"attackcb", {9, 110, 0, 80, 88, 86, 1, 35}},
+		{"attackcb", {9, 110, 0, 80, 88, 86, 1, 30}},
 		{"run", {8, 150, 0, 166, 58, 77, 0, 0}}}}
 };
 
@@ -57,19 +70,3 @@ const std::vector<const char*> MASKS = {
 
 const int MASK_W = 39;
 const int MASK_H = 55;
-
-
-//const std::map<const char*, std::vector<int>> SASUKE = {
-//	// frames - speed - srcX - srcY - W - H
-//	{ "idle", {4, 150, 0,  0, 48, 75} },		// idle
-//	{ "run", {6, 110, 0, 75, 67, 75}},			// walk
-//	{ "jump", {3, 200, 0, 150, 56, 75}},		// jump
-//	{ "fall", {1, 1, 0, 150, 56, 74}},
-//	{ "guard", {1, 1, 0, 224, 58, 71}},
-//	{"airguard", {1, 1, 0, 296, 58, 74}},
-//	{"attackcb", {7, 200, 0, 371, 91, 75}}
-//};
-
-//const std::map<const char*, std::vector<int>> AKAINU = {
-//	{ "idle", {6, 150, 0, 0, 46, 80}}
-//};

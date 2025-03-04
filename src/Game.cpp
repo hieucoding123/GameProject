@@ -77,14 +77,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	player1.addComponent<SpriteComponent>("assets/sasuke.png", true);
 	player1.addComponent<AnimationComponent>();
 	player1.addComponent<KeyboardController>();
-	player1.addComponent<ColliderComponent>();
 	player1.addGroup(p1Group);
 
 	player2.addComponent<TransformComponent>(camera.x + WIDTH - 100, GROUND*MAP_SCALE, 46, 80, 2);
 	player2.addComponent<SpriteComponent>("assets/akainu_stand.png", true);
 	player2.addComponent<AnimationComponent>();
 	player2.addComponent<KeyboardController>();
-	player2.addComponent<ColliderComponent>();
 	player2.addGroup(p2Group);
 }
 
@@ -128,22 +126,16 @@ void Game::update()
 	if (camera.y < 0) camera.y = 0;
 	if (camera.y > HIGH) camera.y = HIGH;*/
 
-	if (Game::AABB(player1.getComponent<ColliderComponent>().attackBox,
-		player2.getComponent<ColliderComponent>().rect))
+	// Khi 2 nhân vật chạm nhau
+	if (Game::AABB(player1.getComponent<SpriteComponent>().getDestRect(),
+		player2.getComponent<SpriteComponent>().getDestRect()))
 	{
-		if (player1.attrib.isHitting) {
-			std::cout << "Var ";
 			player2.attrib.hp -= player1.attrib.damage;
-			player1.attrib.energy++;
-			std::cout << "Player 2 :" << "HP = " << player2.attrib.hp << std::endl;
-		}
-		if (player2.attrib.isHitting) {
-			player1.attrib.hp -= player2.attrib.damage;
-			player2.attrib.energy++;
-			std::cout << "Player 1 :" << "HP = " << player1.attrib.hp << std::endl;
-		}
-	}
+			if (player1.attrib.isHitting) player1.attrib.energy++;
 
+			player1.attrib.hp -= player2.attrib.damage;
+			if (player2.attrib.isHitting) player2.attrib.energy++;
+	}
 }
 
 void Game::render()
@@ -163,13 +155,13 @@ void Game::render()
 		e->draw();
 	}
 
-	int barWidth = 200;  // Chiều rộng thanh máu
-	int barHeight = 20;
+	// Vẽ thanh máu và năng lượng
+	TextureManager::DrawHP(0, 0, (player1.attrib.hp * HP_W) / HP, HPBG_COLOR, HP_COLOR);
+	TextureManager::DrawEnergy(0, HP_H, (player1.attrib.energy * (HP_W - 20)) / ENERGY, ENGBG_COLOR, ENG_COLOR);
+	
+	TextureManager::DrawHP(camera.w - HP_W, 0, ((HP - player2.attrib.hp) * HP_W) / HP, HP_COLOR, HPBG_COLOR);
+	TextureManager::DrawEnergy(camera.w - HP_W + 20, HP_H, ((ENERGY - player2.attrib.energy) * (HP_W - 20)) / ENERGY, ENG_COLOR, ENGBG_COLOR);
 
-	int fillWidth = (player1.attrib.hp * barWidth) / HP;
-	SDL_Rect fillRect = { 0, 0, fillWidth, barHeight };
-	SDL_SetRenderDrawColor(renderer, 234, 164, 31, 255);
-	SDL_RenderFillRect(renderer, &fillRect);
 	SDL_RenderPresent(renderer);
 }
 
