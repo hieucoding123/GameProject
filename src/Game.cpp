@@ -8,6 +8,7 @@
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 SDL_Rect Game::camera = { 0, 0, WIDTH, HIGH };
+
 int Game::MAP_SCALE = 2;
 
 Manager manager;
@@ -110,7 +111,10 @@ void Game::update()
 	int distance = std::abs(player1.getComponent<TransformComponent>().position.x - player2.getComponent<TransformComponent>().position.x);
 
 	if (distance >= camera.w) {
-		;
+		MAP_SCALE = 1;
+		camera.x = camera.y = 0;
+		player1.getComponent<TransformComponent>().scale = 1;
+		player2.getComponent<TransformComponent>().scale = 1;
 	}
 
 	// camera chạy theo
@@ -119,10 +123,10 @@ void Game::update()
 
 
 
-	if (camera.x < 0) camera.x = 0;
+	/*if (camera.x < 0) camera.x = 0;
 	if (camera.x > WIDTH) camera.x = WIDTH;
 	if (camera.y < 0) camera.y = 0;
-	if (camera.y > HIGH) camera.y = HIGH;
+	if (camera.y > HIGH) camera.y = HIGH;*/
 
 	if (Game::AABB(player1.getComponent<ColliderComponent>().attackBox,
 		player2.getComponent<ColliderComponent>().rect))
@@ -138,7 +142,6 @@ void Game::update()
 			player2.attrib.energy++;
 			std::cout << "Player 1 :" << "HP = " << player1.attrib.hp << std::endl;
 		}
-
 	}
 
 }

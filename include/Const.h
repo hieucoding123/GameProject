@@ -24,7 +24,7 @@ const int DEFAULT_X1 = 64;
 const int DEFAULT_X2 = 736;
 const int DEFAULT_Y = 568;
 
-const int GROUND = 576;
+const int GROUND = 568;
 const int GRAVITY = 7;
 
 const int PLAYER1ID = 1;

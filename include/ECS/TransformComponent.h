@@ -44,6 +44,7 @@ public:
 	}
 	void update() override
 	{
+		speed = 2 * scale + 1;
 
 		position.x += velocity.x * speed;
 		position.y += velocity.y * speed;

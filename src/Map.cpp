@@ -20,7 +20,7 @@ void Map::LoadMap(const char* path)
 
 			int tileX = (ID % COL) * BLOCK_W;
 			int tileY = (ID / ROW) * BLOCK_H;
-			Game::addTile(tileX, tileY, x * BLOCK_H * Game::MAP_SCALE, y * BLOCK_W * Game::MAP_SCALE);
+			Game::addTile(tileX, tileY, x * BLOCK_H, y * BLOCK_W);
 
 			myFile.ignore();
 		}

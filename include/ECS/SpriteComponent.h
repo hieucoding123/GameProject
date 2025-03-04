@@ -71,11 +71,11 @@ public:
 
 		destRect.w = transform->width * transform->scale;
 		destRect.h = transform->high * transform->scale;
-
-		mDestRect.x = (destRect.x + (destRect.w - MASK_W) * 1.0 / 2);
-		mDestRect.y = (destRect.y - MASK_H);
-		mDestRect.w = MASK_W;
-		mDestRect.h = MASK_H;
+		
+		mDestRect.w = transform->scale * MASK_W * 1.0 / 2;
+		mDestRect.h = transform->scale * MASK_H * 1.0 / 2;
+		mDestRect.x = (destRect.x + (destRect.w - mDestRect.w) * 1.0 / 2);
+		mDestRect.y = (destRect.y - mDestRect.h);
 	}
 
 	SDL_Rect getDestRect() const

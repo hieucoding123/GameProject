@@ -19,6 +19,7 @@ public:
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static SDL_Rect camera;
+
 	static int MAP_SCALE;
 	
 	static void addTile(int tileX, int tileY, int xpos, int ypos);
