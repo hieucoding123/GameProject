@@ -16,13 +16,14 @@ class SpriteComponent : public Component
 private:
 	TransformComponent* transform;
 	SDL_Texture* texture;
-	SDL_Texture* maskTexture;
 	SDL_Rect srcRect, destRect;
+
+	// đánh dấu
+	SDL_Texture* maskTexture;
 	SDL_Rect mSrcRect, mDestRect;
 	bool animated;
 public:
 	int ID = getID();
-
 	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;	// lật bản vẽ
 
 	SpriteComponent() = default;
