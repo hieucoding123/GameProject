@@ -115,17 +115,6 @@ void Game::update()
 		player2.getComponent<TransformComponent>().scale = 1;
 	}
 
-	// camera chạy theo
-	//camera.x = player1.getComponent<TransformComponent>().position.x - (WIDTH * 1.0 / 2);
-	//camera.y = player1.getComponent<TransformComponent>().position.y - (HIGH * 1.0 / 2);
-
-
-
-	/*if (camera.x < 0) camera.x = 0;
-	if (camera.x > WIDTH) camera.x = WIDTH;
-	if (camera.y < 0) camera.y = 0;
-	if (camera.y > HIGH) camera.y = HIGH;*/
-
 	// Khi 2 nhân vật chạm nhau
 	if (Game::AABB(player1.getComponent<SpriteComponent>().getDestRect(),
 		player2.getComponent<SpriteComponent>().getDestRect()))
@@ -157,10 +146,13 @@ void Game::render()
 
 	// Vẽ thanh máu và năng lượng
 	TextureManager::DrawHP(0, 0, (player1.attrib.hp * HP_W) / HP, HPBG_COLOR, HP_COLOR);
-	TextureManager::DrawEnergy(0, HP_H, (player1.attrib.energy * (HP_W - 20)) / ENERGY, ENGBG_COLOR, ENG_COLOR);
+	TextureManager::DrawEnergy(0, HP_H, 
+		(player1.attrib.energy * (HP_W - 20)) / ENERGY, ENGBG_COLOR, ENG_COLOR);
 	
-	TextureManager::DrawHP(camera.w - HP_W, 0, ((HP - player2.attrib.hp) * HP_W) / HP, HP_COLOR, HPBG_COLOR);
-	TextureManager::DrawEnergy(camera.w - HP_W + 20, HP_H, ((ENERGY - player2.attrib.energy) * (HP_W - 20)) / ENERGY, ENG_COLOR, ENGBG_COLOR);
+	TextureManager::DrawHP(camera.w - HP_W, 0, 
+		((HP - player2.attrib.hp) * HP_W) / HP, HP_COLOR, HPBG_COLOR);
+	TextureManager::DrawEnergy(camera.w - HP_W + 20, HP_H, 
+		((ENERGY - player2.attrib.energy) * (HP_W - 20)) / ENERGY, ENG_COLOR, ENGBG_COLOR);
 
 	SDL_RenderPresent(renderer);
 }

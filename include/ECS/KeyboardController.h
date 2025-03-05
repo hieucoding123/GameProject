@@ -29,7 +29,6 @@ public:
 				switch (Game::event.key.keysym.sym)
 				{
 				case SDLK_w:
-					transform->velocity.y = -1;
 					animations->animFinished = false;
 					entity->attrib.isHitting = false;
 					transform->velocity.y = -3;
@@ -53,6 +52,18 @@ public:
 					entity->attrib.isHitting = true;			// đang đánh
 					animations->animFinished = false;
 					break;
+				case SDLK_r:
+					transform->velocity.x = 0;
+					animations->use("skill1");
+					entity->attrib.isHitting = true;			// đang đánh
+					animations->animFinished = false;
+					break;
+				case SDLK_f:
+					transform->velocity.x = 1.5 * ((int)sprite->spriteFlip * -2 + 1);
+					animations->use("fire");
+					entity->attrib.isHitting = true;			// đang đánh
+					animations->animFinished = false;
+					break;
 				default:
 					break;
 				}
@@ -63,8 +74,9 @@ public:
 				switch (Game::event.key.keysym.sym)
 				{
 				case SDLK_UP:
-					transform->velocity.y = -1;
+					transform->velocity.y = -3;
 					animations->animFinished = false;
+					animations->use("jump");
 					break;
 				case SDLK_RIGHT:
 					transform->velocity.x = 0.5;
