@@ -108,12 +108,12 @@ void Game::update()
 
 	int distance = std::abs(player1.getComponent<TransformComponent>().position.x - player2.getComponent<TransformComponent>().position.x);
 
-	if (distance >= camera.w) {
+	/*if (distance >= camera.w) {
 		MAP_SCALE = 1;
 		camera.x = camera.y = 0;
 		player1.getComponent<TransformComponent>().scale = 1;
 		player2.getComponent<TransformComponent>().scale = 1;
-	}
+	}*/
 
 	// Khi 2 nhân vật chạm nhau
 	if (Game::AABB(player1.getComponent<SpriteComponent>().getDestRect(),

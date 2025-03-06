@@ -5,8 +5,8 @@
 #include <map>
 #include <vector>
 
-const int WIDTH = 800;
-const int HIGH = 640;
+const int WIDTH = 1920;
+const int HIGH = 992;
 
 const int FPS = 60;
 const int frameDelay = 1000 / FPS;
@@ -15,8 +15,8 @@ const int BLOCK_W = 32;			// kích cỡ tile trong ảnh gốc
 const int BLOCK_H = 32;
 //const int MAP_SCALE = 2;		// tỉ lệ phóng to map
 
-const int FILE_COL = 25;		// HIGH / BLOCK_H
-const int FILE_ROW = 20;		// WIDTH / BLOCK_W
+const int FILE_COL = 60;		// HIGH / BLOCK_H
+const int FILE_ROW = 31;		// WIDTH / BLOCK_W
 
 const int ROW = 15;
 const int COL = 15;
@@ -25,7 +25,7 @@ const int DEFAULT_X1 = 64;
 const int DEFAULT_X2 = 736;
 const int DEFAULT_Y = 568;
 
-const int GROUND = 568;
+const int GROUND = 928;
 const int GRAVITY = 7;
 
 const int PLAYER1ID = 1;
@@ -47,7 +47,7 @@ const SDL_Color ENGBG_COLOR = { 155, 159, 191, 255 };
 const SDL_Color ENG_COLOR = { 73, 222, 255, 255 };
 
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
-constexpr const char* tileMapPath = "assets/TileMap.txt";
+constexpr const char* tileMapPath = "assets/map.txt";
 
 const std::unordered_map<int, const std::map<const char*, std::vector<int>>> GAMECHARACTERS = {
 		// frames - speed - srcX - srcY - W - H - isHitting - damage
