@@ -10,7 +10,11 @@ public:
 	Effect(const std::vector<int>& v, int vX, int vY, int scl, SDL_RendererFlip f, int xpos, int ypos);
 	void update();
 	bool isActive() const { return active; }
+	int getDamage() const { return damage; }
+	void setDamge() { damage = 0; }
+	void offEffect() { active = false; }
 	SDL_Rect srcRect, destRect;
+	int addEnergy;
 private:
 	int frames;
 	int speed;

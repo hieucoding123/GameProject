@@ -55,7 +55,7 @@ public:
 					animations->use("skill1");
 					animations->animFinished = false;
 					sprite->effect = Effect(GAMECHARACTERS.at(sprite->ID).at("eff1"), 9, 0, transform->scale, sprite->spriteFlip,
-						sprite->getDestRect().x + sprite->getDestRect().w *sprite->ROL, sprite->getDestRect().y);
+						entity->getRect().x + entity->getRect().w * sprite->ROL, entity->getRect().y);
 					break;
 				default:
 					break;
@@ -92,7 +92,7 @@ public:
 					animations->use("skill1");			
 					animations->animFinished = false;
 					sprite->effect = Effect(GAMECHARACTERS.at(sprite->ID).at("eff1"), 0, 0, transform->scale, sprite->spriteFlip,
-						sprite->getDestRect().x + 400 * sprite->ROL, sprite->getDestRect().y);
+						entity->getRect().x + 550 * sprite->ROL, entity->getRect().y);
 					break;
 				default:
 					break;

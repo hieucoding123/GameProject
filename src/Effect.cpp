@@ -11,7 +11,7 @@ Effect::Effect(const std::vector<int>& v, int vX, int vY, int scl, SDL_RendererF
 	speed = v[1];
 	damage = v[7];
 
-	vx = vX*((int)f * -2 + 1);
+	vx = vX*((int)f * -2 + 1);			// tịnh tiến theo hướng
 	vy = vY;
 
 	srcRect = { v[2], v[3], v[4], v[5] };
@@ -33,6 +33,7 @@ void Effect::update()
 		if (currentFrame >= frames) {
 			active = false;
 			destRect = { 0 };
+			addEnergy = 0;
 		}
 	}
 

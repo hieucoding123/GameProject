@@ -146,6 +146,22 @@ public:
 	void update()
 	{
 		for (auto& e : entities) e->update();
+
+		// Kiểm tra va chạm
+		int i = 0;
+		for (auto& effect : Game::effects)
+		{
+			for (int j = 0; j < entities.size(); j++)
+			{
+				if (j != i && Game::AABB(effect->destRect, entities[j]->getRect()) &&
+					effect->getDamage() > 0)		// áp dụng hiệu ứng lên đối tượng khác
+				{
+					entities[j]->attrib.hp -= effect->getDamage();
+					effect->setDamge();
+				}
+			}
+			i++;
+		}
 	}
 	void draw()
 	{
