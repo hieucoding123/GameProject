@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\ECS\ECS.cpp" />
+    <ClCompile Include="src\Effect.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Map.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="include\ECS\SpriteComponent.h" />
     <ClInclude Include="include\ECS\TileComponent.h" />
     <ClInclude Include="include\ECS\TransformComponent.h" />
+    <ClInclude Include="include\Effect.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Map.h" />
     <ClInclude Include="include\TextureManager.h" />

@@ -25,6 +25,8 @@ private:
 public:
 	int ID = getID();
 	SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;	// lật bản vẽ
+	int ROL;
+	Effect effect;
 
 	SpriteComponent() = default;
 
@@ -48,7 +50,6 @@ public:
 			transform = &entity->addComponent<TransformComponent>();
 		}
 		transform = &entity->getComponent<TransformComponent>();
-
 		
 		srcRect.x = srcRect.y = 0;
 		srcRect.w = transform->width;
@@ -77,6 +78,9 @@ public:
 		mDestRect.h = transform->scale * MASK_H * 1.0 / 2;
 		mDestRect.x = (destRect.x + (destRect.w - mDestRect.w) * 1.0 / 2);
 		mDestRect.y = (destRect.y - mDestRect.h);
+		int ROL = ((int)spriteFlip * -2 + 1);
+
+		effect.update();
 	}
 
 	SDL_Rect getDestRect() const
@@ -88,6 +92,10 @@ public:
 	{
 		TextureManager::Draw(texture, &srcRect, &destRect, spriteFlip);
 		TextureManager::Draw(maskTexture, &mSrcRect, &mDestRect, SDL_FLIP_NONE);
+		if (effect.isActive())
+		{
+			TextureManager::Draw(texture, &effect.srcRect, &effect.destRect, spriteFlip);
+		}
 	}
 
 	bool isAnimated() const { return animated; }

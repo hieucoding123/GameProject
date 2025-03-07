@@ -120,10 +120,17 @@ void Game::update()
 		player2.getComponent<SpriteComponent>().getDestRect()))
 	{
 			player2.attrib.hp -= player1.attrib.damage;
-			if (player1.attrib.isHitting) player1.attrib.energy++;
+			if (player1.attrib.isHitting)
+			{
+				player1.attrib.energy++;
+			}
 
 			player1.attrib.hp -= player2.attrib.damage;
-			if (player2.attrib.isHitting) player2.attrib.energy++;
+			if (player2.attrib.isHitting)
+			{
+				player2.attrib.energy++;
+
+			}
 	}
 }
 

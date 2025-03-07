@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL_image.h>
 #include <SDL.h>
+#include "Effect.h"
 
 class Game
 {
@@ -21,7 +22,6 @@ public:
 	static SDL_Rect camera;
 
 	static int MAP_SCALE;
-	
 	static void addTile(int tileX, int tileY, int xpos, int ypos);
 	static bool AABB(const SDL_Rect& rect1, const SDL_Rect& rect2);
 private:

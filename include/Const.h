@@ -36,8 +36,8 @@ const double ENERGY = 2000;
 const int DEFENSE = 10;
 
 // chiều dài và rộng thanh máu
-const int HP_W = 200;
-const int HP_H = 20;
+const int HP_W = 500;
+const int HP_H = 30;
 
 // màu nền và màu thanh máu và thanh năng lượng
 const SDL_Color HPBG_COLOR = { 255, 0, 0, 255 };
@@ -47,7 +47,7 @@ const SDL_Color ENGBG_COLOR = { 155, 159, 191, 255 };
 const SDL_Color ENG_COLOR = { 73, 222, 255, 255 };
 
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
-constexpr const char* tileMapPath = "assets/map.txt";
+constexpr const char* tileMapPath = "assets/TileMap.txt";
 
 const std::unordered_map<int, const std::map<const char*, std::vector<int>>> GAMECHARACTERS = {
 		// frames - speed - srcX - srcY - W - H - isHitting - damage
@@ -58,7 +58,7 @@ const std::unordered_map<int, const std::map<const char*, std::vector<int>>> GAM
 		{ "guard", {1, 1, 0, 224, 58, 71, 0, 0}},
 		{"airguard", {1, 1, 0, 296, 58, 74, 0, 0}},
 		{"attackcb", {7, 180, 0, 371, 91, 75, 1, 20}},
-		{"skill1", {8, 140, 0, 446, 60, 77, 1, 35}},
+		{"skill1", {8, 100, 0, 446, 60, 77, 1, 35}}, 
 		{"fire", {6, 110, 0, 523, 86, 57, 1, 35}}}},
 	{ 2, {{"idle", {6, 150, 0, 0, 46, 80, 0, 0}},
 		{"attackcb", {9, 110, 0, 80, 88, 86, 1, 30}},

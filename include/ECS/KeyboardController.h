@@ -30,7 +30,6 @@ public:
 				{
 				case SDLK_w:
 					animations->animFinished = false;
-					entity->attrib.isHitting = false;
 					transform->velocity.y = -3;
 					animations->use("jump");
 					break;
@@ -49,25 +48,18 @@ public:
 				case SDLK_u:
 					transform->velocity.x = 0;
 					animations->use("attackcb");
-					entity->attrib.isHitting = true;			// đang đánh
 					animations->animFinished = false;
 					break;
 				case SDLK_r:
 					transform->velocity.x = 0;
 					animations->use("skill1");
-					entity->attrib.isHitting = true;			// đang đánh
 					animations->animFinished = false;
-					break;
-				case SDLK_f:
-					transform->velocity.x = 1.5 * ((int)sprite->spriteFlip * -2 + 1);
-					animations->use("fire");
-					entity->attrib.isHitting = true;			// đang đánh
-					animations->animFinished = false;
+					sprite->effect = Effect(GAMECHARACTERS.at(sprite->ID).at("fire"), 10, 0, transform->scale, sprite->spriteFlip,
+						sprite->getDestRect().x + sprite->getDestRect().w *sprite->ROL, sprite->getDestRect().y);
 					break;
 				default:
 					break;
 				}
-				
 			}
 			else if (sprite->ID == PLAYER2ID && animations->animFinished)
 			{
@@ -92,8 +84,7 @@ public:
 					break;
 				case SDLK_1:
 					transform->velocity.x = 0;
-					animations->use("attackcb");
-					entity->attrib.isHitting = true;			// đang đánh
+					animations->use("attackcb");			// đang đánh
 					animations->animFinished = false;
 					break;
 				default:
