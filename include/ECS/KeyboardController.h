@@ -54,7 +54,7 @@ public:
 					transform->velocity.x = 0;
 					animations->use("skill1");
 					animations->animFinished = false;
-					sprite->effect = Effect(GAMECHARACTERS.at(sprite->ID).at("fire"), 10, 0, transform->scale, sprite->spriteFlip,
+					sprite->effect = Effect(GAMECHARACTERS.at(sprite->ID).at("eff1"), 9, 0, transform->scale, sprite->spriteFlip,
 						sprite->getDestRect().x + sprite->getDestRect().w *sprite->ROL, sprite->getDestRect().y);
 					break;
 				default:
@@ -82,10 +82,17 @@ public:
 					animations->animFinished = true;		// sẵn sàng nhận phím tiếp theo
 					animations->use("run");
 					break;
-				case SDLK_1:
+				case SDLK_p:
 					transform->velocity.x = 0;
 					animations->use("attackcb");			// đang đánh
 					animations->animFinished = false;
+					break;
+				case SDLK_l:
+					transform->velocity.x = 0;
+					animations->use("skill1");			
+					animations->animFinished = false;
+					sprite->effect = Effect(GAMECHARACTERS.at(sprite->ID).at("eff1"), 0, 0, transform->scale, sprite->spriteFlip,
+						sprite->getDestRect().x + 400 * sprite->ROL, sprite->getDestRect().y);
 					break;
 				default:
 					break;

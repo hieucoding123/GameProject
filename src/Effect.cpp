@@ -1,4 +1,4 @@
-#include "Effect.h"
+﻿#include "Effect.h"
 #include "Game.h"
 
 Effect::Effect()
@@ -23,10 +23,11 @@ Effect::Effect(const std::vector<int>& v, int vX, int vY, int scl, SDL_RendererF
 
 void Effect::update()
 {
-	// cho hi?u ?ng chuy?n ??ng
+	// cho hiệu ứng chuyển động
 	Uint32 now = SDL_GetTicks();
 	if ((now - lastUpdate) > speed) {
 		currentFrame++;
+		srcRect.x += srcRect.w;
 		lastUpdate = now;
 
 		if (currentFrame >= frames) {
@@ -35,9 +36,7 @@ void Effect::update()
 		}
 	}
 
-	srcRect.x = currentFrame * srcRect.w;
-
-	// cho hi?u ?ng di chuy?n
+	// cho hiệu ứng di chuyển
 	destRect.x += vx;
 	destRect.y += vy;
 }

@@ -78,7 +78,7 @@ public:
 		mDestRect.h = transform->scale * MASK_H * 1.0 / 2;
 		mDestRect.x = (destRect.x + (destRect.w - mDestRect.w) * 1.0 / 2);
 		mDestRect.y = (destRect.y - mDestRect.h);
-		int ROL = ((int)spriteFlip * -2 + 1);
+		ROL = ((int)spriteFlip * -2 + 1);
 
 		effect.update();
 	}
