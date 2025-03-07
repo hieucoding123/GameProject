@@ -3,7 +3,10 @@
 #include <iostream>
 #include <SDL_image.h>
 #include <SDL.h>
+#include <vector>
 #include "Effect.h"
+
+class Effect;
 
 class Game
 {
@@ -20,6 +23,7 @@ public:
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static SDL_Rect camera;
+	static std::vector<Effect*> effects;
 
 	static int MAP_SCALE;
 	static void addTile(int tileX, int tileY, int xpos, int ypos);
