@@ -8,6 +8,7 @@
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 SDL_Rect Game::camera = { 0, 0, WIDTH, HIGH };
+std::vector<Effect*> Game::effects;
 
 int Game::MAP_SCALE = 2;
 
@@ -106,7 +107,7 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	int distance = std::abs(player1.getComponent<TransformComponent>().position.x - player2.getComponent<TransformComponent>().position.x);
+	//int distance = std::abs(player1.getComponent<TransformComponent>().position.x - player2.getComponent<TransformComponent>().position.x);
 
 	/*if (distance >= camera.w) {
 		MAP_SCALE = 1;
@@ -116,8 +117,7 @@ void Game::update()
 	}*/
 
 	// Khi 2 nhân vật chạm nhau
-	if (Game::AABB(player1.getComponent<SpriteComponent>().getDestRect(),
-		player2.getComponent<SpriteComponent>().getDestRect()))
+	if (Game::AABB(player1.getRect(), player2.getRect()))
 	{
 			player2.attrib.hp -= player1.attrib.damage;
 			if (player1.attrib.isHitting)
@@ -132,6 +132,13 @@ void Game::update()
 
 			}
 	}
+	/*for (auto& e : effects)
+	{
+		if (Game::AABB(player1.getComponent<SpriteComponent>().getDestRect(), e->destRect))
+		{
+			std::cout << "*";
+		}
+	}*/
 }
 
 void Game::render()

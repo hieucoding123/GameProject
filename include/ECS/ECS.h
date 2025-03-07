@@ -6,6 +6,7 @@
 #include <array>
 #include <memory>
 #include <algorithm>
+#include "Game.h"
 #include "Const.h"
 
 class Manager;
@@ -64,11 +65,12 @@ class Entity
 {
 private:
 	Manager& manager;
-	ComponentBitset componentBitset;
-	ComponentArray componentArray;
+	ComponentBitset componentBitset;		// true / false
+	ComponentArray componentArray;			// component
 	GroupBitset groupBitset;
 
 	std::vector<std::unique_ptr<Component>> components;
+	SDL_Rect rect;
 	bool active = true;
 public:
 	Attribute attrib;
@@ -87,6 +89,9 @@ public:
 
 	bool isActive() const { return active; }
 	void destroy() { active = false; }
+	SDL_Rect getRect() const { return rect; }
+
+	SDL_Rect* Rect() { return &rect; }			// cập nhật rect trên màn hình
 
 	// thêm component
 	template<class T, class ... TArgs>
