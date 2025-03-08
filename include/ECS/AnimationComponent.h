@@ -6,7 +6,7 @@
 class AnimationComponent : public Component
 {
 public:
-	const char* state = "idle";			// trạng thái
+	//const char* state = "idle";			// trạng thái
 	bool animFinished = true;
 
 	AnimationComponent() = default;
@@ -30,7 +30,7 @@ public:
 	void update() override
 	{
 		// cập nhật theo trạng thái
-		animInfor = GAMECHARACTERS.at(sprite->ID).at(state);
+		animInfor = GAMECHARACTERS.at(sprite->ID).at(entity->attrib.state);
 
 		if (sprite->isAnimated())
 		{
@@ -41,7 +41,7 @@ public:
 				sprite->addSrcX(transform->width);
 
 				if (currentFrame >= frames) {
-					if (state != "run")
+					if (entity->attrib.state != "run")
 					{
 						use("idle");
 						transform->velocity.x = 0;
@@ -69,8 +69,8 @@ public:
 
 	void use(const char* animation)
 	{
-		state = animation;
-		animInfor = GAMECHARACTERS.at(sprite->ID).at(state);
+		entity->attrib.state = animation;
+		animInfor = GAMECHARACTERS.at(sprite->ID).at(entity->attrib.state);
 		frames = animInfor[0];
 		speed = animInfor[1];
 		sprite->setSrcX(animInfor[2]);

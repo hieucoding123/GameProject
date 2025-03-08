@@ -57,6 +57,7 @@ struct Attribute
 	int energy = 0;			// năng lượng
 	double damage = 0;		// sát thương
 	int defense = DEFENSE;	// phòng thủ
+	const char* state = "idle";
 	bool onGround = true;	// chạm đất
 	bool isHitting = false;	// đánh / không
 };
