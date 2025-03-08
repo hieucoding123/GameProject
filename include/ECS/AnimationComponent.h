@@ -29,6 +29,7 @@ public:
 	}
 	void update() override
 	{
+		// cập nhật theo trạng thái
 		animInfor = GAMECHARACTERS.at(sprite->ID).at(state);
 
 		if (sprite->isAnimated())
@@ -37,6 +38,7 @@ public:
 			if (now - lastUpdate > speed) {
 				currentFrame++;
 				lastUpdate = now;
+				sprite->addSrcX(transform->width);
 
 				if (currentFrame >= frames) {
 					if (state != "run")
@@ -48,6 +50,7 @@ public:
 					else
 					{
 						currentFrame = 0;	// nếu đang chạy -> chạy tiếp
+						sprite->setSrcX(animInfor[2]);
 					}
 					animFinished = true;
 					entity->attrib.isHitting = false;
@@ -60,7 +63,7 @@ public:
 		transform->high = animInfor[5];
 
 		// cho dịch khung hình
-		sprite->setSrcX(transform->width * currentFrame);
+		//sprite->setSrcX(transform->width * currentFrame);
 		sprite->setSrcY(animInfor[3]);
 	}
 
@@ -70,6 +73,8 @@ public:
 		animInfor = GAMECHARACTERS.at(sprite->ID).at(state);
 		frames = animInfor[0];
 		speed = animInfor[1];
+		sprite->setSrcX(animInfor[2]);
+		sprite->setSrcY(animInfor[3]);
 		sprite->setSrcW(animInfor[4]);
 		sprite->setSrcH(animInfor[5]);
 		entity->attrib.isHitting = (bool)animInfor[6];

@@ -115,4 +115,9 @@ public:
 	{
 		srcRect.y = y;
 	}
+	// tăng src.x, chạy hoạt hình 
+	void addSrcX(int n)
+	{
+		srcRect.x += n;
+	}
 };
