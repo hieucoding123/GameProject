@@ -47,7 +47,7 @@ public:
 					break;
 				case SDLK_u:
 					transform->velocity.x = 0;
-					animations->use("takedam");
+					animations->use("attackcb");
 					animations->animFinished = false;
 					break;
 				case SDLK_r:
