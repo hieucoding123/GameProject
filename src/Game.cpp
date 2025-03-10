@@ -77,13 +77,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	player1.addComponent<TransformComponent>(camera.x + 100, GROUND*MAP_SCALE, 48, 75, 2);
 	player1.addComponent<SpriteComponent>("assets/sasuke.png", true);
 	player1.addComponent<AnimationComponent>();
-	player1.addComponent<KeyboardController>();
+	player1.addComponent<ADWSKeyboard>();
 	player1.addGroup(p1Group);
 
 	player2.addComponent<TransformComponent>(camera.x + WIDTH - 100, GROUND*MAP_SCALE, 46, 80, 2);
 	player2.addComponent<SpriteComponent>("assets/akainu_stand.png", true);
 	player2.addComponent<AnimationComponent>();
-	player2.addComponent<KeyboardController>();
+	player2.addComponent<ArrowKeyboard>();
 	player2.addGroup(p2Group);
 }
 

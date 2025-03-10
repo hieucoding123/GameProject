@@ -68,13 +68,16 @@
     <ClInclude Include="include\ECS\TileComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ECS\KeyboardController.h">
+    <ClInclude Include="include\ECS\ArrowKeyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\ECS\AnimationComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ECS\ADWSKeyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

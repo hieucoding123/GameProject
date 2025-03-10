@@ -160,13 +160,14 @@
     <ClInclude Include="include\ECS\AnimationComponent.h" />
     <ClInclude Include="include\ECS\Components.h" />
     <ClInclude Include="include\ECS\ECS.h" />
-    <ClInclude Include="include\ECS\KeyboardController.h" />
+    <ClInclude Include="include\ECS\ArrowKeyboard.h" />
     <ClInclude Include="include\ECS\SpriteComponent.h" />
     <ClInclude Include="include\ECS\TileComponent.h" />
     <ClInclude Include="include\ECS\TransformComponent.h" />
     <ClInclude Include="include\Effect.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Map.h" />
+    <ClInclude Include="include\ECS\ADWSKeyboard.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\Vector2D.h" />
   </ItemGroup>
