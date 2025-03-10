@@ -6,5 +6,6 @@
 #include "TransformComponent.h"
 #include "SpriteComponent.h"
 #include "TileComponent.h"
-#include "KeyboardController.h"
+#include "ArrowKeyboard.h"
 #include "AnimationComponent.h"
+#include "ADWSKeyboard.h"
