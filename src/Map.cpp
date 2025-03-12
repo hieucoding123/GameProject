@@ -3,6 +3,16 @@
 #include "TextureManager.h"
 #include "Const.h"
 
+Map::Map()
+{
+
+}
+
+Map::~Map()
+{
+
+}
+
 // tải và vẽ map
 
 void Map::LoadMap(const char* path)
@@ -20,7 +30,7 @@ void Map::LoadMap(const char* path)
 
 			int tileX = (ID % COL) * BLOCK_W;
 			int tileY = (ID / ROW) * BLOCK_H;
-			Game::addTile(tileX, tileY, x * BLOCK_H, y * BLOCK_W);
+			Game::tiles.push_back(std::move(std::make_unique<Tile>(tileX, tileY, x * BLOCK_W, y * BLOCK_H)));
 
 			myFile.ignore();
 		}

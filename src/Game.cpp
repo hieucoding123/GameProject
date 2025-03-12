@@ -1,35 +1,21 @@
-﻿#include <iostream>
-#include "Game.h"
-#include "Const.h"
-#include "TextureManager.h"
+﻿#include "Game.h"
+#include "GameObjects/GameObject.h"
 #include "Map.h"
-#include "ECS/Components.h"
+#include "GameObjects/Sasuke.h"
+#include "GameObjects/Akainu.h"
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 SDL_Rect Game::camera = { 0, 0, WIDTH, HIGH };
-std::vector<Effect*> Game::effects;
+std::vector<std::unique_ptr<Tile>> Game::tiles;
+EffectManager Game::effectManager;
 
 int Game::MAP_SCALE = 2;
 
-Manager manager;
+Sasuke* sasuke = nullptr;
+Akainu* akainu = nullptr;
 
 Map* map;
-
-enum groupLabels : Group
-{
-	p1Group,
-	p2Group,
-	mapGroup
-
-};
-
-auto& tiles(manager.getGroup(mapGroup));
-auto& player1Group(manager.getGroup(p1Group));
-auto& player2Group(manager.getGroup(p2Group));
-
-auto& player1(manager.addEntity());
-auto& player2(manager.addEntity());
 
 Game::Game()
 { }
@@ -74,17 +60,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 
 	map->LoadMap(tileMapPath);
 
-	player1.addComponent<TransformComponent>(camera.x + 100, GROUND*MAP_SCALE, 48, 75, 2);
-	player1.addComponent<SpriteComponent>("assets/sasuke.png", true);
-	player1.addComponent<AnimationComponent>();
-	player1.addComponent<ADWSKeyboard>();
-	player1.addGroup(p1Group);
+	sasuke = new Sasuke;
+	sasuke->init();
+	sasuke->setPosition(camera.x + 100, GROUND * MAP_SCALE);
+	sasuke->setCamera();
 
-	player2.addComponent<TransformComponent>(camera.x + WIDTH - 100, GROUND*MAP_SCALE, 46, 80, 2);
-	player2.addComponent<SpriteComponent>("assets/akainu_stand.png", true);
-	player2.addComponent<AnimationComponent>();
-	player2.addComponent<ArrowKeyboard>();
-	player2.addGroup(p2Group);
+	akainu = new Akainu;
+	akainu->init();
+	akainu->setPosition(camera.x + camera.w - 100, GROUND * MAP_SCALE);
+	akainu->setCamera();
 }
 
 void Game::handleEvents()
@@ -104,69 +88,40 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	manager.refresh();
-	manager.update();
-
-	//int distance = std::abs(player1.getComponent<TransformComponent>().position.x - player2.getComponent<TransformComponent>().position.x);
-
-	/*if (distance >= camera.w) {
-		MAP_SCALE = 1;
-		camera.x = camera.y = 0;
-		player1.getComponent<TransformComponent>().scale = 1;
-		player2.getComponent<TransformComponent>().scale = 1;
-	}*/
-
-	// Khi 2 nhân vật chạm nhau
-	if (Game::AABB(player1.getRect(), player2.getRect()))
+	for (auto& t : Game::tiles)
 	{
-			player2.attrib.hp -= player1.attrib.damage;
-			if (player1.attrib.isHitting)
-			{
-				player1.attrib.energy++;
-			}
-
-			player1.attrib.hp -= player2.attrib.damage;
-			if (player2.attrib.isHitting)
-			{
-				player2.attrib.energy++;
-
-			}
+		t->update();
 	}
-	/*for (auto& e : effects)
-	{
-		if (Game::AABB(player1.getComponent<SpriteComponent>().getDestRect(), e->destRect))
-		{
-			std::cout << "*";
-		}
-	}*/
+	sasuke->update();
+	sasuke->ADWSController();
+
+	akainu->update();
+	akainu->LRUDController();
+	effectManager.update();
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
 
-	for (auto& e : tiles)
+	for (auto& t : Game::tiles)
 	{
-		e->draw();
-	}
-	for (auto& e : player1Group)
-	{
-		e->draw();
-	}
-	for (auto& e : player2Group)
-	{
-		e->draw();
+		t->draw();
 	}
 
+	sasuke->draw();
+	akainu->draw();
+	effectManager.draw();
+
 	// Vẽ thanh máu và năng lượng
-	TextureManager::DrawHP(0, 0, (player1.attrib.hp * HP_W) / HP, HPBG_COLOR, HP_COLOR);
-	TextureManager::DrawEnergy(0, HP_H, 
-		(player1.attrib.energy * (HP_W - 20)) / ENERGY, ENGBG_COLOR, ENG_COLOR);
+	TextureManager::DrawHP(0, 0, (sasuke->getHP() * HP_W) / HP, HPBG_COLOR, HP_COLOR);
+	TextureManager::DrawEnergy(0, HP_H,
+		(sasuke->getEnergy() * (HP_W - 20)) / ENERGY, ENGBG_COLOR, ENG_COLOR);
 	
-	TextureManager::DrawHP(camera.w - HP_W, 0, 
-		((HP - player2.attrib.hp) * HP_W) / HP, HP_COLOR, HPBG_COLOR);
-	TextureManager::DrawEnergy(camera.w - HP_W + 20, HP_H, 
-		((ENERGY - player2.attrib.energy) * (HP_W - 20)) / ENERGY, ENG_COLOR, ENGBG_COLOR);
+	TextureManager::DrawHP(camera.w - HP_W, 0,
+		((HP - akainu->getHP()) * HP_W) / HP, HP_COLOR, HPBG_COLOR);
+	TextureManager::DrawEnergy(camera.w - HP_W + 20, HP_H,
+		((ENERGY - akainu->getEnergy()) * (HP_W - 20)), ENG_COLOR, ENGBG_COLOR);
 
 	SDL_RenderPresent(renderer);
 }
@@ -178,17 +133,4 @@ void Game::clean()
 	SDL_Quit();
 
 	std::cout << "Game cleaned" << std::endl;
-}
-
-void Game::addTile(int tileX, int tileY, int xpos, int ypos)
-{
-	auto& tile(manager.addEntity());
-	
-	tile.addComponent<TileComponent>(tileX, tileY, xpos, ypos);
-	tile.addGroup(mapGroup);
-}
-
-bool Game::AABB(const SDL_Rect& rect1, const SDL_Rect& rect2)
-{
-	return SDL_HasIntersection(&rect1, &rect2);
 }
