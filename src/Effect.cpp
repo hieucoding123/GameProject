@@ -2,10 +2,15 @@
 #include "Game.h"
 
 Effect::Effect()
-{ }
-
-Effect::Effect(const std::vector<int>& v, int vX, int vY, int scl, SDL_RendererFlip f, int xpos, int ypos)
 {
+	effectTexture = nullptr;
+}
+
+Effect::Effect(SDL_Texture* texture, const std::vector<int>& v, int vX, int vY,
+	int scl, SDL_RendererFlip f, int xpos, int ypos)
+{
+	effectTexture = texture;
+	effectFlip = f;
 	active = true;
 	frames = v[0];
 	speed = v[1];
@@ -33,11 +38,15 @@ void Effect::update()
 		if (currentFrame >= frames) {
 			active = false;
 			destRect = { 0 };
-			addEnergy = 0;
 		}
 	}
 
 	// cho hiệu ứng di chuyển
 	destRect.x += vx;
 	destRect.y += vy;
+}
+
+void Effect::draw()
+{
+	TextureManager::Draw(effectTexture, &srcRect, &destRect, effectFlip);
 }

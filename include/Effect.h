@@ -1,21 +1,22 @@
 #pragma once
 
 #include "SDL.h"
+#include "TextureManager.h"
 #include <vector>
 
 class Effect
 {
 public:
 	Effect();
-	Effect(const std::vector<int>& v, int vX, int vY, int scl, SDL_RendererFlip f, int xpos, int ypos);
+	Effect(SDL_Texture* texture, const std::vector<int>& v, int vX, int vY,
+		int scl, SDL_RendererFlip f, int xpos, int ypos);
 	void update();
+	void draw();
 	bool isActive() const { return active; }
-	int getDamage() const { return damage; }
-	void setDamge() { damage = 0; }
-	void offEffect() { active = false; }
-	SDL_Rect srcRect, destRect;
-	int addEnergy;
 private:
+	SDL_Texture* effectTexture;
+	SDL_Rect srcRect, destRect;
+	SDL_RendererFlip effectFlip;
 	int frames;
 	int speed;
 	int damage;
