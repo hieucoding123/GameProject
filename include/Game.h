@@ -4,9 +4,10 @@
 #include <SDL_image.h>
 #include <SDL.h>
 #include <vector>
-#include "Effect.h"
+#include <memory>
 
-class Effect;
+class Tile;
+class EffectManager;
 
 class Game
 {
@@ -20,14 +21,13 @@ public:
 	void clean();
 	bool running() { return isRunning; };
 
+	static std::vector<std::unique_ptr<Tile>> tiles;
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
 	static SDL_Rect camera;
-	static std::vector<Effect*> effects;
+	static EffectManager effectManager;
 
 	static int MAP_SCALE;
-	static void addTile(int tileX, int tileY, int xpos, int ypos);
-	static bool AABB(const SDL_Rect& rect1, const SDL_Rect& rect2);
 private:
 	bool isRunning;
 	SDL_Window* window;
