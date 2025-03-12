@@ -134,3 +134,11 @@ void Game::clean()
 
 	std::cout << "Game cleaned" << std::endl;
 }
+
+bool Game::AABB(const SDL_Rect& rec1, const SDL_Rect& rec2)
+{
+	return (rec1.x + rec1.w >= rec2.x &&
+		rec2.x + rec2.w >= rec1.x &&
+		rec1.y + rec1.h >= rec2.y &&
+		rec2.y + rec2.h >= rec1.y);
+}

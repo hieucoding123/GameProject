@@ -21,7 +21,6 @@ Effect::Effect(SDL_Texture* texture, const std::vector<int>& v, int vX, int vY,
 
 	srcRect = { v[2], v[3], v[4], v[5] };
 	destRect = { xpos, ypos, srcRect.w * scl, srcRect.h * scl };
-
 	lastUpdate = SDL_GetTicks();
 	currentFrame = 0;
 }
@@ -44,6 +43,21 @@ void Effect::update()
 	// cho hiệu ứng di chuyển
 	destRect.x += vx;
 	destRect.y += vy;
+}
+
+SDL_Rect Effect::getRect() const
+{
+	return destRect;
+}
+
+int Effect::getDamage() const
+{
+	return damage;
+}
+
+void Effect::setDamage()
+{
+	damage = 0;
 }
 
 void Effect::draw()

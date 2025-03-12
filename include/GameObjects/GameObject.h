@@ -2,9 +2,9 @@
 
 #include <memory>
 #include "SDL.h"
-#include "Attribute.h"
-#include "ECS/TransformComponent.h"
-#include "ECS/SpriteComponent.h"
+#include "Components/Attribute.h"
+#include "Components/TransformComponent.h"
+#include "Components/SpriteComponent.h"
 #include "EffectManager.h"
 
 
@@ -13,12 +13,12 @@ class GameObject
 {
 public:
 	GameObject();
-	void setCamera();
-	bool hasCamera() const;
+	void setCamera();					// gắn theo camera
+	bool hasCamera() const;				// theo camera
 	virtual void init();
 	virtual void update();
 	virtual void draw();
-	virtual void ADWSController();
+	virtual void ADWSController();		// điều khiển
 	virtual void LRUDController();
 	~GameObject();
 protected:

@@ -1,4 +1,4 @@
-#include "ECS/TransformComponent.h"
+#include "TransformComponent.h"
 #include "Const.h"
 
 TransformComponent::TransformComponent()

@@ -11,10 +11,10 @@ class Animation
 public:
 	Animation(Attribute* attribute, Vector2D* vel,
 		SDL_Rect* rect, const std::map<int, std::vector<int>>& FIGURE);
-	void setState(int s);
-	bool isFinished() const { return animFinished; }
-	void setFinished(bool b);
-	std::vector<int> getEffectInfor(int state);
+	void setState(int s);										// đặt trạng thái
+	bool isFinished() const { return animFinished; }			// kiểm tra kết thúc
+	void setFinished(bool b);									// cho kết thúc
+	std::vector<int> getEffectInfor(int state);					// lấy thông tin hiệu ứng
 	void update();
 	~Animation();
 private:

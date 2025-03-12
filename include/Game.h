@@ -28,6 +28,8 @@ public:
 	static EffectManager effectManager;
 
 	static int MAP_SCALE;
+
+	static bool AABB(const SDL_Rect& rec1, const SDL_Rect& rec2);
 private:
 	bool isRunning;
 	SDL_Window* window;

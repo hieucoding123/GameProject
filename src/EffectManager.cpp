@@ -25,3 +25,16 @@ void EffectManager::draw()
 		e->draw();
 	}
 }
+
+void EffectManager::checkVar(Attribute* attrib,SDL_Rect* rect)
+{
+	for (auto& e : effects)
+	{
+		int damage = e->getDamage();
+		if (damage > 0 && Game::AABB(*rect, e->getRect()))
+		{
+			attrib->hp -= e->getDamage();
+			e->setDamage();
+		}
+	}
+}

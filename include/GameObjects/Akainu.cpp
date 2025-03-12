@@ -11,7 +11,7 @@ void Akainu::init()
 {
 	GameObject::init();
 	transform->setSpeed(3);
-	sprite = std::make_unique<SpriteComponent>("D:/CoDE/C++/Tu_hoc_Cpp/Tu_hoc_Cpp/assets/akainu_stand.png", rect);
+	sprite = std::make_unique<SpriteComponent>(AKAINU_IMG_PATH, rect);
 	sprite->getSrcRect()->w = 46;
 	sprite->getSrcRect()->h = 80;
 	animation = std::make_unique<Animation>(attrib.get(), transform->getVelocity(), sprite->getSrcRect(), AKAINU);
@@ -20,8 +20,6 @@ void Akainu::update()
 {
 	GameObject::update();
 	// cập nhật vị trí trên màn hình
-
-	//std::cout << transform->getXPos() << ' ' << transform->getYPos() << std::endl;
 
 	if (transform->getYPos() + rect->h >= (GROUND * Game::MAP_SCALE))
 	{
@@ -42,6 +40,9 @@ void Akainu::update()
 	}
 
 	animation->update();
+
+	// cập nhật va chạm với hiệu ứng
+	Game::effectManager.checkVar(attrib.get(), rect.get());
 }
 void Akainu::draw()
 {
@@ -76,7 +77,7 @@ void Akainu::ADWSController()
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
 			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), animation->getEffectInfor(-3),
-				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y));
+				0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_u:
 			transform->setVx(0);
@@ -117,7 +118,7 @@ void Akainu::LRUDController()
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
 			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), animation->getEffectInfor(-3),
-				0, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y));
+				0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_k:
 			transform->setVx(0);

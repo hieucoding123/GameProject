@@ -13,6 +13,9 @@ public:
 	void update();
 	void draw();
 	bool isActive() const { return active; }
+	SDL_Rect getRect() const;
+	int getDamage() const;
+	void setDamage();
 private:
 	SDL_Texture* effectTexture;
 	SDL_Rect srcRect, destRect;

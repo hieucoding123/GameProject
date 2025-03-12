@@ -11,7 +11,7 @@ void Sasuke::init()
 {
 	GameObject::init();
 	transform->setSpeed(5);
-	sprite = std::make_unique<SpriteComponent>("D:/CoDE/C++/Tu_hoc_Cpp/Tu_hoc_Cpp/assets/Sasuke.png", rect);
+	sprite = std::make_unique<SpriteComponent>(SASUKE_IMG_PATH, rect);
 	sprite->getSrcRect()->w = 48;
 	sprite->getSrcRect()->h = 75;
 	animation = std::make_unique<Animation>(attrib.get(), transform->getVelocity(), sprite->getSrcRect(), SASUKE);
@@ -42,6 +42,9 @@ void Sasuke::update()
 	}
 
 	animation->update();
+
+	// cập nhật va chạm với hiệu ứng
+	Game::effectManager.checkVar(attrib.get(), rect.get());
 }
 void Sasuke::draw()
 {
@@ -76,7 +79,7 @@ void Sasuke::ADWSController()
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
 			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), animation->getEffectInfor(-3), 
-				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y));
+				9, 0, 2, sprite->getFlip(), rect->x + 200 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_u:
 			transform->setVx(0);
@@ -117,7 +120,7 @@ void Sasuke::LRUDController()
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
 			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), animation->getEffectInfor(-3),
-				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y));
+				9, 0, 2, sprite->getFlip(), rect->x + 200 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_k:
 			transform->setVx(0);

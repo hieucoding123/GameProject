@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "GameObject.h"
-#include "ECS/Animation.h"
+#include "Components/Animation.h"
 
 class Sasuke : public GameObject
 {

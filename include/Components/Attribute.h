@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Const.h"
 
+// các thuộc tính cơ bản
 struct Attribute
 {
 	double hp = HP;			// máu

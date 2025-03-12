@@ -46,6 +46,9 @@ const SDL_Color HP_COLOR = { 234, 164, 31, 255 };
 const SDL_Color ENGBG_COLOR = { 155, 159, 191, 255 };
 const SDL_Color ENG_COLOR = { 73, 222, 255, 255 };
 
+constexpr const char* SASUKE_IMG_PATH = "assets/sasuke.png";
+constexpr const char* AKAINU_IMG_PATH = "assets/akainu_stand.png";
+
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
 constexpr const char* tileMapPath = "assets/TileMap.txt";
 

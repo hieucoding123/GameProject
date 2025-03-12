@@ -1,4 +1,4 @@
-﻿#include "ECS/SpriteComponent.h"
+﻿#include "SpriteComponent.h"
 
 SpriteComponent::SpriteComponent()
 {
