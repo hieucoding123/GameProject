@@ -30,10 +30,34 @@
     <ClCompile Include="src\Vector2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\ECS\ECS.cpp">
+    <ClCompile Include="include\Components\ECS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Components\SpriteComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Components\TransformComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\GameObjects\Akainu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\GameObjects\GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\GameObjects\Sasuke.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\GameObjects\Tile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Components\Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EffectManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,34 +74,40 @@
     <ClInclude Include="include\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ECS\ECS.h">
+    <ClInclude Include="include\Components\ECS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ECS\TransformComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ECS\Components.h">
+    <ClInclude Include="include\Components\TransformComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ECS\SpriteComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ECS\TileComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ECS\ArrowKeyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ECS\AnimationComponent.h">
+    <ClInclude Include="include\Components\SpriteComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Effect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ECS\ADWSKeyboard.h">
+    <ClInclude Include="include\GameObjects\Akainu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjects\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjects\Sasuke.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjects\Tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Components\Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Components\Attribute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EffectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
