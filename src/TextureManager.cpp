@@ -34,3 +34,11 @@ void TextureManager::DrawEnergy(int x, int y, int w, const SDL_Color& bgColor, c
 	SDL_SetRenderDrawColor(Game::renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderFillRect(Game::renderer, &fillRect);
 }
+
+void TextureManager::DrawCollisionImage(const SDL_Rect* rect)
+{
+	SDL_Texture* texture = LoadTexture(collisionImgPath);
+	SDL_Rect collisionSrc = { 0, 0, 282, 282 };
+	SDL_Rect destRect = { rect->x, rect->y, collisionSrc.w / Game::MAP_SCALE, collisionSrc.h / Game::MAP_SCALE };
+	Draw(texture, &collisionSrc, &destRect, SDL_FLIP_NONE);
+}

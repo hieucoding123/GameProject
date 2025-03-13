@@ -32,6 +32,8 @@ void GameObject::update()
 void GameObject::draw()
 {
 	sprite->draw();
+	if (attrib->state == -4) 
+		TextureManager::DrawCollisionImage(rect.get());
 }
 
 void GameObject::ADWSController()

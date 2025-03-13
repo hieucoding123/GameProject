@@ -14,4 +14,6 @@ public:
 	static void DrawHP(int x, int y, int w, const SDL_Color& color, const SDL_Color& bgColor);
 
 	static void DrawEnergy(int x, int y, int w, const SDL_Color& color, const SDL_Color& bgColor);
+	
+	static void DrawCollisionImage(const SDL_Rect* rect);
 };

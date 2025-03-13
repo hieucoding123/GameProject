@@ -51,6 +51,15 @@ constexpr const char* AKAINU_IMG_PATH = "assets/akainu_stand.png";
 
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
 constexpr const char* tileMapPath = "assets/TileMap.txt";
+constexpr const char* collisionImgPath = "assets/collisionImage.png";
+
+const std::vector<const char*> MASKS = {
+	"assets/fight/p1.png",
+	"assets/fight/p2.png"
+};
+
+const int MASK_W = 39;
+const int MASK_H = 55;
 
 const std::map<int, std::vector<int>> SASUKE = {
 	// state - f - s - x - y- w - h - hit - damage
@@ -76,11 +85,3 @@ const std::map<int, std::vector<int>> AKAINU = {
 		{-3,			{12, 140, 303, 0, 68, 78, 1, 20}},
 		{-4,			{1, 1000, 492, 169, 63, 74, 0, 0}}
 };
-
-const std::vector<const char*> MASKS = {
-	"assets/fight/p1.png",
-	"assets/fight/p2.png"
-};
-
-const int MASK_W = 39;
-const int MASK_H = 55;
