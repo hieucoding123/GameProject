@@ -12,4 +12,5 @@ struct Attribute
 	bool onGround = true;	// chạm đất
 	bool isHitting = false;	// đánh / không	
 	bool hasCamera = false;
+	int ID;
 };

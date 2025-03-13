@@ -44,7 +44,9 @@ void Sasuke::update()
 	animation->update();
 
 	// cập nhật va chạm với hiệu ứng
+	//std::cout << "Sasuke\n";
 	Game::effectManager.checkVar(attrib.get(), rect.get());
+	//std::cout << "****\n";
 }
 void Sasuke::draw()
 {
@@ -78,7 +80,7 @@ void Sasuke::ADWSController()
 			transform->setVx(0);
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
-			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), animation->getEffectInfor(-3), 
+			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3), 
 				9, 0, 2, sprite->getFlip(), rect->x + 200 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_u:
@@ -119,7 +121,7 @@ void Sasuke::LRUDController()
 			transform->setVx(0);
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
-			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), animation->getEffectInfor(-3),
+			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
 				9, 0, 2, sprite->getFlip(), rect->x + 200 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_k:

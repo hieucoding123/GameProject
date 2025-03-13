@@ -8,7 +8,7 @@ class Effect
 {
 public:
 	Effect();
-	Effect(SDL_Texture* texture, const std::vector<int>& v, int vX, int vY,
+	Effect(SDL_Texture* texture, int id, const std::vector<int>& v, int vX, int vY,
 		int scl, SDL_RendererFlip f, int xpos, int ypos);
 	void update();
 	void draw();
@@ -16,6 +16,7 @@ public:
 	SDL_Rect getRect() const;
 	int getDamage() const;
 	void setDamage();
+	int getID() const;
 private:
 	SDL_Texture* effectTexture;
 	SDL_Rect srcRect, destRect;
@@ -28,4 +29,5 @@ private:
 	Uint32 lastUpdate;
 	bool active = false;
 	int currentFrame;
+	int ID;
 };

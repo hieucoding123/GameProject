@@ -42,7 +42,9 @@ void Akainu::update()
 	animation->update();
 
 	// cập nhật va chạm với hiệu ứng
+	//std::cout << "Akainu\n";
 	Game::effectManager.checkVar(attrib.get(), rect.get());
+	//std::cout << "****\n";
 }
 void Akainu::draw()
 {
@@ -76,7 +78,7 @@ void Akainu::ADWSController()
 			transform->setVx(0);
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
-			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), animation->getEffectInfor(-3),
+			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
 				0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_u:
@@ -117,7 +119,7 @@ void Akainu::LRUDController()
 			transform->setVx(0);
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
-			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), animation->getEffectInfor(-3),
+			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
 				0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_k:

@@ -7,7 +7,11 @@
 #include "Components/SpriteComponent.h"
 #include "EffectManager.h"
 
-
+inline int genID()
+{
+	static int ID = 0;
+	return ID++;
+}
 
 class GameObject
 {

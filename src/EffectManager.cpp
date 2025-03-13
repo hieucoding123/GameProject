@@ -30,11 +30,15 @@ void EffectManager::checkVar(Attribute* attrib,SDL_Rect* rect)
 {
 	for (auto& e : effects)
 	{
-		int damage = e->getDamage();
-		if (damage > 0 && Game::AABB(*rect, e->getRect()))
+		std::cout << attrib->ID << ' ' << e->getID() << std::endl;
+		if (attrib->ID != e->getID() &&  Game::AABB(*rect, e->getRect()))
 		{
-			attrib->hp -= e->getDamage();
-			e->setDamage();
+			int damage = e->getDamage();
+			if (damage > 0 && Game::AABB(*rect, e->getRect()))
+			{
+				attrib->hp -= e->getDamage();
+				e->setDamage();
+			}
 		}
 	}
 }

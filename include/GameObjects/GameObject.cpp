@@ -1,4 +1,4 @@
-#include "GameObject.h"
+﻿#include "GameObject.h"
 
 GameObject::GameObject()
 {
@@ -6,6 +6,7 @@ GameObject::GameObject()
 	transform = std::make_unique<TransformComponent>();
 	sprite = std::make_unique<SpriteComponent>();
 	attrib = std::make_unique<Attribute>();
+	attrib->ID = genID();					// gắn mỗi đối tượng 1 id
 	isActive = true;
 }
 

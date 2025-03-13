@@ -6,10 +6,11 @@ Effect::Effect()
 	effectTexture = nullptr;
 }
 
-Effect::Effect(SDL_Texture* texture, const std::vector<int>& v, int vX, int vY,
+Effect::Effect(SDL_Texture* texture, int id, const std::vector<int>& v, int vX, int vY,
 	int scl, SDL_RendererFlip f, int xpos, int ypos)
 {
 	effectTexture = texture;
+	ID = id;
 	effectFlip = f;
 	active = true;
 	frames = v[0];
@@ -43,6 +44,8 @@ void Effect::update()
 	// cho hiệu ứng di chuyển
 	destRect.x += vx;
 	destRect.y += vy;
+
+	std::cout << "Effect's id : " << ID << std::endl;
 }
 
 SDL_Rect Effect::getRect() const
@@ -59,6 +62,12 @@ void Effect::setDamage()
 {
 	damage = 0;
 }
+
+int Effect::getID() const
+{
+	return ID;
+}
+
 
 void Effect::draw()
 {
