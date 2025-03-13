@@ -147,5 +147,8 @@
     <Image Include="assets\fight\p2.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\collisionImage.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
