@@ -48,6 +48,16 @@ std::vector<int> Animation::getEffectInfor(int state)
 
 void Animation::update()
 {
+	// nếu dính sát thương thì sẽ chuyển hoạt hình
+	if (attrib->isHitting)
+	{
+		this->setState(-4);
+		velocity->x = 0;
+		velocity->y = 0;
+		attrib->isHitting = false;
+		animFinished = false;
+	}
+
 	Uint32 now = SDL_GetTicks();
 	if (now - lastUpdate > speed) {
 		currentFrame++;

@@ -44,8 +44,6 @@ void Effect::update()
 	// cho hiệu ứng di chuyển
 	destRect.x += vx;
 	destRect.y += vy;
-
-	std::cout << "Effect's id : " << ID << std::endl;
 }
 
 SDL_Rect Effect::getRect() const

@@ -1,4 +1,4 @@
-#include "EffectManager.h"
+﻿#include "EffectManager.h"
 
 void EffectManager::addEffect(std::unique_ptr<Effect> e)
 {
@@ -30,13 +30,14 @@ void EffectManager::checkVar(Attribute* attrib,SDL_Rect* rect)
 {
 	for (auto& e : effects)
 	{
-		std::cout << attrib->ID << ' ' << e->getID() << std::endl;
+		// không tính chạm đối tượng tạo ra hiệu ứng
 		if (attrib->ID != e->getID() &&  Game::AABB(*rect, e->getRect()))
 		{
 			int damage = e->getDamage();
 			if (damage > 0 && Game::AABB(*rect, e->getRect()))
 			{
 				attrib->hp -= e->getDamage();
+				attrib->isHitting = true;		// bị đánh
 				e->setDamage();
 			}
 		}
