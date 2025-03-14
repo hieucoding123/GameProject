@@ -204,6 +204,7 @@
   <ItemGroup>
     <Media Include="assets\audio\background.mp3" />
     <Media Include="assets\audio\hit.wav" />
+    <Media Include="assets\audio\step3.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

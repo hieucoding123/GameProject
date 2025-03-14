@@ -28,6 +28,7 @@ void GameObject::update()
 {
 	transform->update();
 	sprite->update();
+	attrib->onGround = (transform->getYPos() + rect->h >= GROUND * Game::MAP_SCALE);
 }
 void GameObject::draw()
 {

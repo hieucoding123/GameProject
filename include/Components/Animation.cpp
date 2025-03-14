@@ -57,7 +57,10 @@ void Animation::update()
 		attrib->isHitting = false;
 		animFinished = false;
 	}
-
+	else if (!attrib->onGround && animFinished)
+	{
+		this->setState(-2);
+	}
 	Uint32 now = SDL_GetTicks();
 	if (now - lastUpdate > speed) {
 		currentFrame++;

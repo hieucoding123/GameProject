@@ -21,8 +21,6 @@ void Sasuke::update()
 	GameObject::update();
 	// cập nhật vị trí trên màn hình
 
-	//std::cout << transform->getXPos() << ' ' << transform->getYPos() << std::endl;
-
 	if (transform->getYPos() + rect->h >= (GROUND * Game::MAP_SCALE))
 	{
 		transform->setYpos((GROUND * Game::MAP_SCALE) - rect->h);
@@ -40,7 +38,6 @@ void Sasuke::update()
 		rect->x = transform->getXPos();
 		rect->y = transform->getYPos();
 	}
-
 	animation->update();
 
 	// cập nhật va chạm với hiệu ứng
@@ -88,6 +85,16 @@ void Sasuke::ADWSController()
 			animation->setState((int)SDLK_u);
 			animation->setFinished(false);
 			break;
+		case SDLK_c:
+			transform->setVx(0);
+			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
+			animation->setFinished(false);
+			break;
+		case SDLK_f:
+			transform->setVx(5 * sprite->getROL());
+			animation->setState((int)SDLK_f);
+			animation->setFinished(false);
+			break;
 		default:
 			break;
 		}
@@ -127,6 +134,16 @@ void Sasuke::LRUDController()
 		case SDLK_k:
 			transform->setVx(0);
 			animation->setState((int)SDLK_u);
+			animation->setFinished(false);
+			break;
+		case SDLK_l:
+			transform->setVx(0);
+			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
+			animation->setFinished(false);
+			break;
+		case SDLK_RCTRL:
+			transform->setVx(5 * sprite->getROL());
+			animation->setState((int)SDLK_f);
 			animation->setFinished(false);
 			break;
 		default:

@@ -53,7 +53,16 @@ constexpr const char* imageTilePath = "assets/imageTileMap.png";
 constexpr const char* tileMapPath = "assets/TileMap.txt";
 constexpr const char* collisionImgPath = "assets/collisionImage.png";
 
-const std::vector<const char*> MASKS = {
+constexpr const char* MUSIC_PATH = "assets/audio/background.mp3";
+
+const std::vector<const char*> SOUND_PAHTS =
+{
+	"assets/audio/hit.wav",
+	"assets/audio/step3.wav"
+};
+
+const std::vector<const char*> MASKS = 
+{
 	"assets/fight/p1.png",
 	"assets/fight/p2.png"
 };
@@ -66,13 +75,14 @@ const std::map<int, std::vector<int>> SASUKE = {
 	{ -1,				{4, 150, 0,  0, 48, 75, 0, 0} },		// idle
 	{ (int)SDLK_d,		{6, 110, 0, 75, 67, 75, 0, 0}},			// walk
 	{ (int)SDLK_w,		{3, 200, 0, 150, 56, 75, 0, 0}},		// jump
-	{ -2,				{1, 1, 0, 150, 56, 74, 0, 0} },
-	{ (int)SDLK_c,		{1, 1, 0, 224, 58, 71, 0, 0}},
-	{ (int)SDLK_k,		{1, 1, 0, 296, 58, 74, 0, 0}},
-	{ (int)SDLK_u,		{7, 180, 0, 371, 91, 75, 1, 20}},
-	{ (int)SDLK_r,		{8, 100, 0, 446, 60, 77, 0, 0}},
-	{ -3,				{7, 140, 242, 0, 86, 57, 1, 20} },
-	{ -4,				{3, 250, 450, 77, 57, 73, 0, 0} }
+	{ -2,				{1, 1, 0, 150, 56, 74, 0, 0} },			// fall
+	{ (int)SDLK_c,		{1, 1000, 0, 224, 58, 71, 0, 0}},			// thủ (đất)
+	{ (int)SDLK_q,		{1, 1, 0, 296, 58, 74, 0, 0}},			// thủ (trên không)
+	{ (int)SDLK_u,		{7, 180, 0, 371, 91, 75, 1, 20}},		// cận chiến
+	{ (int)SDLK_r,		{8, 100, 0, 446, 60, 77, 0, 0}},		// skill 1
+	{ -3,				{7, 140, 242, 0, 86, 57, 1, 20} },		// effect 1
+	{ -4,				{3, 250, 450, 77, 57, 73, 0, 0} },		// get damage
+	{ (int)SDLK_f,		{4, 200, 643, 83, 69, 67, 0, 0 } }
 };
 
 const std::map<int, std::vector<int>> AKAINU = {
@@ -83,5 +93,9 @@ const std::map<int, std::vector<int>> AKAINU = {
 		{(int)SDLK_w,	{3, 200, 0, 243, 68, 84, 0, 0}},
 		{(int)SDLK_r,	{8, 150, 0, 327, 84, 77, 0, 0}},
 		{-3,			{12, 140, 303, 0, 68, 78, 1, 20}},
-		{-4,			{1, 1000, 492, 169, 63, 74, 0, 0}}
+		{-4,			{1, 1000, 492, 169, 63, 74, 0, 0}},
+		{-2,			{1, 10, 806, 85, 84, 79, 0, 0}},
+		{(int)SDLK_c,	{2, 450, 595, 165, 75, 78, 0, 0}},
+		{(int)SDLK_q,	{2, 450, 753, 165, 76, 77, 0, 0}},
+		{(int)SDLK_f,	{3, 180, 227, 257, 92, 70, 0, 0}}
 };

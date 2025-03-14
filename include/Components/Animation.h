@@ -14,7 +14,7 @@ public:
 	
 	/*
 	* Tùy chỉnh trạng thái
-	* @param int trạng thái(key) có trong map dữ liệu hành động
+	* @param s trạng thái(key) có trong map dữ liệu hành động
 	*/
 	void setState(int s);
 	
@@ -26,13 +26,13 @@ public:
 	
 	/*
 	* Tùy chỉnh kết thúc hành động
-	* @param bool true nếu đặt hành động kết thúc
+	* @param b true nếu đặt hành động kết thúc
 	*/
 	void setFinished(bool b);
 
 	/*
 	* Lấy thông tin hiệu ứng
-	* @param int key trong map dữ liệu hành động
+	* @param key key trong map dữ liệu hành động
 	* @return 1 vector chứa thông tin để khởi tạo hiệu ứng
 	*/
 	std::vector<int> getEffectInfor(int key);

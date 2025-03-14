@@ -162,5 +162,6 @@
     <Media Include="assets\audio\hit.wav">
       <Filter>Resource Files</Filter>
     </Media>
+    <Media Include="assets\audio\step3.mp3" />
   </ItemGroup>
 </Project>

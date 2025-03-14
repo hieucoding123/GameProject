@@ -86,6 +86,16 @@ void Akainu::ADWSController()
 			animation->setState((int)SDLK_u);
 			animation->setFinished(false);
 			break;
+		case SDLK_c:
+			transform->setVx(0);
+			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
+			animation->setFinished(false);
+			break;
+		case SDLK_f:
+			transform->setVx(5 * sprite->getROL());
+			animation->setState((int)SDLK_f);
+			animation->setFinished(false);
+			break;
 		default:
 			break;
 		}
@@ -125,6 +135,16 @@ void Akainu::LRUDController()
 		case SDLK_k:
 			transform->setVx(0);
 			animation->setState((int)SDLK_u);
+			animation->setFinished(false);
+			break;
+		case SDLK_l:
+			transform->setVx(0);
+			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
+			animation->setFinished(false);
+			break;
+		case SDLK_RCTRL:
+			transform->setVx(5 * sprite->getROL());
+			animation->setState((int)SDLK_f);
 			animation->setFinished(false);
 			break;
 		default:
