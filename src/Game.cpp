@@ -58,6 +58,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	camera.x = (WIDTH * MAP_SCALE - WIDTH) / 2;
 	camera.y = (HIGH * MAP_SCALE - HIGH);
 
+	m_audioManager = std::make_unique<AudioManager>();
+	m_audioManager->init();
+	m_audioManager->loadSound("hit", "assets/audio/hit.wav");
+	m_audioManager->loadMusic("assets/audio/background.mp3");
+	m_audioManager->setMusicVolume(MIX_MAX_VOLUME);
+	m_audioManager->playMusic(-1);
+
 	map->LoadMap(tileMapPath);
 
 	sasuke = new Sasuke;
@@ -128,6 +135,11 @@ void Game::render()
 
 void Game::clean()
 {
+	if (m_audioManager)
+	{
+		m_audioManager->clean();
+	}
+
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();

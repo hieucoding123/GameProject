@@ -147,6 +147,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AudioManager.cpp" />
     <ClCompile Include="include\Components\Animation.cpp" />
     <ClCompile Include="include\Components\ECS.cpp" />
     <ClCompile Include="src\EffectManager.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AudioManager.h" />
     <ClInclude Include="include\Components\Animation.h" />
     <ClInclude Include="include\Components\Attribute.h" />
     <ClInclude Include="include\Const.h" />
@@ -198,6 +200,10 @@
     <Image Include="assets\player.png" />
     <Image Include="assets\sasuke.png" />
     <Image Include="assets\water.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\audio\background.mp3" />
+    <Media Include="assets\audio\hit.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

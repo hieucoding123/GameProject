@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include <vector>
 #include <memory>
+#include "AudioManager.h"
 
 class Tile;
 class EffectManager;
@@ -33,4 +34,5 @@ public:
 private:
 	bool isRunning;
 	SDL_Window* window;
+	std::unique_ptr<AudioManager> m_audioManager;
 };
