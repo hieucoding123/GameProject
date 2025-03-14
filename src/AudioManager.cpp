@@ -1,4 +1,5 @@
 ﻿#include "AudioManager.h"
+#include "Const.h"
 #include <iostream>
 
 AudioManager::AudioManager() 
@@ -27,37 +28,6 @@ bool AudioManager::init(int freq, int chunkSize)
 
 	m_initialized = true;
 
-	return true;
-}
-
-bool AudioManager::loadSound(const std::string& id, const char* filePath)
-{
-	if (!m_initialized)
-		return false;
-
-	// kiểm tra nếu đã có sound thì không cần tải lại
-	auto it = m_soundEffects.find(id);
-	if (it != m_soundEffects.end())
-		return true;
-
-	Mix_Chunk* chunk = Mix_LoadWAV(filePath);
-	if (!chunk)
-	{
-		std::cerr << "Không thể tải sound effect! SDL_mixer Error: "
-			<< Mix_GetError() << std::endl;
-		return false;
-	}
-
-	m_soundEffects[id] = chunk;
-
-	return true;
-}
-
-bool AudioManager::loadMusic(const char* filePath)
-{
-	if (!m_initialized)
-		return false;
-
 	// giải phóng nhạc nền hiện tại nếu có
 	if (m_music)
 	{
@@ -65,18 +35,26 @@ bool AudioManager::loadMusic(const char* filePath)
 		m_music = nullptr;
 	}
 
-	m_music = Mix_LoadMUS(filePath);
-	
+	m_music = Mix_LoadMUS(MUSIC_PATH);
+
 	if (!m_music) {
 		std::cerr << "Không thể tải nhạc nền! SDL_mixer Error: "
 			<< Mix_GetError() << std::endl;
 		return false;
 	}
+	Mix_VolumeMusic(m_musicVolume);
+	Mix_PlayMusic(m_music, -1);
+
+	// khởi tạo tất cả âm thanh
+	for (int i = 0; i < SOUND_PAHTS.size(); i++)
+	{
+		m_soundEffects[i] = Mix_LoadWAV(SOUND_PAHTS[i]);
+	}
 
 	return true;
 }
 
-int AudioManager::playSound(const std::string& id, int loops, int channel)
+int AudioManager::playSound(const int id, int loops, int channel)
 {
 	if (!m_initialized)
 		return false;

@@ -7,6 +7,8 @@
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 SDL_Rect Game::camera = { 0, 0, WIDTH, HIGH };
+std::unique_ptr<AudioManager> Game::audioManager = std::make_unique<AudioManager>();
+
 std::vector<std::unique_ptr<Tile>> Game::tiles;
 EffectManager Game::effectManager;
 
@@ -58,12 +60,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	camera.x = (WIDTH * MAP_SCALE - WIDTH) / 2;
 	camera.y = (HIGH * MAP_SCALE - HIGH);
 
-	m_audioManager = std::make_unique<AudioManager>();
-	m_audioManager->init();
-	m_audioManager->loadSound("hit", "assets/audio/hit.wav");
-	m_audioManager->loadMusic("assets/audio/background.mp3");
-	m_audioManager->setMusicVolume(MIX_MAX_VOLUME);
-	m_audioManager->playMusic(-1);
+	audioManager->init();
 
 	map->LoadMap(tileMapPath);
 
@@ -135,11 +132,7 @@ void Game::render()
 
 void Game::clean()
 {
-	if (m_audioManager)
-	{
-		m_audioManager->clean();
-	}
-
+	audioManager->clean();
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
@@ -155,3 +148,7 @@ bool Game::AABB(const SDL_Rect& rec1, const SDL_Rect& rec2)
 		rec2.y + rec2.h >= rec1.y);
 }
 
+void Game::playSound(int ID)
+{
+	audioManager->playSound(ID);
+}

@@ -9,7 +9,7 @@
 class AudioManager
 {
 private:
-	std::map<std::string, Mix_Chunk*> m_soundEffects;
+	std::map<int, Mix_Chunk*> m_soundEffects;
 	Mix_Music* m_music;
 	bool m_initialized;
 	int m_soundVolume;
@@ -27,28 +27,13 @@ public:
 	bool init(int freq = 44100, int chunkSize = 2048);
 
 	/*
-	* Tải file âm thanh hiệu ứng
-	* @param id ID để tham chiếu đến sound
-	* @param filePath Đường đẫn đến file âm thang
-	* @return true nếu tải thành công
-	*/
-	bool loadSound(const std::string& id, const char* filePath);
-
-	/*
-	* Tải file nhạc nền
-	* @param filePath Đường dẫn đến file nhạc
-	* @return true nếu tải thành công
-	*/
-	bool loadMusic(const char* filePath);
-
-	/*
 	* Phát 1 hiệu ứng âm thanh
 	* @param id ID của âm thanh
 	* @param loops Số lần lặp lại (-1 ~ lặp vô hạn)
 	* @param channel Kênh phát (-1 ~ kênh trống đầu tiên)
 	* @return ID của channel đang phát âm thanh
 	*/
-	int playSound(const std::string& id, int loops = -1, int channel = -1);
+	int playSound(const int id, int loops = 0, int channel = -1);
 
 	/*
 	* Phát nhạc nền

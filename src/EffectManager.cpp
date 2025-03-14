@@ -39,6 +39,7 @@ void EffectManager::checkVar(Attribute* attrib,SDL_Rect* rect)
 				attrib->hp -= e->getDamage();
 				attrib->isHitting = true;		// bị đánh
 				e->setDamage();
+				Game::playSound(0);
 			}
 		}
 	}
