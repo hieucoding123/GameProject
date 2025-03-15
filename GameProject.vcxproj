@@ -161,6 +161,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\SelletionPart.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
@@ -190,6 +191,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\akainu_stand.png" />
+    <Image Include="assets\avatars.png" />
+    <Image Include="assets\selectFrame.png" />
     <Image Include="assets\collisionImage.png" />
     <Image Include="assets\dirt.png" />
     <Image Include="assets\fight\p1.png" />
@@ -199,11 +202,14 @@
     <Image Include="assets\map.png" />
     <Image Include="assets\player.png" />
     <Image Include="assets\sasuke.png" />
+    <Image Include="assets\selectBackground.png" />
     <Image Include="assets\water.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\audio\background.mp3" />
     <Media Include="assets\audio\hit.wav" />
+    <Media Include="assets\audio\ping.wav" />
+    <Media Include="assets\audio\selectedSound.wav" />
     <Media Include="assets\audio\step3.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -9,6 +9,10 @@ SDL_Event Game::event;
 SDL_Rect Game::camera = { 0, 0, WIDTH, HIGH };
 std::unique_ptr<AudioManager> Game::audioManager = std::make_unique<AudioManager>();
 
+SDL_Texture* Game::background = TextureManager::LoadTexture(SELECT_BG_IMG);
+SDL_Texture* Game::selectTexture = TextureManager::LoadTexture(SELECT_FRAME_IMG);
+SDL_Rect Game::destRect = { SELECT_X, SELECT_Y, SELECT_W, SELECT_H };
+
 std::vector<std::unique_ptr<Tile>> Game::tiles;
 EffectManager Game::effectManager;
 
@@ -55,12 +59,16 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	else {
 		isRunning = false;
 	}
+	audioManager->init();
 
+	background = TextureManager::LoadTexture(SELECT_BG_IMG);
+	selectTexture = TextureManager::LoadTexture(SELECT_FRAME_IMG);
+	std::vector<int> v = initSelection();
+	
 	// đặt camera ở giữa
 	camera.x = (WIDTH * MAP_SCALE - WIDTH) / 2;
 	camera.y = (HIGH * MAP_SCALE - HIGH);
 
-	audioManager->init();
 
 	map->LoadMap(tileMapPath);
 

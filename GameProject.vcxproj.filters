@@ -63,6 +63,9 @@
     <ClCompile Include="src\AudioManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\SelletionPart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game.h">
@@ -156,6 +159,15 @@
     <Image Include="assets\collisionImage.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\avatars.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\selectFrame.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\selectBackground.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\audio\background.mp3" />
@@ -163,5 +175,11 @@
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="assets\audio\step3.mp3" />
+    <Media Include="assets\audio\selectedSound.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\ping.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>
