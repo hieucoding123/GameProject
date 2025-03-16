@@ -30,7 +30,7 @@ void Map::LoadMap(const char* path)
 
 			int tileX = (ID % COL) * BLOCK_W;
 			int tileY = (ID / ROW) * BLOCK_H;
-			Game::tiles.push_back(std::move(std::make_unique<Tile>(tileX, tileY, x * BLOCK_W, y * BLOCK_H)));
+			PlaySection::tiles.push_back(std::move(std::make_unique<Tile>(tileX, tileY, x * BLOCK_W, y * BLOCK_H)));
 
 			myFile.ignore();
 		}

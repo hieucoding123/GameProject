@@ -13,9 +13,6 @@ public:
 	void draw() override;
 	void ADWSController() override;
 	void LRUDController() override;
-	void setPosition(int xpos, int ypos);
-	int getHP() const;
-	int getEnergy() const;
 private:
 	std::unique_ptr<Animation> animation;
 };

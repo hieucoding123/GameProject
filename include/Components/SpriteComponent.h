@@ -14,16 +14,26 @@ public:
 	// srcRect
 	SDL_Rect* getSrcRect();
 
-	// đặt tỉ lệ
+	/*
+	* Tùy chỉnh tỉ lệ
+	* @param s Tỉ lệ
+	*/
 	void setScale(int s);
 
-	// đặt flip
+	/*
+	* Tùy chỉnh lật ảnh
+	* @param f Chỉ số quy định lật ảnh trong SDL
+	*/
 	void setFlip(SDL_RendererFlip f);
 
 	SDL_RendererFlip getFlip() const;
 
 	int getROL() const;
 
+	/*
+	* Chia sẻ texture ra ngoài đối tượng
+	* @return texture của đối tượng gọi
+	*/
 	SDL_Texture* shareTexture()
 	{
 		return texture;

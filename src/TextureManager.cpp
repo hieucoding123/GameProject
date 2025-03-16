@@ -39,6 +39,6 @@ void TextureManager::DrawCollisionImage(const SDL_Rect* rect)
 {
 	SDL_Texture* texture = LoadTexture(collisionImgPath);
 	SDL_Rect collisionSrc = { 0, 0, 282, 282 };
-	SDL_Rect destRect = { rect->x, rect->y, collisionSrc.w / Game::MAP_SCALE, collisionSrc.h / Game::MAP_SCALE };
+	SDL_Rect destRect = { rect->x, rect->y, collisionSrc.w / PlaySection::MAP_SCALE, collisionSrc.h / PlaySection::MAP_SCALE };
 	Draw(texture, &collisionSrc, &destRect, SDL_FLIP_NONE);
 }

@@ -66,4 +66,5 @@ void SpriteComponent::draw()
 SpriteComponent::~SpriteComponent()
 {
 	SDL_DestroyTexture(texture);
+	delete destRect;
 }

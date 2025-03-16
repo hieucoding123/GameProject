@@ -3,6 +3,7 @@
 #include "SelectionSection.h"
 #include "TextureManager.h"
 
+// Khởi tạo các biến tĩnh
 SDL_Texture* SelectionSection::background = TextureManager::LoadTexture(SELECT_BG_IMG);
 SDL_Texture* SelectionSection::selectTexture = TextureManager::LoadTexture(SELECT_FRAME_IMG);
 SDL_Rect SelectionSection::destRect = { SELECT_X, SELECT_Y, SELECT_W, SELECT_H };

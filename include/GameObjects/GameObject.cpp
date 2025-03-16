@@ -28,7 +28,7 @@ void GameObject::update()
 {
 	transform->update();
 	sprite->update();
-	attrib->onGround = (transform->getYPos() + rect->h >= GROUND * Game::MAP_SCALE);
+	attrib->onGround = (transform->getYPos() + rect->h >= GROUND * PlaySection::MAP_SCALE);
 }
 void GameObject::draw()
 {
@@ -85,6 +85,22 @@ void GameObject::LRUDController()
 	{
 
 	}
+}
+
+void GameObject::setPosition(int xpos, int ypos)
+{
+	transform->setXPos(xpos);
+	transform->setYpos(ypos);	
+}
+
+int GameObject::getHP() const
+{
+	return attrib->hp;
+}
+
+int GameObject::getEnergy() const
+{
+	return attrib->energy;
 }
 
 GameObject::~GameObject()

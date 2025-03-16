@@ -1,4 +1,5 @@
 ﻿#include "Akainu.h"
+#include "PlaySection.h"
 #include "EffectManager.h"
 
 Akainu::Akainu()
@@ -21,18 +22,18 @@ void Akainu::update()
 	GameObject::update();
 	// cập nhật vị trí trên màn hình
 
-	if (transform->getYPos() + rect->h >= (GROUND * Game::MAP_SCALE))
+	if (transform->getYPos() + rect->h >= (GROUND * PlaySection::MAP_SCALE))
 	{
-		transform->setYpos((GROUND * Game::MAP_SCALE) - rect->h);
+		transform->setYpos((GROUND * PlaySection::MAP_SCALE) - rect->h);
 	}
-	if (transform->getXPos() + rect->w >= (WIDTH * Game::MAP_SCALE))
+	if (transform->getXPos() + rect->w >= (WIDTH * PlaySection::MAP_SCALE))
 	{
-		transform->setXPos(WIDTH * Game::MAP_SCALE - rect->w);
+		transform->setXPos(WIDTH * PlaySection::MAP_SCALE - rect->w);
 	}
 	if (this->hasCamera())
 	{
-		rect->x = transform->getXPos() - Game::camera.x;
-		rect->y = transform->getYPos() - Game::camera.y;
+		rect->x = transform->getXPos() - PlaySection::camera.x;
+		rect->y = transform->getYPos() - PlaySection::camera.y;
 	}
 	else {
 		rect->x = transform->getXPos();
@@ -43,7 +44,7 @@ void Akainu::update()
 
 	// cập nhật va chạm với hiệu ứng
 	//std::cout << "Akainu\n";
-	Game::effectManager.checkVar(attrib.get(), rect.get());
+	PlaySection::effectManager.checkVar(attrib.get(), rect.get());
 	//std::cout << "****\n";
 }
 void Akainu::draw()
@@ -78,7 +79,7 @@ void Akainu::ADWSController()
 			transform->setVx(0);
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
-			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
 				0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_u:
@@ -130,7 +131,7 @@ void Akainu::LRUDController()
 			transform->setVx(0);
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
-			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
 				0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_k:
@@ -153,19 +154,4 @@ void Akainu::LRUDController()
 			break;
 		}
 	}
-}
-
-void Akainu::setPosition(int xpos, int ypos)
-{
-	transform->setXPos(xpos);
-	transform->setYpos(ypos);
-}
-
-int	Akainu::getHP() const
-{
-	return attrib->hp;
-}
-int	Akainu::getEnergy() const
-{
-	return attrib->energy;
 }

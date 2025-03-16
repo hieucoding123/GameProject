@@ -24,6 +24,15 @@ public:
 	virtual void draw();
 	virtual void ADWSController();		// điều khiển
 	virtual void LRUDController();
+	void setPosition(int xpos, int ypos);
+	/*
+	* Lấy ra chỉ số HP
+	*/
+	int getHP() const;
+	/*
+	* Lấy ra chỉ số năng lượng
+	*/
+	int getEnergy() const;
 	~GameObject();
 protected:
 	std::unique_ptr<TransformComponent> transform;

@@ -3,12 +3,8 @@
 #include <iostream>
 #include <SDL_image.h>
 #include <SDL.h>
-#include <vector>
-#include <memory>
 #include "AudioManager.h"
 
-class Tile;
-class EffectManager;
 
 class Game
 {
@@ -22,21 +18,8 @@ public:
 	void clean();
 	bool running() { return isRunning; };
 
-	static std::vector<std::unique_ptr<Tile>> tiles;
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
-	static SDL_Rect camera;
-	static EffectManager effectManager;
-
-	static int MAP_SCALE;
-
-	/*
-	* Kiểm tra hai hình chữ nhật giao nhau
-	* @param rect1 hình chữ nhật đầu tiên
-	* @param rect2 hình chữ nhật thứ hai
-	* @return true nếu hai hình giao nhau
-	*/
-	static bool AABB(const SDL_Rect& rec1, const SDL_Rect& rec2);
 
 	/*
 	* Phát một đoạn nhạc

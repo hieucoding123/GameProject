@@ -4,21 +4,13 @@
 #include "GameObjects/Sasuke.h"
 #include "GameObjects/Akainu.h"
 #include "SelectionSection.h"
+#include "PlaySection.h"
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
-SDL_Rect Game::camera = { 0, 0, WIDTH, HIGH };
+
+PlaySection* playSection = new PlaySection;
 std::unique_ptr<AudioManager> Game::audioManager = std::make_unique<AudioManager>();
-
-std::vector<std::unique_ptr<Tile>> Game::tiles;
-EffectManager Game::effectManager;
-
-int Game::MAP_SCALE = 2;
-
-Sasuke* sasuke = nullptr;
-Akainu* akainu = nullptr;
-
-Map* map;
 
 Game::Game()
 { }
@@ -60,31 +52,23 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 
 	// Phần chọn nhân vật
 	SelectionSection::selectionLoad();
-	std::vector<int> v = SelectionSection::Selection();
+	std::vector<int> ID = SelectionSection::Selection();
 	
 	// Khởi tạo nhân vật và game
-	// đặt camera ở giữa
-	camera.x = (WIDTH * MAP_SCALE - WIDTH) / 2;
-	camera.y = (HIGH * MAP_SCALE - HIGH);
-
-
-	map->LoadMap(tileMapPath);
-
-	sasuke = new Sasuke;
-	sasuke->init();
-	sasuke->setPosition(camera.x + 100, GROUND * MAP_SCALE);
-	sasuke->setCamera();
-
-	akainu = new Akainu;
-	akainu->init();
-	akainu->setPosition(camera.x + camera.w - 100, GROUND * MAP_SCALE);
-	akainu->setCamera();
+	playSection->playLoad();
+	playSection->init(ID);
 }
 
 void Game::handleEvents()
 {
 	// Xử lý sự kiện chung
 	SDL_PollEvent(&event);
+
+	playSection->handleEvents();
+	if (!playSection->playing())
+	{
+		isRunning = false;
+	}
 
 	switch (event.type)
 	{
@@ -100,61 +84,31 @@ void Game::handleEvents()
 void Game::update()
 {
 	// Phần cập nhật game
-	for (auto& t : Game::tiles)
-	{
-		t->update();
-	}
-	sasuke->update();
-	sasuke->ADWSController();
-
-	akainu->update();
-	akainu->LRUDController();
-	effectManager.update();
+	playSection->update();
 }
 
 void Game::render()
 {
-	// Phần vẽ game
 	SDL_RenderClear(renderer);
-
-	for (auto& t : Game::tiles)
-	{
-		t->draw();
-	}
-
-	sasuke->draw();
-	akainu->draw();
-	effectManager.draw();
-
-	// Vẽ thanh máu và năng lượng
-	TextureManager::DrawHP(SELECT_W, 0, (sasuke->getHP() * HP_W) / HP, HPBG_COLOR, HP_COLOR);
-	TextureManager::DrawEnergy(SELECT_W, HP_H,
-		(sasuke->getEnergy() * (HP_W - 20)) / ENERGY, ENGBG_COLOR, ENG_COLOR);
 	
-	TextureManager::DrawHP(camera.w - HP_W - SELECT_W, 0,
-		((HP - akainu->getHP()) * HP_W) / HP, HP_COLOR, HPBG_COLOR);
-	TextureManager::DrawEnergy(camera.w - HP_W - SELECT_W + 20, HP_H,
-		((ENERGY - akainu->getEnergy()) * (HP_W - 20)) / ENERGY, ENG_COLOR, ENGBG_COLOR);
+	// Phần vẽ game
+	playSection->render();
 
 	SDL_RenderPresent(renderer);
 }
 
 void Game::clean()
 {
+	playSection->clean();
+	delete playSection;
+	playSection = nullptr;
 	audioManager->clean();
+
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 
 	std::cout << "Game cleaned" << std::endl;
-}
-
-bool Game::AABB(const SDL_Rect& rec1, const SDL_Rect& rec2)
-{
-	return (rec1.x + rec1.w >= rec2.x &&
-		rec2.x + rec2.w >= rec1.x &&
-		rec1.y + rec1.h >= rec2.y &&
-		rec2.y + rec2.h >= rec1.y);
 }
 
 void Game::playSound(int ID)

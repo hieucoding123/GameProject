@@ -1,5 +1,6 @@
 ﻿#include "Sasuke.h"
 #include "EffectManager.h"
+#include "PlaySection.h"
 
 Sasuke::Sasuke()
 {
@@ -21,18 +22,18 @@ void Sasuke::update()
 	GameObject::update();
 	// cập nhật vị trí trên màn hình
 
-	if (transform->getYPos() + rect->h >= (GROUND * Game::MAP_SCALE))
+	if (transform->getYPos() + rect->h >= (GROUND * PlaySection::MAP_SCALE))
 	{
-		transform->setYpos((GROUND * Game::MAP_SCALE) - rect->h);
+		transform->setYpos((GROUND * PlaySection::MAP_SCALE) - rect->h);
 	}
-	if (transform->getXPos() + rect->w >= (WIDTH * Game::MAP_SCALE))
+	if (transform->getXPos() + rect->w >= (WIDTH * PlaySection::MAP_SCALE))
 	{
-		transform->setXPos(WIDTH * Game::MAP_SCALE - rect->w);
+		transform->setXPos(WIDTH * PlaySection::MAP_SCALE - rect->w);
 	}
 	if (this->hasCamera())
 	{
-		rect->x = transform->getXPos() - Game::camera.x;
-		rect->y = transform->getYPos() - Game::camera.y;
+		rect->x = transform->getXPos() - PlaySection::camera.x;
+		rect->y = transform->getYPos() - PlaySection::camera.y;
 	}
 	else {
 		rect->x = transform->getXPos();
@@ -42,7 +43,7 @@ void Sasuke::update()
 
 	// cập nhật va chạm với hiệu ứng
 	//std::cout << "Sasuke\n";
-	Game::effectManager.checkVar(attrib.get(), rect.get());
+	PlaySection::effectManager.checkVar(attrib.get(), rect.get());
 	//std::cout << "****\n";
 }
 void Sasuke::draw()
@@ -77,7 +78,7 @@ void Sasuke::ADWSController()
 			transform->setVx(0);
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
-			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3), 
+			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3), 
 				9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_u:
@@ -129,7 +130,7 @@ void Sasuke::LRUDController()
 			transform->setVx(0);
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
-			Game::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
 				9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
 			break;
 		case SDLK_k:
@@ -152,19 +153,4 @@ void Sasuke::LRUDController()
 			break;
 		}
 	}
-}
-
-void Sasuke::setPosition(int xpos, int ypos)
-{
-	transform->setXPos(xpos);
-	transform->setYpos(ypos);
-}
-
-int	Sasuke::getHP() const
-{
-	return attrib->hp;
-}
-int	Sasuke::getEnergy() const
-{
-	return attrib->energy;
 }

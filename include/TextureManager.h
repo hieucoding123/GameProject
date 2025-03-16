@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Game.h"
+#include "PlaySection.h"
 
 // quản lý và cài texture
 class TextureManager
@@ -8,17 +9,17 @@ class TextureManager
 public:
 	/*
 	* Tải texture khi có đường dẫn ảnh
-	* @param const char* đường dẫn đến ảnh
+	* @param path đường dẫn đến ảnh
 	* @return SDL_Texture* trỏ đến texture
 	*/
 	static SDL_Texture* LoadTexture(const char* path);
 
 	/*
 	* Vẽ lên màn hình qua renderer
-	* @param SDL_Texture* con trỏ đến texture
-	* @param SDL_Rect* con trỏ đến srcRect
-	* @param SDL_Rect* con trỏ đến destRect
-	* @param SDL_RendererFlip quy định lật ảnh
+	* @param texture con trỏ đến texture cần vẽ
+	* @param srcRect con trỏ đến hình chữ nhật gốc
+	* @param destRect con trỏ đến hình chữ nhật đích
+	* @param flip quy định lật ảnh
 	*/
 	static void Draw(SDL_Texture* texture, SDL_Rect* srcRect, SDL_Rect* destRect, SDL_RendererFlip flip);
 
@@ -28,7 +29,7 @@ public:
 	
 	/*
 	*Vẽ ảnh khi có va chạm
-	* @param SDL_Rect* chứa vị trí cần vẽ
+	* @param rect chứa vị trí cần vẽ
 	*/
 	static void DrawCollisionImage(const SDL_Rect* rect);
 };
