@@ -63,7 +63,10 @@
     <ClCompile Include="src\AudioManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SelletionPart.cpp">
+    <ClCompile Include="src\SeletionSection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PlaySection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,6 +120,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\AudioManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SelectionSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlaySection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -179,6 +188,9 @@
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="assets\audio\ping.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\teleport.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>

@@ -91,9 +91,10 @@ void Sasuke::ADWSController()
 			animation->setFinished(false);
 			break;
 		case SDLK_f:
-			transform->setVx(5 * sprite->getROL());
+			transform->setVx(4 * sprite->getROL());
 			animation->setState((int)SDLK_f);
 			animation->setFinished(false);
+			Game::playSound(4);
 			break;
 		default:
 			break;
@@ -142,9 +143,10 @@ void Sasuke::LRUDController()
 			animation->setFinished(false);
 			break;
 		case SDLK_RCTRL:
-			transform->setVx(5 * sprite->getROL());
+			transform->setVx(4 * sprite->getROL());
 			animation->setState((int)SDLK_f);
 			animation->setFinished(false);
+			Game::playSound(4);
 			break;
 		default:
 			break;

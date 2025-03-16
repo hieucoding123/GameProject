@@ -95,6 +95,7 @@ void Akainu::ADWSController()
 			transform->setVx(5 * sprite->getROL());
 			animation->setState((int)SDLK_f);
 			animation->setFinished(false);
+			Game::playSound(4);
 			break;
 		default:
 			break;
@@ -146,6 +147,7 @@ void Akainu::LRUDController()
 			transform->setVx(5 * sprite->getROL());
 			animation->setState((int)SDLK_f);
 			animation->setFinished(false);
+			Game::playSound(4);
 			break;
 		default:
 			break;

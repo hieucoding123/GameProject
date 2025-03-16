@@ -43,24 +43,8 @@ public:
 	* @param int ID của đoạn nhạc
 	*/
 	static void playSound(int ID);
-
-	/*
-	* Khởi tạo phần chọn nhân vật
-	* @return một vector chứa các ID của nhân vật được chọn
-	*/
-	static std::vector<int> initSelection();
-
-	/*
-	* Xử lý sự kiện nhấn chuột, di chuyển giữa các ô
-	* @param id ID của nhân vật sắp được chọn
-	* @return true nếu đã chọn xong
-	*/
-	static bool handleEvent(int& id);
 private:
 	bool isRunning;
 	SDL_Window* window;
 	static std::unique_ptr<AudioManager> audioManager;
-	static SDL_Texture* background;
-	static SDL_Texture* selectTexture;
-	static SDL_Rect destRect;
 };

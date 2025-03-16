@@ -3,15 +3,12 @@
 #include "Map.h"
 #include "GameObjects/Sasuke.h"
 #include "GameObjects/Akainu.h"
+#include "SelectionSection.h"
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 SDL_Rect Game::camera = { 0, 0, WIDTH, HIGH };
 std::unique_ptr<AudioManager> Game::audioManager = std::make_unique<AudioManager>();
-
-SDL_Texture* Game::background = TextureManager::LoadTexture(SELECT_BG_IMG);
-SDL_Texture* Game::selectTexture = TextureManager::LoadTexture(SELECT_FRAME_IMG);
-SDL_Rect Game::destRect = { SELECT_X, SELECT_Y, SELECT_W, SELECT_H };
 
 std::vector<std::unique_ptr<Tile>> Game::tiles;
 EffectManager Game::effectManager;
@@ -61,10 +58,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 	}
 	audioManager->init();
 
-	background = TextureManager::LoadTexture(SELECT_BG_IMG);
-	selectTexture = TextureManager::LoadTexture(SELECT_FRAME_IMG);
-	std::vector<int> v = initSelection();
+	// Phần chọn nhân vật
+	SelectionSection::selectionLoad();
+	std::vector<int> v = SelectionSection::Selection();
 	
+	// Khởi tạo nhân vật và game
 	// đặt camera ở giữa
 	camera.x = (WIDTH * MAP_SCALE - WIDTH) / 2;
 	camera.y = (HIGH * MAP_SCALE - HIGH);
@@ -85,6 +83,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 
 void Game::handleEvents()
 {
+	// Xử lý sự kiện chung
 	SDL_PollEvent(&event);
 
 	switch (event.type)
@@ -100,6 +99,7 @@ void Game::handleEvents()
 
 void Game::update()
 {
+	// Phần cập nhật game
 	for (auto& t : Game::tiles)
 	{
 		t->update();
@@ -114,6 +114,7 @@ void Game::update()
 
 void Game::render()
 {
+	// Phần vẽ game
 	SDL_RenderClear(renderer);
 
 	for (auto& t : Game::tiles)
@@ -126,14 +127,14 @@ void Game::render()
 	effectManager.draw();
 
 	// Vẽ thanh máu và năng lượng
-	TextureManager::DrawHP(0, 0, (sasuke->getHP() * HP_W) / HP, HPBG_COLOR, HP_COLOR);
-	TextureManager::DrawEnergy(0, HP_H,
+	TextureManager::DrawHP(SELECT_W, 0, (sasuke->getHP() * HP_W) / HP, HPBG_COLOR, HP_COLOR);
+	TextureManager::DrawEnergy(SELECT_W, HP_H,
 		(sasuke->getEnergy() * (HP_W - 20)) / ENERGY, ENGBG_COLOR, ENG_COLOR);
 	
-	TextureManager::DrawHP(camera.w - HP_W, 0,
+	TextureManager::DrawHP(camera.w - HP_W - SELECT_W, 0,
 		((HP - akainu->getHP()) * HP_W) / HP, HP_COLOR, HPBG_COLOR);
-	TextureManager::DrawEnergy(camera.w - HP_W + 20, HP_H,
-		((ENERGY - akainu->getEnergy()) * (HP_W - 20)), ENG_COLOR, ENGBG_COLOR);
+	TextureManager::DrawEnergy(camera.w - HP_W - SELECT_W + 20, HP_H,
+		((ENERGY - akainu->getEnergy()) * (HP_W - 20)) / ENERGY, ENG_COLOR, ENGBG_COLOR);
 
 	SDL_RenderPresent(renderer);
 }

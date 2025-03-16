@@ -161,7 +161,8 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Map.cpp" />
-    <ClCompile Include="src\SelletionPart.cpp" />
+    <ClCompile Include="src\PlaySection.cpp" />
+    <ClCompile Include="src\SeletionSection.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
@@ -181,6 +182,8 @@
     <ClInclude Include="include\GameObjects\Sasuke.h" />
     <ClInclude Include="include\GameObjects\Tile.h" />
     <ClInclude Include="include\Map.h" />
+    <ClInclude Include="include\PlaySection.h" />
+    <ClInclude Include="include\SelectionSection.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\Vector2D.h" />
   </ItemGroup>
@@ -211,6 +214,7 @@
     <Media Include="assets\audio\ping.wav" />
     <Media Include="assets\audio\selectedSound.wav" />
     <Media Include="assets\audio\step3.mp3" />
+    <Media Include="assets\audio\teleport.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
