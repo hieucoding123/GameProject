@@ -13,7 +13,7 @@ const int SELECT_Y = 387;		// vị trí ban đầu của khung chọn
 const int SELECT_W = 70;		// chiều rộng khung chọn
 const int SELECT_H = 94;		// chiều dài khung chọn
 const int AVATAR_ROW = 1;		// số hàng xếp avatar
-const int AVATAR_COL = 2;		// số cột xếp avatar
+const int AVATAR_COL = 3;		// số cột xếp avatar
 
 const int WIDTH = 1920;
 const int HIGH = 992;
@@ -40,6 +40,7 @@ const int GRAVITY = 7;
 
 const int PLAYER1ID = 0;
 const int PLAYER2ID = 1;
+const int PLAYER3ID = 2;
 
 const double HP = 500;
 const double ENERGY = 2000;
@@ -58,6 +59,7 @@ const SDL_Color ENG_COLOR = { 73, 222, 255, 255 };
 
 constexpr const char* SASUKE_IMG_PATH = "assets/sasuke.png";
 constexpr const char* AKAINU_IMG_PATH = "assets/akainu_stand.png";
+constexpr const char* MADARA_IMG_PATH = "assets/madara.png";
 
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
 constexpr const char* tileMapPath = "assets/TileMap.txt";
@@ -97,7 +99,11 @@ const std::map<int, std::vector<int>> SASUKE = {
 	{ (int)SDLK_r,		{8, 100, 0, 446, 60, 77, 0, 0}},		// skill 1
 	{ -3,				{7, 140, 242, 0, 86, 57, 1, 20} },		// effect 1
 	{ -4,				{3, 250, 450, 77, 57, 73, 0, 0} },		// get damage
-	{ (int)SDLK_f,		{4, 200, 643, 83, 69, 67, 0, 0 } }		// dịch chuyển
+	{ (int)SDLK_f,		{4, 200, 643, 83, 69, 67, 0, 0 } },		// dịch chuyển
+	{ (int)SDLK_2,		{6, 170, 664, 327, 241, 196, 0, 0} },		// skill 2
+	{ -5,				{5, 300, 0, 524, 171, 26, 0, 90}},		// effect 2
+	{(int)SDLK_1,		{4, 250, 179, 150, 73, 72, 0, 0}},		// skill 3
+	{-6,				{6, 300, 945, 0, 330, 255, 0, 150}}		// effect 3
 };
 
 const std::map<int, std::vector<int>> AKAINU = {
@@ -113,4 +119,24 @@ const std::map<int, std::vector<int>> AKAINU = {
 		{(int)SDLK_c,	{2, 450, 595, 165, 75, 78, 0, 0}},
 		{(int)SDLK_q,	{2, 450, 753, 165, 76, 77, 0, 0}},
 		{(int)SDLK_f,	{3, 180, 227, 257, 92, 70, 0, 0}}
+};
+
+const std::map<int, std::vector<int>> MADARA = {
+	// state - f - s - x - y- w - h - hit - damage
+	{ -1,				{3, 150, 0,  0, 61, 89, 0, 0} },		// idle
+	{ (int)SDLK_d,		{6, 110, 321, 0, 83, 89, 0, 0}},			// walk
+	{ (int)SDLK_w,		{2, 250, 0, 89, 72, 92, 0, 0}},		// jump
+	{ -2,				{1, 1, 0, 226, 74, 88, 0, 0} },			// fall
+	{ (int)SDLK_c,		{4, 200, 81, 195, 106, 119, 0, 0}},			// thủ (đất)
+	//{ (int)SDLK_q,		{1, 1000, 0, 296, 58, 74, 0, 0}},			// thủ (trên không)
+	{ (int)SDLK_u,		{5, 200, 819, 0, 127, 89, 1, 20}},		// cận chiến
+	{ (int)SDLK_2,		{5, 320, 0, 314, 93, 112, 0, 0}},		// skill 2
+	{ -3,				{6, 200, 0, 426, 525, 172, 1, 35} },		// effect 1
+	{ -4,				{2, 250, 183, 2, 69, 87, 0, 0} },		// get damage
+	//{ (int)SDLK_f,		{4, 200, 643, 83, 69, 67, 0, 0 } },		// dịch chuyển
+	//{ (int)SDLK_1,		{7, 180, 0, 523, 298, 222, 0, 0} },		// skill 1
+	{ -5,				{2, 650, 733, 89, 233, 267, 0, 0}},		// effect 2.1
+	{-7,				{3, 400, 0, 598, 187, 187, 1, 110}},		// effect 2.2
+	{(int)SDLK_r,		{4, 320, 216, 89, 71, 91, 0, 0}}		// skill 1
+	//{-6,				{6, 300, 945, 0, 330, 255, 0, 150}}		// effect 3
 };

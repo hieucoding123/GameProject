@@ -69,6 +69,9 @@
     <ClCompile Include="src\PlaySection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\GameObjects\Madara.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game.h">
@@ -128,6 +131,9 @@
     <ClInclude Include="include\PlaySection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\GameObjects\Madara.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\CollisionsMap.txt" />
@@ -175,6 +181,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\selectBackground.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\madara.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

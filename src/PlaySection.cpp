@@ -1,6 +1,7 @@
 ﻿#include "PlaySection.h"
 #include "GameObjects/Sasuke.h"
 #include "GameObjects/Akainu.h"
+#include "GameObjects/Madara.h"
 #include "Game.h"
 #include "Map.h"
 #include "Const.h"
@@ -133,6 +134,14 @@ void PlaySection::setCharacter(const int& ID, int xpos, int ypos, bool camera)
 	case PLAYER2ID:
 	{
 		gameObjects[gameObjects.size() - 1] = new Akainu;
+		gameObjects[gameObjects.size() - 1]->init();
+		gameObjects[gameObjects.size() - 1]->setPosition(xpos, ypos);
+		if (camera) gameObjects[gameObjects.size() - 1]->setCamera();
+		break;
+	}
+	case PLAYER3ID:
+	{
+		gameObjects[gameObjects.size() - 1] = new Madara;
 		gameObjects[gameObjects.size() - 1]->init();
 		gameObjects[gameObjects.size() - 1]->setPosition(xpos, ypos);
 		if (camera) gameObjects[gameObjects.size() - 1]->setCamera();

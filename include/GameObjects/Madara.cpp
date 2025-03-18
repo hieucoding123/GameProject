@@ -1,23 +1,23 @@
-﻿#include "Sasuke.h"
+﻿#include "Madara.h"
 #include "EffectManager.h"
 #include "PlaySection.h"
 
-Sasuke::Sasuke()
+Madara::Madara()
 {
 	GameObject::GameObject();
 }
 
 // khởi tạo
-void Sasuke::init()
+void Madara::init()
 {
 	GameObject::init();
 	transform->setSpeed(5);
-	sprite = std::make_unique<SpriteComponent>(SASUKE_IMG_PATH, rect);
-	sprite->getSrcRect()->w = 48;
-	sprite->getSrcRect()->h = 75;
-	animation = std::make_unique<Animation>(attrib.get(), transform->getVelocity(), sprite->getSrcRect(), SASUKE);
+	sprite = std::make_unique<SpriteComponent>(MADARA_IMG_PATH, rect);
+	sprite->getSrcRect()->w = 61;
+	sprite->getSrcRect()->h = 89;
+	animation = std::make_unique<Animation>(attrib.get(), transform->getVelocity(), sprite->getSrcRect(), MADARA);
 }
-void Sasuke::update()
+void Madara::update()
 {
 	GameObject::update();
 	// cập nhật vị trí trên màn hình
@@ -42,16 +42,16 @@ void Sasuke::update()
 	animation->update();
 
 	// cập nhật va chạm với hiệu ứng
-	//std::cout << "Sasuke\n";
+	//std::cout << "Madara\n";
 	PlaySection::effectManager.checkVar(attrib.get(), rect.get());
 	//std::cout << "****\n";
 }
-void Sasuke::draw()
+void Madara::draw()
 {
 	GameObject::draw();
 }
 
-void Sasuke::ADWSController()
+void Madara::ADWSController()
 {
 	if (Game::event.type == SDL_KEYDOWN && animation->isFinished())
 	{
@@ -78,39 +78,39 @@ void Sasuke::ADWSController()
 			transform->setVx(0);
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3), 
-				9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
+			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+				0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
 			break;
 		case SDLK_u:
 			transform->setVx(0);
 			animation->setState((int)SDLK_u);
 			animation->setFinished(false);
 			break;
-		case SDLK_c:
+		/*case SDLK_c:
 			transform->setVx(0);
 			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
 			animation->setFinished(false);
-			break;
-		case SDLK_f:
+			break;*/
+		/*case SDLK_f:
 			transform->setVx(4 * sprite->getROL());
 			animation->setState((int)SDLK_f);
 			animation->setFinished(false);
 			Game::playSound(4);
-			break;
-		case SDLK_1:
+			break;*/
+		/*case SDLK_1:
 			transform->setVx(0);
 			animation->setState((int)SDLK_1);
 			animation->setFinished(false);
 			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-6),
-				9, 0, 2, sprite->getFlip(), rect->x + rect->w*sprite->getROL(), rect->y - 400));
-			break;
+				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 300));
+			break;*/
 		case SDLK_2:
 			transform->setVx(0);
-			animation->setState((int)SDLK_1);
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor((int)SDLK_2),
-				0, 0, 2, sprite->getFlip(), rect->x, rect->y - 240));
+			animation->setState((int)SDLK_2);
 			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
-				12, 0, 3, sprite->getFlip(), rect->x, rect->y - 120));
+				0, 0, 3, SDL_FLIP_NONE, rect->x + rect->w * 1.0/2 - 350, rect->y - 600));
+			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
+				0, 7, 6, sprite->getFlip(), rect->x + 900 * sprite->getROL(), -800));
 			animation->setFinished(false);
 			break;
 		default:
@@ -119,7 +119,7 @@ void Sasuke::ADWSController()
 	}
 }
 
-void Sasuke::LRUDController()
+void Madara::LRUDController()
 {
 	if (Game::event.type == SDL_KEYDOWN && animation->isFinished())
 	{
@@ -147,40 +147,38 @@ void Sasuke::LRUDController()
 			animation->setState((int)SDLK_r);
 			animation->setFinished(false);
 			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-				9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
+				0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
 			break;
 		case SDLK_k:
 			transform->setVx(0);
 			animation->setState((int)SDLK_u);
 			animation->setFinished(false);
 			break;
-		case SDLK_l:
+		/*case SDLK_l:
 			transform->setVx(0);
 			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
 			animation->setFinished(false);
-			break;
-		case SDLK_RCTRL:
+			break;*/
+		/*case SDLK_RCTRL:
 			transform->setVx(4 * sprite->getROL());
 			animation->setState((int)SDLK_f);
 			animation->setFinished(false);
 			Game::playSound(4);
-			break;
-		case SDLK_SLASH:
+			break;*/
+		/*case SDLK_SLASH:
 			transform->setVx(0);
 			animation->setState((int)SDLK_1);
 			animation->setFinished(false);
 			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-6),
 				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 300));
-			break;
-		case SDLK_PERIOD:
+			break;*/
+		/*case SDLK_PERIOD:
 			transform->setVx(0);
-			animation->setState((int)SDLK_1);
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor((int)SDLK_2),
-				0, 0, 2, sprite->getFlip(), rect->x, rect->y - 240));
+			animation->setState((int)SDLK_2);
 			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
-				12, 0, 3, sprite->getFlip(), rect->x, rect->y - 120));
+				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 30));
 			animation->setFinished(false);
-			break;
+			break;*/
 		default:
 			break;
 		}

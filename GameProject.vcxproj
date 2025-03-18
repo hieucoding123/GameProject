@@ -147,6 +147,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\GameObjects\Madara.cpp" />
     <ClCompile Include="src\AudioManager.cpp" />
     <ClCompile Include="include\Components\Animation.cpp" />
     <ClCompile Include="include\Components\ECS.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObjects\Akainu.h" />
     <ClInclude Include="include\GameObjects\GameObject.h" />
+    <ClInclude Include="include\GameObjects\Madara.h" />
     <ClInclude Include="include\GameObjects\Sasuke.h" />
     <ClInclude Include="include\GameObjects\Tile.h" />
     <ClInclude Include="include\Map.h" />
@@ -195,6 +197,7 @@
   <ItemGroup>
     <Image Include="assets\akainu_stand.png" />
     <Image Include="assets\avatars.png" />
+    <Image Include="assets\madara.png" />
     <Image Include="assets\selectFrame.png" />
     <Image Include="assets\collisionImage.png" />
     <Image Include="assets\dirt.png" />
