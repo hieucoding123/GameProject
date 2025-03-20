@@ -22,18 +22,27 @@ Animation::Animation(Attribute* attribute, Vector2D* vel,
 	animFinished = true;
 }
 
-void Animation::setState(int s)
+bool Animation::setStateSuccess(int s)
 {
-	attrib->state = s;
-	frames = figure.at(attrib->state)[0];
-	speed = figure.at(attrib->state)[1];
-	srcRect->x = figure.at(attrib->state)[2];
-	srcRect->y = figure.at(attrib->state)[3];
-	srcRect->w = figure.at(attrib->state)[4];
-	srcRect->h = figure.at(attrib->state)[5]; 
+	if (figure.at(s)[6] <= attrib->energy)
+	{
+		attrib->state = s;
+		// trừ năng lượng
+		attrib->energy -= figure.at(s)[6] * 0.5;
+		frames = figure.at(s)[0];
+		speed = figure.at(s)[1];
+		srcRect->x = figure.at(s)[2];
+		srcRect->y = figure.at(s)[3];
+		srcRect->w = figure.at(s)[4];
+		srcRect->h = figure.at(s)[5];
+		// Cài đặt sát thương cận chiến
+		attrib->damage = figure.at(s)[7];
 
-	currentFrame = 0;
-	lastUpdate = SDL_GetTicks();
+		currentFrame = 0;
+		lastUpdate = SDL_GetTicks();
+		return true;
+	}
+	return false;
 }
 
 void Animation::setFinished(bool b)
@@ -51,7 +60,8 @@ void Animation::update()
 	// nếu dính sát thương thì sẽ chuyển hoạt hình
 	if (attrib->isHitting)
 	{
-		this->setState(-4);
+		// Nhận sát thương (không di chuyển, không tiếp nhận điều khiển)
+		this->setStateSuccess(-4);
 		velocity->x = 0;
 		velocity->y = 0;
 		attrib->isHitting = false;
@@ -59,7 +69,7 @@ void Animation::update()
 	}
 	else if (!attrib->onGround && animFinished)
 	{
-		this->setState(-2);
+		this->setStateSuccess(-2);
 	}
 	Uint32 now = SDL_GetTicks();
 	if (now - lastUpdate > speed) {
@@ -70,7 +80,7 @@ void Animation::update()
 		if (currentFrame >= frames) {
 			if (attrib->state != (int)SDLK_d)
 			{
-				this->setState(-1);
+				this->setStateSuccess(-1);
 				velocity->x = 0;
 				velocity->y = 0;
 			}

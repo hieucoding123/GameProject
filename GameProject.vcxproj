@@ -164,6 +164,7 @@
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\PlaySection.cpp" />
     <ClCompile Include="src\SeletionSection.cpp" />
+    <ClCompile Include="src\GameOver.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
@@ -183,6 +184,7 @@
     <ClInclude Include="include\GameObjects\Madara.h" />
     <ClInclude Include="include\GameObjects\Sasuke.h" />
     <ClInclude Include="include\GameObjects\Tile.h" />
+    <ClInclude Include="include\GameOver.h" />
     <ClInclude Include="include\Map.h" />
     <ClInclude Include="include\PlaySection.h" />
     <ClInclude Include="include\SelectionSection.h" />

@@ -58,60 +58,70 @@ void Madara::ADWSController()
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_d:
-			transform->setVx(1);
-			animation->setState((int)SDLK_d);
-			animation->setFinished(true);
-			sprite->setFlip(SDL_FLIP_NONE);
+			if (animation->setStateSuccess((int)SDLK_d))
+			{
+				transform->setVx(1);
+				animation->setFinished(true);
+				sprite->setFlip(SDL_FLIP_NONE);
+			}
 			break;
 		case SDLK_a:
-			transform->setVx(-1);
-			animation->setState((int)SDLK_d);
-			animation->setFinished(true);
-			sprite->setFlip(SDL_FLIP_HORIZONTAL);
+			if (animation->setStateSuccess((int)SDLK_d))
+			{
+				transform->setVx(-1);
+				animation->setFinished(true);
+				sprite->setFlip(SDL_FLIP_HORIZONTAL);
+			}
 			break;
 		case SDLK_w:
-			transform->setVy(-3);
-			animation->setState((int)SDLK_w);
-			animation->setFinished(false);
+			if (animation->setStateSuccess((int)SDLK_w))
+			{
+				transform->setVy(-3);
+				animation->setFinished(false);
+			}
 			break;
 		case SDLK_r:
-			transform->setVx(0);
-			animation->setState((int)SDLK_r);
-			animation->setFinished(false);
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-				0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
+			if (animation->setStateSuccess((int)SDLK_r))
+			{
+				transform->setVx(0);
+				animation->setFinished(false);
+				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+					0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
+			}
 			break;
 		case SDLK_u:
+			animation->setStateSuccess((attrib->onGround) ? (int)SDLK_u : (int)SDLK_e);
 			transform->setVx(0);
-			animation->setState((int)SDLK_u);
 			animation->setFinished(false);
 			break;
 		/*case SDLK_c:
 			transform->setVx(0);
-			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
+			animation->setStateSuccess((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
 			animation->setFinished(false);
 			break;*/
 		/*case SDLK_f:
 			transform->setVx(4 * sprite->getROL());
-			animation->setState((int)SDLK_f);
+			animation->setStateSuccess((int)SDLK_f);
 			animation->setFinished(false);
 			Game::playSound(4);
 			break;*/
 		/*case SDLK_1:
 			transform->setVx(0);
-			animation->setState((int)SDLK_1);
+			animation->setStateSuccess((int)SDLK_1);
 			animation->setFinished(false);
 			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-6),
 				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 300));
 			break;*/
 		case SDLK_2:
-			transform->setVx(0);
-			animation->setState((int)SDLK_2);
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
-				0, 0, 3, SDL_FLIP_NONE, rect->x + rect->w * 1.0/2 - 350, rect->y - 600));
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
-				0, 7, 6, sprite->getFlip(), rect->x + 900 * sprite->getROL(), -800));
-			animation->setFinished(false);
+			if (animation->setStateSuccess((int)SDLK_2))
+			{
+				transform->setVx(0);
+				animation->setFinished(false);
+				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
+					0, 0, 3, SDL_FLIP_NONE, rect->x + rect->w * 1.0 / 2 - 350, rect->y - 600));
+				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
+					0, 7, 6, sprite->getFlip(), rect->x + 900 * sprite->getROL(), -800));
+			}
 			break;
 		default:
 			break;
@@ -126,59 +136,72 @@ void Madara::LRUDController()
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_RIGHT:
-			transform->setVx(1);
-			animation->setState((int)SDLK_d);
-			animation->setFinished(true);
-			sprite->setFlip(SDL_FLIP_NONE);
+			
+			if (animation->setStateSuccess((int)SDLK_d))
+			{
+				transform->setVx(1);
+				animation->setFinished(true);
+				sprite->setFlip(SDL_FLIP_NONE);
+			}
 			break;
 		case SDLK_LEFT:
-			transform->setVx(-1);
-			animation->setState((int)SDLK_d);
-			animation->setFinished(true);
-			sprite->setFlip(SDL_FLIP_HORIZONTAL);
+			if (animation->setStateSuccess((int)SDLK_d))
+			{
+				transform->setVx(-1);
+				animation->setFinished(true);
+				sprite->setFlip(SDL_FLIP_HORIZONTAL);
+			}
 			break;
 		case SDLK_UP:
-			transform->setVy(-3);
-			animation->setState((int)SDLK_w);
-			animation->setFinished(false);
+			if (animation->setStateSuccess((int)SDLK_w))
+			{
+				transform->setVy(-3);
+				animation->setFinished(false);
+			}
 			break;
 		case SDLK_m:
-			transform->setVx(0);
-			animation->setState((int)SDLK_r);
-			animation->setFinished(false);
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-				0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
+			if (animation->setStateSuccess((int)SDLK_r))
+			{
+				transform->setVx(0);
+				animation->setFinished(false);
+				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+					0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
+			}
 			break;
 		case SDLK_k:
+			animation->setStateSuccess((attrib->onGround) ? (int)SDLK_u : (int)SDLK_e);
 			transform->setVx(0);
-			animation->setState((int)SDLK_u);
 			animation->setFinished(false);
 			break;
 		/*case SDLK_l:
 			transform->setVx(0);
-			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
+			animation->setStateSuccess((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
 			animation->setFinished(false);
 			break;*/
 		/*case SDLK_RCTRL:
 			transform->setVx(4 * sprite->getROL());
-			animation->setState((int)SDLK_f);
+			animation->setStateSuccess((int)SDLK_f);
 			animation->setFinished(false);
 			Game::playSound(4);
 			break;*/
 		/*case SDLK_SLASH:
 			transform->setVx(0);
-			animation->setState((int)SDLK_1);
+			animation->setStateSuccess((int)SDLK_1);
 			animation->setFinished(false);
 			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-6),
 				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 300));
 			break;*/
-		/*case SDLK_PERIOD:
-			transform->setVx(0);
-			animation->setState((int)SDLK_2);
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
-				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 30));
-			animation->setFinished(false);
-			break;*/
+		case SDLK_PERIOD:
+			if (animation->setStateSuccess((int)SDLK_2))
+			{
+				transform->setVx(0);
+				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
+					0, 0, 3, SDL_FLIP_NONE, rect->x + rect->w * 1.0 / 2 - 350, rect->y - 600));
+				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
+					0, 7, 6, sprite->getFlip(), rect->x + 900 * sprite->getROL(), -800));
+				animation->setFinished(false);
+			}
+			break;
 		default:
 			break;
 		}

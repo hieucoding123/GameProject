@@ -28,7 +28,24 @@ void GameObject::update()
 {
 	transform->update();
 	sprite->update();
+	// Kiểm tra chạm với mặt đất
 	attrib->onGround = (transform->getYPos() + rect->h >= GROUND * PlaySection::MAP_SCALE);
+
+	// Kiểm tra va chạm với đối tượng khác
+	for (auto& object : PlaySection::gameObjects)
+	{
+		if (object->attrib->ID != attrib->ID && PlaySection::AABB(*rect, *object->rect.get()))
+		{
+			if (object->attrib->damage > 0) 
+			{
+				attrib->hp -= object->attrib->damage;
+				attrib->isHitting = true;
+				object->attrib->damage = 0;
+				object->attrib->energy += 32;
+				Game::playSound(0);
+			}
+		}
+	}
 }
 void GameObject::draw()
 {

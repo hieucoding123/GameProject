@@ -50,10 +50,14 @@ void PlaySection::init(std::vector<int> ID)
 	setCharacter(ID[1], camera.x + camera.w - 100, GROUND * MAP_SCALE, true);
 
 	isPlaying = true;
+
+	// Dọn dẹp các hiệu ứng từ ván trước
+	effectManager.clean();
 }
 
 void PlaySection::handleEvents()
 {
+	SDL_PollEvent(&Game::event);
 	// Xử lý sự kiện
 	switch (Game::event.type)
 	{
@@ -77,6 +81,16 @@ void PlaySection::update()
 	gameObjects[1]->update();
 	gameObjects[1]->LRUDController();
 
+	// Cập nhật kết thúc
+	if (gameObjects[0]->getHP() <= 0 || gameObjects[1]->getHP() <= 0)
+	{
+		/*for (auto& object : gameObjects)
+		{
+			object = nullptr;
+		}*/
+		isPlaying = false;
+	}
+
 
 	effectManager.update();
 }
@@ -84,6 +98,8 @@ void PlaySection::update()
 void PlaySection::render()
 {
 	// Phần vẽ game
+	SDL_RenderClear(Game::renderer);
+
 	for (auto& t : tiles)
 	{
 		t->draw();
@@ -103,15 +119,15 @@ void PlaySection::render()
 		((ENERGY - gameObjects[1]->getEnergy()) * (HP_W - 20)) / ENERGY, ENG_COLOR, ENGBG_COLOR);
 	
 	effectManager.draw();
+
+	SDL_RenderPresent(Game::renderer);
 }
 
 void PlaySection::clean()
 {
 	// Hủy các thành phần trong phần chơi
-	for (auto& object : gameObjects)
-	{
-		delete object;
-	}
+
+	effectManager.clean();
 	gameObjects.clear();
 	delete map;
 	map = nullptr;

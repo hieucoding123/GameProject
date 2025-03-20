@@ -13,10 +13,11 @@ public:
 		SDL_Rect* rect, const std::map<int, std::vector<int>>& FIGURE);
 	
 	/*
-	* Tùy chỉnh trạng thái
+	* Tùy chỉnh trạng thái thành công
 	* @param s trạng thái(key) có trong map dữ liệu hành động
+	* @return true nếu thành công
 	*/
-	void setState(int s);
+	bool setStateSuccess(int s);
 	
 	/*
 	* Kiểm tra hành động đã kết thúc chưa

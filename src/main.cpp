@@ -15,17 +15,7 @@ int main(int argc, char* argv[])
 	game->init("Game", xpos, ypos, WIDTH, HIGH, false);
 	while (game->running())
 	{
-		Uint32 frameStart = SDL_GetTicks();
-
-		game->handleEvents();
-		game->update();
-		game->render();
-
-		int frameTime = SDL_GetTicks() - frameStart;
-		if (frameDelay > frameTime)
-		{
-			SDL_Delay(frameDelay - frameTime);
-		}
+		game->play();
 	}
 
 	game->clean();

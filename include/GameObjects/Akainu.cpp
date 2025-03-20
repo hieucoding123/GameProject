@@ -59,44 +59,58 @@ void Akainu::ADWSController()
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_d:
-			transform->setVx(1);
-			animation->setState((int)SDLK_d);
-			animation->setFinished(true);
-			sprite->setFlip(SDL_FLIP_NONE);
+			if (animation->setStateSuccess((int)SDLK_d))
+			{
+				transform->setVx(1);
+				animation->setFinished(true);
+				sprite->setFlip(SDL_FLIP_NONE);
+			}
 			break;
 		case SDLK_a:
-			transform->setVx(-1);
-			animation->setState((int)SDLK_d);
-			animation->setFinished(true);
-			sprite->setFlip(SDL_FLIP_HORIZONTAL);
+			if (animation->setStateSuccess((int)SDLK_d))
+			{
+				transform->setVx(-1);
+				animation->setFinished(true);
+				sprite->setFlip(SDL_FLIP_HORIZONTAL);
+			}
 			break;
 		case SDLK_w:
-			transform->setVy(-5);
-			animation->setState((int)SDLK_w);
-			animation->setFinished(false);
+			if (animation->setStateSuccess((int)SDLK_w))
+			{
+				transform->setVy(-5);
+				animation->setFinished(false);
+			}
 			break;
 		case SDLK_r:
-			transform->setVx(0);
-			animation->setState((int)SDLK_r);
-			animation->setFinished(false);
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-				0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
+			if (animation->setStateSuccess((int)SDLK_r))
+			{
+				transform->setVx(0);
+				animation->setFinished(false);
+				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+					0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
+			}
 			break;
 		case SDLK_u:
-			transform->setVx(0);
-			animation->setState((int)SDLK_u);
-			animation->setFinished(false);
+			if (animation->setStateSuccess((int)SDLK_u))
+			{
+				transform->setVx(0);
+				animation->setFinished(false);
+			}
 			break;
 		case SDLK_c:
-			transform->setVx(0);
-			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
-			animation->setFinished(false);
+			if (animation->setStateSuccess((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q))
+			{
+				transform->setVx(0);
+				animation->setFinished(false);
+			}
 			break;
 		case SDLK_f:
-			transform->setVx(5 * sprite->getROL());
-			animation->setState((int)SDLK_f);
-			animation->setFinished(false);
-			Game::playSound(4);
+			if (animation->setStateSuccess((int)SDLK_f))
+			{
+				transform->setVx(5 * sprite->getROL());
+				animation->setFinished(false);
+				Game::playSound(4);
+			}
 			break;
 		default:
 			break;
@@ -111,44 +125,58 @@ void Akainu::LRUDController()
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_RIGHT:
-			transform->setVx(1);
-			animation->setState((int)SDLK_d);
-			animation->setFinished(true);
-			sprite->setFlip(SDL_FLIP_NONE);
+			if (animation->setStateSuccess((int)SDLK_d))
+			{
+				transform->setVx(1);
+				animation->setFinished(true);
+				sprite->setFlip(SDL_FLIP_NONE);
+			}
 			break;
 		case SDLK_LEFT:
-			transform->setVx(-1);
-			animation->setState((int)SDLK_d);
-			animation->setFinished(true);
-			sprite->setFlip(SDL_FLIP_HORIZONTAL);
+			if (animation->setStateSuccess((int)SDLK_d))
+			{
+				transform->setVx(-1);
+				animation->setFinished(true);
+				sprite->setFlip(SDL_FLIP_HORIZONTAL);
+			}
 			break;
 		case SDLK_UP:
-			transform->setVy(-5);
-			animation->setState((int)SDLK_w);
-			animation->setFinished(false);
+			if (animation->setStateSuccess((int)SDLK_w))
+			{
+				transform->setVy(-5);
+				animation->setFinished(false);
+			}
 			break;
 		case SDLK_m:
-			transform->setVx(0);
-			animation->setState((int)SDLK_r);
-			animation->setFinished(false);
-			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-				0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
+			if (animation->setStateSuccess((int)SDLK_r))
+			{
+				transform->setVx(0);
+				animation->setFinished(false);
+				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+					0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
+			}
 			break;
 		case SDLK_k:
-			transform->setVx(0);
-			animation->setState((int)SDLK_u);
-			animation->setFinished(false);
+			if (animation->setStateSuccess((int)SDLK_u))
+			{
+				transform->setVx(0);
+				animation->setFinished(false);
+			}
 			break;
 		case SDLK_l:
-			transform->setVx(0);
-			animation->setState((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
-			animation->setFinished(false);
+			if (animation->setStateSuccess((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q))
+			{
+				transform->setVx(0);
+				animation->setFinished(false);
+			}
 			break;
 		case SDLK_RCTRL:
-			transform->setVx(5 * sprite->getROL());
-			animation->setState((int)SDLK_f);
-			animation->setFinished(false);
-			Game::playSound(4);
+			if (animation->setStateSuccess((int)SDLK_f))
+			{
+				transform->setVx(5 * sprite->getROL());
+				animation->setFinished(false);
+				Game::playSound(4);
+			}
 			break;
 		default:
 			break;

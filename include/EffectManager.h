@@ -19,6 +19,12 @@ public:
 
 	void update();
 	void draw();
+
+	/*
+	* Xóa các hiệu ứng
+	*/
+	void clean() { effects.clear(); }
+
 	/*
 	* Kiểm tra va chạm giữa effect và một thực thể sống trong game
 	* @param attrib Thuộc tính của thực thể

@@ -59,7 +59,9 @@ public:
 	/*
 	* Kiểm tra xem phần chơi còn chạy không
 	*/
-	bool playing() { return isPlaying; };
+	bool playing() const { return isPlaying; };
+
+	void setPlaying(bool b) { isPlaying = b; };
 
 	static std::vector<std::unique_ptr<Tile>> tiles;
 	static SDL_Rect camera;
@@ -74,5 +76,10 @@ public:
 	*/
 	static bool AABB(const SDL_Rect& rec1, const SDL_Rect& rec2);
 private:
-	bool isPlaying;
+	/*
+	* Kiểm tra va cham giữa các đối tượng
+	*/
+	//void objectCollision();
+
+	bool isPlaying = true;
 };

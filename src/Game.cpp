@@ -5,11 +5,14 @@
 #include "GameObjects/Akainu.h"
 #include "SelectionSection.h"
 #include "PlaySection.h"
+#include "GameOver.h"
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
 PlaySection* playSection = new PlaySection;
+GameOver* gameOver = new GameOver;
+
 std::unique_ptr<AudioManager> Game::audioManager = std::make_unique<AudioManager>();
 
 Game::Game()
@@ -49,59 +52,58 @@ void Game::init(const char* title, int xpos, int ypos, int width, int high, bool
 		isRunning = false;
 	}
 	audioManager->init();
-
-	// Phần chọn nhân vật
-	SelectionSection::selectionLoad();
-	std::vector<int> ID = SelectionSection::Selection();
-	
-	// Khởi tạo nhân vật và game
-	playSection->playLoad();
-	playSection->init(ID);
 }
 
-void Game::handleEvents()
+void Game::play()
 {
-	// Xử lý sự kiện chung
-	SDL_PollEvent(&event);
-
-	playSection->handleEvents();
-	if (!playSection->playing())
+	// Khi game chạy
+	while (isRunning)
 	{
-		isRunning = false;
-	}
-
-	switch (event.type)
-	{
-	case SDL_QUIT:
-		isRunning = false;
-		break;
+		// Phần chọn nhân vật
+		SelectionSection::selectionLoad();
+		std::vector<int> ID = SelectionSection::Selection();
 		
-	default:
-		break;
+
+		// Khởi tạo nhân vật và game
+		PlaySection::gameObjects.clear();
+
+		playSection->playLoad();
+		playSection->init(ID);
+
+		playSection->setPlaying(true);
+
+		// Vòng lặp game
+		while (playSection->playing())
+		{
+			Uint32 frameStart = SDL_GetTicks();
+
+			playSection->handleEvents();
+			playSection->update();
+			playSection->render();
+
+			int frameTime = SDL_GetTicks() - frameStart;
+			if (frameDelay > frameTime)
+			{
+				SDL_Delay(frameDelay - frameTime);
+			}
+		}
+		
+		// Kết thúc game
+		if (!gameOver->continueGame())
+		{
+			isRunning = false;
+		}
 	}
 }
 
-void Game::update()
-{
-	// Phần cập nhật game
-	playSection->update();
-}
-
-void Game::render()
-{
-	SDL_RenderClear(renderer);
-	
-	// Phần vẽ game
-	playSection->render();
-
-	SDL_RenderPresent(renderer);
-}
 
 void Game::clean()
 {
 	playSection->clean();
 	delete playSection;
 	playSection = nullptr;
+	delete gameOver;
+	gameOver = nullptr;
 	audioManager->clean();
 
 	SDL_DestroyWindow(window);
