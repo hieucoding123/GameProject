@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "SDL.h"
 #include "TextureManager.h"
@@ -15,6 +15,9 @@ public:
 	bool isActive() const { return active; }
 	SDL_Rect getRect() const;
 	int getDamage() const;
+	/*
+	* đặt sát thương về 0
+	*/
 	void setDamage();
 	int getID() const;
 private:
@@ -29,5 +32,5 @@ private:
 	Uint32 lastUpdate;
 	bool active = false;
 	int currentFrame;
-	int ID;
+	int ID;					// ID xác định đối tượng tạo ra hiệu ứng
 };

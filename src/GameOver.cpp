@@ -14,8 +14,9 @@ GameOver::~GameOver()
 
 bool GameOver::continueGame()
 {
+	isContinue = true;
 	bgTexture = TextureManager::LoadTexture("assets/gameOver.png");
-	srcRect = { 0, 0, GAME_OVER_W, GAME_OVER_H };
+	srcRect = { 0, GAME_OVER_H, GAME_OVER_W, GAME_OVER_H };
 
 	while (true)
 	{
@@ -25,17 +26,17 @@ bool GameOver::continueGame()
 		{
 		case SDLK_a:
 			srcRect.y = GAME_OVER_H;
-			isOver = false;
+			isContinue = true;
 			Game::playSound(2);
 			break;
 		case SDLK_d:
 			srcRect.y = 0;
-			isOver = true;
+			isContinue = false;
 			Game::playSound(2);
 			break;
 		case SDLK_j:
-			Game::playSound(2);
-			return isOver;
+			if (!isContinue) Game::playSound(8);
+			return isContinue;
 			break;
 		default:
 			break;

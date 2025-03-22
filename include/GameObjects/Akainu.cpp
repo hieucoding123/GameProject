@@ -79,6 +79,7 @@ void Akainu::ADWSController()
 			{
 				transform->setVy(-5);
 				animation->setFinished(false);
+				Game::playSound(5);
 			}
 			break;
 		case SDLK_r:
@@ -145,6 +146,7 @@ void Akainu::LRUDController()
 			{
 				transform->setVy(-5);
 				animation->setFinished(false);
+				Game::playSound(5);
 			}
 			break;
 		case SDLK_m:

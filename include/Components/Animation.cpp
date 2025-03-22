@@ -24,6 +24,7 @@ Animation::Animation(Attribute* attribute, Vector2D* vel,
 
 bool Animation::setStateSuccess(int s)
 {
+	// Đủ năng lượng để thực hiện hành động
 	if (figure.at(s)[6] <= attrib->energy)
 	{
 		attrib->state = s;

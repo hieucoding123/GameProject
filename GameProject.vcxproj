@@ -215,9 +215,15 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\audio\background.mp3" />
-    <Media Include="assets\audio\hit.wav" />
+    <Media Include="assets\audio\chidori.wav" />
+    <Media Include="assets\audio\chooseContinue.wav" />
+    <Media Include="assets\audio\exactly.wav" />
+    <Media Include="assets\audio\fire.wav" />
+    <Media Include="assets\audio\hurt.wav" />
+    <Media Include="assets\audio\jump.wav" />
     <Media Include="assets\audio\ping.wav" />
     <Media Include="assets\audio\selectedSound.wav" />
+    <Media Include="assets\audio\sharingan.wav" />
     <Media Include="assets\audio\step3.mp3" />
     <Media Include="assets\audio\teleport.wav" />
   </ItemGroup>

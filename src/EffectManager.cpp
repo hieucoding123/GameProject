@@ -37,8 +37,11 @@ void EffectManager::checkVar(Attribute* attrib,SDL_Rect* rect)
 			int damage = e->getDamage();
 			if (damage > 0 && PlaySection::AABB(*rect, e->getRect()))
 			{
-				attrib->hp -= e->getDamage();
-				attrib->isHitting = true;		// bị đánh
+				// nếu đối tượng đang thủ thì giảm sát thương
+				if (attrib->state == (int)SDLK_c || attrib->state == (int)SDLK_q)
+					damage = (damage <= 30) ? 0 : (damage * 2.0 / 3);
+				attrib->hp -= damage;
+				attrib->isHitting = (damage > 0);		// bị đánh
 				e->setDamage();
 				Game::playSound(0);
 			}

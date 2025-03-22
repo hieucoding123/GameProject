@@ -4,7 +4,7 @@
 
 AudioManager::AudioManager() 
 	:m_music(nullptr), m_initialized(false),
-	m_soundVolume(MIX_MAX_VOLUME), m_musicVolume(MIX_MAX_VOLUME)
+	m_soundVolume(MIX_MAX_VOLUME), m_musicVolume(MIX_MAX_VOLUME / 2)
 {
 
 }

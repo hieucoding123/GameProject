@@ -16,5 +16,5 @@ public:
 private:
 	SDL_Texture* bgTexture;
 	SDL_Rect srcRect;
-	bool isOver = true;
+	bool isContinue;
 };

@@ -78,15 +78,35 @@ void Sasuke::ADWSController()
 			{
 				transform->setVy(-3);
 				animation->setFinished(false);
+				Game::playSound(5);
 			}
 			break;
 		case SDLK_r:
-			if (animation->setStateSuccess((int)SDLK_r))
+			if (attrib->onGround)
 			{
-				transform->setVx(0);
-				animation->setFinished(false);
-				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-					9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
+				if (animation->setStateSuccess((int)SDLK_r))
+				{
+					transform->setVx(0);
+					animation->setFinished(false);
+					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+						9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
+					Game::playSound(6);
+				}
+			}
+			else {		// chiêu tương tự nhưng ở trên không
+				if (animation->setStateSuccess((int)SDLK_t))
+				{
+					transform->setVx(0);
+					transform->setVy(-1);
+					animation->setFinished(false);
+					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
+						9, 5, 2, sprite->getFlip(), rect->x + 100 * sprite->getROL(), rect->y));
+					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
+						9, 5, 2, sprite->getFlip(), rect->x + 10 * sprite->getROL(), rect->y + 30));
+					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
+						9, 5, 2, sprite->getFlip(), rect->x + 200 * sprite->getROL(), rect->y + 10));
+					Game::playSound(6);
+				}
 			}
 			break;
 		case SDLK_u:
@@ -115,7 +135,8 @@ void Sasuke::ADWSController()
 				transform->setVx(0);
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-6),
-					9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 400));
+					9, 0, 3, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 600));
+				Game::playSound(9);
 			}
 			break;
 		case SDLK_2:
@@ -127,6 +148,7 @@ void Sasuke::ADWSController()
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
 					12, 0, 3, sprite->getFlip(), rect->x, rect->y - 120));
 				animation->setFinished(false);
+				Game::playSound(9);
 			}
 			break;
 		default:
@@ -162,15 +184,35 @@ void Sasuke::LRUDController()
 			{
 				transform->setVy(-3);
 				animation->setFinished(false);
+				Game::playSound(5);
 			}
 			break;
 		case SDLK_m:
-			if (animation->setStateSuccess((int)SDLK_r))
+			if (attrib->onGround)
 			{
-				transform->setVx(0);
-				animation->setFinished(false);
-				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-					9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
+				if (animation->setStateSuccess((int)SDLK_r))
+				{
+					transform->setVx(0);
+					animation->setFinished(false);
+					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
+						9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
+					Game::playSound(6);
+				}
+			}
+			else {		// chiêu tương tự nhưng ở trên không
+				if (animation->setStateSuccess((int)SDLK_t))
+				{
+					transform->setVx(0);
+					transform->setVy(-1);
+					animation->setFinished(false);
+					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
+						9, 5, 2, sprite->getFlip(), rect->x + 100 * sprite->getROL(), rect->y));
+					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
+						9, 5, 2, sprite->getFlip(), rect->x + 10 * sprite->getROL(), rect->y + 30));
+					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
+						9, 5, 2, sprite->getFlip(), rect->x + 200 * sprite->getROL(), rect->y + 10));
+					Game::playSound(6);
+				}
 			}
 			break;
 		case SDLK_k:
@@ -199,17 +241,19 @@ void Sasuke::LRUDController()
 				transform->setVx(0);
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-6),
-					9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 300));
+					9, 0, 3, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 600));
+				Game::playSound(9);
 			}
 			break;
 		case SDLK_PERIOD:
 			if (animation->setStateSuccess((int)SDLK_1))
 			{
 				transform->setVx(0);
-				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor((int)SDLK_2),
+				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
 					0, 0, 2, sprite->getFlip(), rect->x, rect->y - 240));
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
 					12, 0, 3, sprite->getFlip(), rect->x, rect->y - 120));
+				Game::playSound(9);
 			}
 			animation->setFinished(false);
 			break;

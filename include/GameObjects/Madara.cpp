@@ -76,8 +76,9 @@ void Madara::ADWSController()
 		case SDLK_w:
 			if (animation->setStateSuccess((int)SDLK_w))
 			{
-				transform->setVy(-3);
+				transform->setVy(-4);
 				animation->setFinished(false);
+				Game::playSound(5);
 			}
 			break;
 		case SDLK_r:
@@ -87,6 +88,7 @@ void Madara::ADWSController()
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
 					0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
+				Game::playSound(6);
 			}
 			break;
 		case SDLK_u:
@@ -120,7 +122,8 @@ void Madara::ADWSController()
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
 					0, 0, 3, SDL_FLIP_NONE, rect->x + rect->w * 1.0 / 2 - 350, rect->y - 600));
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
-					0, 7, 6, sprite->getFlip(), rect->x + 900 * sprite->getROL(), -800));
+					0, 7, 6, SDL_FLIP_NONE, rect->x + 1151 * sprite->getROL() - 501, -800));
+				Game::playSound(9);
 			}
 			break;
 		default:
@@ -155,8 +158,9 @@ void Madara::LRUDController()
 		case SDLK_UP:
 			if (animation->setStateSuccess((int)SDLK_w))
 			{
-				transform->setVy(-3);
+				transform->setVy(-4);
 				animation->setFinished(false);
+				Game::playSound(5);
 			}
 			break;
 		case SDLK_m:
@@ -166,6 +170,7 @@ void Madara::LRUDController()
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
 					0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
+				Game::playSound(6);
 			}
 			break;
 		case SDLK_k:
@@ -198,8 +203,9 @@ void Madara::LRUDController()
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
 					0, 0, 3, SDL_FLIP_NONE, rect->x + rect->w * 1.0 / 2 - 350, rect->y - 600));
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
-					0, 7, 6, sprite->getFlip(), rect->x + 900 * sprite->getROL(), -800));
+					0, 7, 6, SDL_FLIP_NONE, rect->x + 1151 * sprite->getROL() - 501, -800));
 				animation->setFinished(false);
+				Game::playSound(9);
 			}
 			break;
 		default:

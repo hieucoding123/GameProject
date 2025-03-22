@@ -43,7 +43,7 @@ const int PLAYER2ID = 1;
 const int PLAYER3ID = 2;
 
 const double HP = 500;
-const double ENERGY = 2000;
+const double ENERGY = 300;
 const int DEFENSE = 10;
 
 // chiều dài và rộng thanh máu
@@ -75,11 +75,16 @@ constexpr const char* MUSIC_PATH = "assets/audio/background.mp3";
 // Đường dẫn các đoạn âm ngắn
 const std::vector<const char*> SOUND_PAHTS =
 {
-	"assets/audio/hit.wav",
-	"assets/audio/step3.wav",
-	"assets/audio/ping.wav",
-	"assets/audio/selectedSound.wav",
-	"assets/audio/teleport.wav"
+	"assets/audio/hurt.wav",					// 0
+	"assets/audio/step3.wav",					
+	"assets/audio/ping.wav",					// 2
+	"assets/audio/exactly.wav",
+	"assets/audio/teleport.wav",				// 4
+	"assets/audio/jump.wav",
+	"assets/audio/fire.wav",					// 6
+	"assets/audio/chidori.wav",
+	"assets/audio/chooseContinue.wav",			// 8
+	"assets/audio/sharingan.wav"
 };
 
 const std::vector<const char*> MASKS = 
@@ -103,6 +108,8 @@ const std::map<int, std::vector<int>> SASUKE = {
 	{ (int)SDLK_e,      {3, 200, 0, 561, 107, 77, 0, 15}},		// cận chiến(bay)
 	{ (int)SDLK_r,		{8, 100, 0, 446, 60, 77, 60, 0}},		// skill 1
 	{ -3,				{7, 140, 242, 0, 86, 57, 0, 20} },		// effect 1
+	{ (int)SDLK_t,      {3, 200, 0, 638, 62, 82, 0, 0}},		// skill 1 (bay)
+	{-8,                {1, 1000, 471, 151, 46, 46, 0, 10}},	// effect 1 (bay)
 	{ -4,				{3, 250, 450, 77, 57, 73, 0, 0} },		// get damage
 	{ (int)SDLK_f,		{4, 200, 643, 83, 69, 67, 0, 0 } },		// dịch chuyển
 	{ (int)SDLK_2,		{4, 250, 179, 150, 73, 72, 100, 0} },		// skill 2
@@ -139,11 +146,11 @@ const std::map<int, std::vector<int>> MADARA = {
 	{(int)SDLK_e,       {4, 180, 0, 869, 97, 95, 0, 15}},		// cận chiến (bay)
 	{ (int)SDLK_2,		{5, 400, 0, 314, 93, 112, 200, 0}},		// skill 2
 	{ -3,				{6, 200, 0, 426, 525, 172, 1, 35} },		// effect 1
-	{ -4,				{2, 250, 183, 2, 69, 87, 0, 0} },		// get damage
+	{ -4,				{2, 340, 183, 2, 69, 87, 0, 0} },		// get damage
 	//{ (int)SDLK_f,		{4, 200, 643, 83, 69, 67, 0, 0 } },		// dịch chuyển
 	//{ (int)SDLK_1,		{7, 180, 0, 523, 298, 222, 0, 0} },		// skill 1
-	{ -5,				{2, 1000, 733, 89, 233, 267, 0, 0}},		// effect 2.1
+	{ -5,				{2, 1100, 733, 89, 233, 267, 0, 0}},		// effect 2.1
 	{-7,				{3, 500, 0, 598, 187, 187, 1, 110}},		// effect 2.2
-	{(int)SDLK_r,		{4, 320, 216, 89, 71, 91, 60, 0}}		// skill 1
+	{(int)SDLK_r,		{4, 400, 216, 89, 71, 91, 60, 0}}		// skill 1
 	//{-6,				{6, 300, 945, 0, 330, 255, 0, 150}}		// effect 3
 };

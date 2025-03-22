@@ -195,9 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\audio\background.mp3" />
-    <Media Include="assets\audio\hit.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
     <Media Include="assets\audio\step3.mp3" />
     <Media Include="assets\audio\selectedSound.wav">
       <Filter>Resource Files</Filter>
@@ -206,6 +203,27 @@
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="assets\audio\teleport.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\chidori.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\fire.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\jump.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\sharingan.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\chooseContinue.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\hurt.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\exactly.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>
