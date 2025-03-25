@@ -28,6 +28,7 @@ private:
 	int speed;
 	int damage;
 	int vx, vy;
+	int realX, realY;
 
 	Uint32 lastUpdate;
 	bool active = false;

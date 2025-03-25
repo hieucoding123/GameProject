@@ -75,6 +75,18 @@ public:
 	* @return true nếu hai hình giao nhau
 	*/
 	static bool AABB(const SDL_Rect& rec1, const SDL_Rect& rec2);
+
+	/*
+	* Yêu cầu điều chỉnh camera trên trục x
+	* @param x quãng đường di chuyển trên trục x
+	*/
+
+	static void setCameraX(int x);
+	/*
+	* Yêu cầu điều chỉnh camera trên trục y
+	* @param y quãng đường di chuyển trên trục y
+	*/
+	static void setCameraY(int y);
 private:
 	/*
 	* Kiểm tra va cham giữa các đối tượng

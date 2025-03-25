@@ -2,9 +2,11 @@
 #include "GameObjects/Sasuke.h"
 #include "GameObjects/Akainu.h"
 #include "GameObjects/Madara.h"
+#include "GameObjects/Tile.h"
 #include "Game.h"
 #include "Map.h"
 #include "Const.h"
+#include <algorithm>
 
 std::vector<std::unique_ptr<Tile>> PlaySection::tiles;
 EffectManager PlaySection::effectManager;
@@ -84,13 +86,8 @@ void PlaySection::update()
 	// Cập nhật kết thúc
 	if (gameObjects[0]->getHP() <= 0 || gameObjects[1]->getHP() <= 0)
 	{
-		/*for (auto& object : gameObjects)
-		{
-			object = nullptr;
-		}*/
 		isPlaying = false;
 	}
-
 
 	effectManager.update();
 }
@@ -177,4 +174,34 @@ bool PlaySection::AABB(const SDL_Rect& rec1, const SDL_Rect& rec2)
 		return true;
 	}
 	return false;
+}
+
+void PlaySection::setCameraX(int x)
+{
+	// Tìm đối tượng có gắn camera và bị mất hình khi chỉnh camera
+	auto it = std::find_if(gameObjects.begin(), gameObjects.end(),
+		[x](const GameObject* obj) {
+			return (obj->hasCamera() && ((obj->getXpos() - camera.x < x) ||
+				(obj->getXpos() + obj->getWidth() - camera.x - camera.w > x)));
+		});
+
+	// Không có đối tượng vi phạm
+	if (it == gameObjects.end())
+	{
+		camera.x += x;
+	}
+}
+
+void PlaySection::setCameraY(int y)
+{
+	auto it = find_if(gameObjects.begin(), gameObjects.end(),
+		[y](const GameObject* obj) {
+			return (obj->hasCamera() && ((obj->getYpos() - camera.y < y) ||
+				(obj->getYpos() + obj->getHigh() - camera.y - camera.h > y)));
+		});
+
+	if (it == gameObjects.end())
+	{
+		camera.y += y;
+	}
 }

@@ -30,21 +30,10 @@ void Sasuke::update()
 	{
 		transform->setXPos(WIDTH * PlaySection::MAP_SCALE - rect->w);
 	}
-	if (this->hasCamera())
-	{
-		rect->x = transform->getXPos() - PlaySection::camera.x;
-		rect->y = transform->getYPos() - PlaySection::camera.y;
-	}
-	else {
-		rect->x = transform->getXPos();
-		rect->y = transform->getYPos();
-	}
+	
 	animation->update();
 
-	// cập nhật va chạm với hiệu ứng
-	//std::cout << "Sasuke\n";
 	PlaySection::effectManager.checkVar(attrib.get(), rect.get());
-	//std::cout << "****\n";
 }
 void Sasuke::draw()
 {
@@ -55,6 +44,8 @@ void Sasuke::ADWSController()
 {
 	if (Game::event.type == SDL_KEYDOWN && animation->isFinished())
 	{
+		int x = transform->getXPos();
+		int y = transform->getYPos();
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_d:
@@ -89,7 +80,7 @@ void Sasuke::ADWSController()
 					transform->setVx(0);
 					animation->setFinished(false);
 					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-						9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
+						9, 0, 2, sprite->getFlip(), x + 70 * sprite->getROL(), y));
 					Game::playSound(6);
 				}
 			}
@@ -100,11 +91,11 @@ void Sasuke::ADWSController()
 					transform->setVy(-1);
 					animation->setFinished(false);
 					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
-						9, 5, 2, sprite->getFlip(), rect->x + 100 * sprite->getROL(), rect->y));
+						9, 5, 2, sprite->getFlip(), x + 100 * sprite->getROL(), y));
 					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
-						9, 5, 2, sprite->getFlip(), rect->x + 10 * sprite->getROL(), rect->y + 30));
+						9, 5, 2, sprite->getFlip(), x + 10 * sprite->getROL(), y + 30));
 					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
-						9, 5, 2, sprite->getFlip(), rect->x + 200 * sprite->getROL(), rect->y + 10));
+						9, 5, 2, sprite->getFlip(), x + 200 * sprite->getROL(), y + 10));
 					Game::playSound(6);
 				}
 			}
@@ -135,7 +126,7 @@ void Sasuke::ADWSController()
 				transform->setVx(0);
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-6),
-					9, 0, 3, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 600));
+					9, 0, 3, sprite->getFlip(), x + rect->w * sprite->getROL(), y - 600));
 				Game::playSound(9);
 			}
 			break;
@@ -144,9 +135,9 @@ void Sasuke::ADWSController()
 			{
 				transform->setVx(0);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
-					0, 0, 2, sprite->getFlip(), rect->x, rect->y - 240));
+					0, 0, 2, sprite->getFlip(), x, y - 240));
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
-					12, 0, 3, sprite->getFlip(), rect->x, rect->y - 120));
+					12, 0, 3, sprite->getFlip(), x, y - 120));
 				animation->setFinished(false);
 				Game::playSound(9);
 			}
@@ -161,6 +152,8 @@ void Sasuke::LRUDController()
 {
 	if (Game::event.type == SDL_KEYDOWN && animation->isFinished())
 	{
+		int x = transform->getXPos();
+		int y = transform->getYPos();
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_RIGHT:
@@ -195,7 +188,7 @@ void Sasuke::LRUDController()
 					transform->setVx(0);
 					animation->setFinished(false);
 					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-						9, 0, 2, sprite->getFlip(), rect->x + 70 * sprite->getROL(), rect->y));
+						9, 0, 2, sprite->getFlip(), x + 70 * sprite->getROL(), y));
 					Game::playSound(6);
 				}
 			}
@@ -206,11 +199,11 @@ void Sasuke::LRUDController()
 					transform->setVy(-1);
 					animation->setFinished(false);
 					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
-						9, 5, 2, sprite->getFlip(), rect->x + 100 * sprite->getROL(), rect->y));
+						9, 5, 2, sprite->getFlip(), x + 100 * sprite->getROL(), y));
 					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
-						9, 5, 2, sprite->getFlip(), rect->x + 10 * sprite->getROL(), rect->y + 30));
+						9, 5, 2, sprite->getFlip(), x + 10 * sprite->getROL(), y + 30));
 					PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-8),
-						9, 5, 2, sprite->getFlip(), rect->x + 200 * sprite->getROL(), rect->y + 10));
+						9, 5, 2, sprite->getFlip(), x + 200 * sprite->getROL(), y + 10));
 					Game::playSound(6);
 				}
 			}
@@ -241,7 +234,7 @@ void Sasuke::LRUDController()
 				transform->setVx(0);
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-6),
-					9, 0, 3, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 600));
+					9, 0, 3, sprite->getFlip(), x + rect->w * sprite->getROL(), y - 600));
 				Game::playSound(9);
 			}
 			break;
@@ -250,9 +243,9 @@ void Sasuke::LRUDController()
 			{
 				transform->setVx(0);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
-					0, 0, 2, sprite->getFlip(), rect->x, rect->y - 240));
+					0, 0, 2, sprite->getFlip(), x, y - 240));
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
-					12, 0, 3, sprite->getFlip(), rect->x, rect->y - 120));
+					12, 0, 3, sprite->getFlip(), x, y - 120));
 				Game::playSound(9);
 			}
 			animation->setFinished(false);

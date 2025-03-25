@@ -35,7 +35,7 @@ bool GameOver::continueGame()
 			Game::playSound(2);
 			break;
 		case SDLK_j:
-			if (!isContinue) Game::playSound(8);
+			if (isContinue) Game::playSound(8);
 			return isContinue;
 			break;
 		default:

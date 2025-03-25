@@ -27,12 +27,39 @@ public:
 	void setPosition(int xpos, int ypos);
 	/*
 	* Lấy ra chỉ số HP
+	* @return chỉ số HP
 	*/
 	int getHP() const;
 	/*
 	* Lấy ra chỉ số năng lượng
+	* @return chỉ số năng lượng
 	*/
 	int getEnergy() const;
+	
+	/*
+	* Lấy ra vị trí x
+	* @return vị trí thực trên trục x
+	*/
+	int getXpos() const;
+
+	/*
+	* Lấy ra vị trí y
+	* @return vị trí thực trên trục y
+	*/
+	int getYpos() const;
+
+	/*
+	* Lấy ra chiều rộng 
+	* @return chiều rộng đối tượng
+	*/
+	int getWidth() const { return rect->w; }
+
+	/*
+	* Lấy ra chiều cao
+	* @return chiều cao đối tượng
+	*/
+	int getHigh() const { return rect->h; }
+
 	~GameObject();
 protected:
 	std::unique_ptr<TransformComponent> transform;

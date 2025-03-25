@@ -1,6 +1,7 @@
 ﻿#include <fstream>
 #include "Map.h"
 #include "TextureManager.h"
+#include "GameObjects/Tile.h"
 #include "Const.h"
 
 Map::Map()

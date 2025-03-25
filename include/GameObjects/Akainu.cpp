@@ -30,15 +30,6 @@ void Akainu::update()
 	{
 		transform->setXPos(WIDTH * PlaySection::MAP_SCALE - rect->w);
 	}
-	if (this->hasCamera())
-	{
-		rect->x = transform->getXPos() - PlaySection::camera.x;
-		rect->y = transform->getYPos() - PlaySection::camera.y;
-	}
-	else {
-		rect->x = transform->getXPos();
-		rect->y = transform->getYPos();
-	}
 
 	animation->update();
 
@@ -56,6 +47,8 @@ void Akainu::ADWSController()
 {
 	if (Game::event.type == SDL_KEYDOWN && animation->isFinished())
 	{
+		int x = transform->getXPos();
+		int y = transform->getYPos();
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_d:
@@ -88,7 +81,7 @@ void Akainu::ADWSController()
 				transform->setVx(0);
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-					0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
+					0, 0, 2, sprite->getFlip(), x + 500 * sprite->getROL(), y));
 			}
 			break;
 		case SDLK_u:
@@ -123,6 +116,8 @@ void Akainu::LRUDController()
 {
 	if (Game::event.type == SDL_KEYDOWN && animation->isFinished())
 	{
+		int x = transform->getXPos();
+		int y = transform->getYPos();
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_RIGHT:
@@ -155,7 +150,7 @@ void Akainu::LRUDController()
 				transform->setVx(0);
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-					0, 0, 2, sprite->getFlip(), rect->x + 500 * sprite->getROL(), rect->y));
+					0, 0, 2, sprite->getFlip(), x + 500 * sprite->getROL(), y));
 			}
 			break;
 		case SDLK_k:

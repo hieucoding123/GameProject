@@ -30,15 +30,7 @@ void Madara::update()
 	{
 		transform->setXPos(WIDTH * PlaySection::MAP_SCALE - rect->w);
 	}
-	if (this->hasCamera())
-	{
-		rect->x = transform->getXPos() - PlaySection::camera.x;
-		rect->y = transform->getYPos() - PlaySection::camera.y;
-	}
-	else {
-		rect->x = transform->getXPos();
-		rect->y = transform->getYPos();
-	}
+
 	animation->update();
 
 	// cập nhật va chạm với hiệu ứng
@@ -55,6 +47,8 @@ void Madara::ADWSController()
 {
 	if (Game::event.type == SDL_KEYDOWN && animation->isFinished())
 	{
+		int x = transform->getXPos();
+		int y = transform->getYPos();
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_d:
@@ -87,7 +81,7 @@ void Madara::ADWSController()
 				transform->setVx(0);
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-					0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
+					0, 0, 2, sprite->getFlip(), x + 586 * sprite->getROL() - 464, y - 170));
 				Game::playSound(6);
 			}
 			break;
@@ -120,9 +114,9 @@ void Madara::ADWSController()
 				transform->setVx(0);
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
-					0, 0, 3, SDL_FLIP_NONE, rect->x + rect->w * 1.0 / 2 - 350, rect->y - 600));
+					0, 0, 3, SDL_FLIP_NONE, x + rect->w * 1.0 / 2 - 350, y - 600));
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
-					0, 7, 6, SDL_FLIP_NONE, rect->x + 1151 * sprite->getROL() - 501, -800));
+					0, 7, 6, SDL_FLIP_NONE, x + 1151 * sprite->getROL() - 501, -800 + PlaySection::camera.y));
 				Game::playSound(9);
 			}
 			break;
@@ -136,6 +130,8 @@ void Madara::LRUDController()
 {
 	if (Game::event.type == SDL_KEYDOWN && animation->isFinished())
 	{
+		int x = transform->getXPos();
+		int y = transform->getYPos();
 		switch (Game::event.key.keysym.sym)
 		{
 		case SDLK_RIGHT:
@@ -169,7 +165,7 @@ void Madara::LRUDController()
 				transform->setVx(0);
 				animation->setFinished(false);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-3),
-					0, 0, 2, sprite->getFlip(), rect->x + 586 * sprite->getROL() - 464, rect->y - 170));
+					0, 0, 2, sprite->getFlip(), x + 586 * sprite->getROL() - 464, y - 170));
 				Game::playSound(6);
 			}
 			break;
@@ -201,9 +197,9 @@ void Madara::LRUDController()
 			{
 				transform->setVx(0);
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-5),
-					0, 0, 3, SDL_FLIP_NONE, rect->x + rect->w * 1.0 / 2 - 350, rect->y - 600));
+					0, 0, 3, SDL_FLIP_NONE, x + rect->w * 1.0 / 2 - 350, y - 600));
 				PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-7),
-					0, 7, 6, SDL_FLIP_NONE, rect->x + 1151 * sprite->getROL() - 501, -800));
+					0, 7, 6, SDL_FLIP_NONE, x + 1151 * sprite->getROL() - 501, -800 + PlaySection::camera.y));
 				animation->setFinished(false);
 				Game::playSound(9);
 			}

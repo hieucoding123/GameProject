@@ -21,7 +21,9 @@ Effect::Effect(SDL_Texture* texture, int id, const std::vector<int>& v, int vX, 
 	vy = vY;
 
 	srcRect = { v[2], v[3], v[4], v[5] };
-	destRect = { xpos, ypos, srcRect.w * scl, srcRect.h * scl };
+	realX = xpos;
+	realY = ypos;
+	destRect = { realX, realY, srcRect.w * scl, srcRect.h * scl };
 	lastUpdate = SDL_GetTicks();
 	currentFrame = 0;
 }
@@ -42,8 +44,10 @@ void Effect::update()
 	}
 
 	// cho hiệu ứng di chuyển
-	destRect.x += vx;
-	destRect.y += vy;
+	realX += vx;
+	realY += vy;
+	destRect.x = realX - PlaySection::camera.x;
+	destRect.y = realY - PlaySection::camera.y;
 }
 
 SDL_Rect Effect::getRect() const

@@ -27,6 +27,45 @@ void GameObject::init()
 void GameObject::update()
 {
 	transform->update();
+
+	// Nếu gắn camera thì không cho thoát ra khỏi vùng của camera
+	if (this->hasCamera())
+	{ 
+		int n;
+
+		// Đi quá bên trái
+		n = this->transform->getXPos() - PlaySection::camera.x;
+		if (n <= 0)
+		{
+			PlaySection::setCameraX(n);
+			this->transform->setXPos(PlaySection::camera.x);
+		}
+
+		// Đi quá bên trên
+		if (this->transform->getYPos() - PlaySection::camera.y <= 0)
+			this->transform->setYpos(PlaySection::camera.y);
+
+		// Đi quá bên phải
+		n = this->transform->getXPos() + rect->w - (PlaySection::camera.x + PlaySection::camera.w);
+		if (n >= 0)
+		{
+			PlaySection::setCameraX(n);
+			this->transform->setXPos(PlaySection::camera.x + PlaySection::camera.w - rect->w);
+		}
+
+		// Đi quá bên dưới
+		if (this->transform->getYPos() + rect->h - (PlaySection::camera.y + PlaySection::camera.h) >= 0)
+			this->transform->setYpos(PlaySection::camera.y + PlaySection::camera.h - rect->h);
+
+		// Tổng kết lại
+		rect->x = transform->getXPos() - PlaySection::camera.x;
+		rect->y = transform->getYPos() - PlaySection::camera.y;
+	}
+	else {
+		rect->x = transform->getXPos();
+		rect->y = transform->getYPos();
+	}
+
 	sprite->update();
 	// Kiểm tra chạm với mặt đất
 	attrib->onGround = (transform->getYPos() + rect->h >= GROUND * PlaySection::MAP_SCALE);
@@ -120,8 +159,17 @@ int GameObject::getEnergy() const
 	return attrib->energy;
 }
 
+int GameObject::getXpos() const
+{
+	return transform->getXPos();
+}
+
+int GameObject::getYpos() const
+{
+	return transform->getYPos();
+}
+
 GameObject::~GameObject()
 {
 
 }
-
