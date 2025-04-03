@@ -10,16 +10,6 @@ GameObject::GameObject()
 	isActive = true;
 }
 
-void GameObject::setCamera()
-{
-	attrib->hasCamera = true;
-}
-
-bool GameObject::hasCamera() const
-{
-	return attrib->hasCamera;
-}
-
 void GameObject::init()
 {
 	transform->init();
@@ -28,43 +18,36 @@ void GameObject::update()
 {
 	transform->update();
 
-	// Nếu gắn camera thì không cho thoát ra khỏi vùng của camera
-	if (this->hasCamera())
-	{ 
-		int n;
+	// Cập nhật camera theo tình huống game
+	int n;
 
-		// Đi quá bên trái
-		n = this->transform->getXPos() - PlaySection::camera.x;
-		if (n <= 0)
-		{
-			PlaySection::setCameraX(n);
-			this->transform->setXPos(PlaySection::camera.x);
-		}
-
-		// Đi quá bên trên
-		if (this->transform->getYPos() - PlaySection::camera.y <= 0)
-			this->transform->setYpos(PlaySection::camera.y);
-
-		// Đi quá bên phải
-		n = this->transform->getXPos() + rect->w - (PlaySection::camera.x + PlaySection::camera.w);
-		if (n >= 0)
-		{
-			PlaySection::setCameraX(n);
-			this->transform->setXPos(PlaySection::camera.x + PlaySection::camera.w - rect->w);
-		}
-
-		// Đi quá bên dưới
-		if (this->transform->getYPos() + rect->h - (PlaySection::camera.y + PlaySection::camera.h) >= 0)
-			this->transform->setYpos(PlaySection::camera.y + PlaySection::camera.h - rect->h);
-
-		// Tổng kết lại
-		rect->x = transform->getXPos() - PlaySection::camera.x;
-		rect->y = transform->getYPos() - PlaySection::camera.y;
+	// Đi quá bên trái
+	n = this->transform->getXPos() - PlaySection::camera.x;
+	if (n <= 0)
+	{
+		PlaySection::setCameraX(n);
+		this->transform->setXPos(PlaySection::camera.x);
 	}
-	else {
-		rect->x = transform->getXPos();
-		rect->y = transform->getYPos();
+
+	// Đi quá bên trên
+	if (this->transform->getYPos() - PlaySection::camera.y <= 0)
+		this->transform->setYpos(PlaySection::camera.y);
+
+	// Đi quá bên phải
+	n = this->transform->getXPos() + rect->w - (PlaySection::camera.x + PlaySection::camera.w);
+	if (n >= 0)
+	{
+		PlaySection::setCameraX(n);
+		this->transform->setXPos(PlaySection::camera.x + PlaySection::camera.w - rect->w);
 	}
+
+	// Đi quá bên dưới
+	if (this->transform->getYPos() + rect->h - (PlaySection::camera.y + PlaySection::camera.h) >= 0)
+		this->transform->setYpos(PlaySection::camera.y + PlaySection::camera.h - rect->h);
+
+	// Tổng kết lại
+	rect->x = transform->getXPos() - PlaySection::camera.x;
+	rect->y = transform->getYPos() - PlaySection::camera.y;
 
 	sprite->update();
 	// Kiểm tra chạm với mặt đất
@@ -85,62 +68,46 @@ void GameObject::update()
 			}
 		}
 	}
+
+	// Va chạm với bot
+	for (auto& bot : PlaySection::bots)
+	{
+		if (PlaySection::AABB(*bot->rect, *rect))
+		{
+			if (attrib->damage > 0)
+			{
+				bot->attrib->hp -= attrib->damage;
+				bot->attrib->isHitting = true;
+				attrib->damage = 0;
+				attrib->energy += 18;
+			}
+			// Để bot đánh trúng
+			attrib->hp -= bot->attrib->damage;
+			if (bot->attrib->damage > 0)
+			{
+				Game::playSound(0);
+				attrib->isHitting = true;
+			}
+			bot->attrib->damage = 0;
+		}
+	}
 }
 void GameObject::draw()
 {
 	sprite->draw();
+	// Vẽ hiệu ứng máu chảy
 	if (attrib->state == -4) 
 		TextureManager::DrawCollisionImage(rect.get());
 }
 
 void GameObject::ADWSController()
 {
-	if (Game::event.type == SDL_KEYDOWN)
-	{
-		switch (Game::event.key.keysym.sym)
-		{
-		case SDLK_d:
-			transform->setVx(1);
-			break;
-		case SDLK_a:
-			transform->setVx(-1);
-			break;
-		case SDLK_w:
-			transform->setVy(-1);
-			break;
-		default:
-			break;
-		}
-	}
-	if (Game::event.type == SDL_KEYUP)
-	{
-		
-	}
+	
 }
 
 void GameObject::LRUDController()
 {
-	if (Game::event.type == SDL_KEYDOWN)
-	{
-		switch (Game::event.key.keysym.sym)
-		{
-		case SDLK_d:
-			transform->setVx(1);
-			break;
-		case SDLK_a:
-			transform->setVx(-1);
-			break;
-		case SDLK_w:
-			transform->setVy(-1);
-			break;
-		default:
-			break;
-		}
-	}
-	if (Game::event.type == SDL_KEYUP)
-	{
 
-	}
 }
 
 void GameObject::setPosition(int xpos, int ypos)

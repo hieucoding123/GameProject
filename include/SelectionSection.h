@@ -16,9 +16,10 @@ public:
 	static void selectionLoad();
 	/*
 	* Khởi tạo phần chọn nhân vật
+	* @param players số nhân vật cần
 	* @return một vector chứa các ID của nhân vật được chọn
 	*/
-	static std::vector<int> Selection();
+	static std::vector<int> Selection(int players);
 
 	/*
 	* Xử lý sự kiện nhấn chuột, di chuyển giữa các ô

@@ -1,4 +1,4 @@
-#include "TransformComponent.h"
+﻿#include "TransformComponent.h"
 #include "Const.h"
 
 TransformComponent::TransformComponent()
@@ -61,6 +61,7 @@ void TransformComponent::update()
 
 	position->y += GRAVITY;
 
+	// Đảm bảo không thể ra khỏi map
 	if (position->x <= 0) position->x = 0;
 }
 

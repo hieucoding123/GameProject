@@ -17,13 +17,18 @@ class GameObject
 {
 public:
 	GameObject();
-	void setCamera();					// gắn theo camera
-	bool hasCamera() const;				// theo camera
 	virtual void init();
 	virtual void update();
 	virtual void draw();
-	virtual void ADWSController();		// điều khiển
+	// Tiếp nhận điều khiển bằng các phím A, D, W, S
+	virtual void ADWSController();
+	// Tiếp nhận điều khiển bằng các phím LEFT, RIGHT, UP, DOWN
 	virtual void LRUDController();
+	/*
+	* Đặt vị trí của đối tượng
+	* @param xpos vị trí trên trục x
+	* @param ypos vị trí trên trục y
+	*/
 	void setPosition(int xpos, int ypos);
 	/*
 	* Lấy ra chỉ số HP
@@ -59,6 +64,11 @@ public:
 	* @return chiều cao đối tượng
 	*/
 	int getHigh() const { return rect->h; }
+
+	/*
+	* @return true nếu đối tượng bị hạ gục
+	*/
+	bool isDie() const { return attrib->isDie; }
 
 	~GameObject();
 protected:

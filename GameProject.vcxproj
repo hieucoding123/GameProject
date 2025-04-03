@@ -147,6 +147,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\GameObjects\Boss.cpp" />
+    <ClCompile Include="include\GameObjects\Bot.cpp" />
     <ClCompile Include="include\GameObjects\Madara.cpp" />
     <ClCompile Include="src\AudioManager.cpp" />
     <ClCompile Include="include\Components\Animation.cpp" />
@@ -159,6 +161,7 @@
     <ClCompile Include="include\Components\SpriteComponent.cpp" />
     <ClCompile Include="include\Components\TransformComponent.cpp" />
     <ClCompile Include="src\Effect.cpp" />
+    <ClCompile Include="src\Interface.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Map.cpp" />
@@ -180,7 +183,10 @@
     <ClInclude Include="include\EffectManager.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObjects\Akainu.h" />
+    <ClInclude Include="include\GameObjects\Boss.h" />
+    <ClInclude Include="include\GameObjects\Bot.h" />
     <ClInclude Include="include\GameObjects\GameObject.h" />
+    <ClInclude Include="include\Interface.h" />
     <ClInclude Include="include\GameObjects\Madara.h" />
     <ClInclude Include="include\GameObjects\Sasuke.h" />
     <ClInclude Include="include\GameObjects\Tile.h" />
@@ -199,7 +205,11 @@
   <ItemGroup>
     <Image Include="assets\akainu_stand.png" />
     <Image Include="assets\avatars.png" />
+    <Image Include="assets\boss.png" />
+    <Image Include="assets\bot.png" />
+    <Image Include="assets\buttons.png" />
     <Image Include="assets\madara.png" />
+    <Image Include="assets\selectBackground1.png" />
     <Image Include="assets\selectFrame.png" />
     <Image Include="assets\collisionImage.png" />
     <Image Include="assets\dirt.png" />
@@ -219,9 +229,13 @@
     <Media Include="assets\audio\chooseContinue.wav" />
     <Media Include="assets\audio\exactly.wav" />
     <Media Include="assets\audio\fire.wav" />
+    <Media Include="assets\audio\gameover.wav" />
     <Media Include="assets\audio\hurt.wav" />
     <Media Include="assets\audio\jump.wav" />
+    <Media Include="assets\audio\ko.wav" />
     <Media Include="assets\audio\ping.wav" />
+    <Media Include="assets\audio\ready.wav" />
+    <Media Include="assets\audio\select.wav" />
     <Media Include="assets\audio\selectedSound.wav" />
     <Media Include="assets\audio\sharingan.wav" />
     <Media Include="assets\audio\step3.mp3" />

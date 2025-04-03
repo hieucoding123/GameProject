@@ -32,11 +32,8 @@ void Akainu::update()
 	}
 
 	animation->update();
-
-	// cập nhật va chạm với hiệu ứng
-	//std::cout << "Akainu\n";
+	
 	PlaySection::effectManager.checkVar(attrib.get(), rect.get());
-	//std::cout << "****\n";
 }
 void Akainu::draw()
 {

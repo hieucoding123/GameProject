@@ -34,9 +34,7 @@ void Madara::update()
 	animation->update();
 
 	// cập nhật va chạm với hiệu ứng
-	//std::cout << "Madara\n";
 	PlaySection::effectManager.checkVar(attrib.get(), rect.get());
-	//std::cout << "****\n";
 }
 void Madara::draw()
 {
@@ -90,17 +88,17 @@ void Madara::ADWSController()
 			transform->setVx(0);
 			animation->setFinished(false);
 			break;
-		/*case SDLK_c:
+		case SDLK_c:
 			transform->setVx(0);
-			animation->setStateSuccess((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
+			animation->setStateSuccess((int)SDLK_c);
 			animation->setFinished(false);
-			break;*/
-		/*case SDLK_f:
+			break;
+		case SDLK_f:
 			transform->setVx(4 * sprite->getROL());
 			animation->setStateSuccess((int)SDLK_f);
 			animation->setFinished(false);
 			Game::playSound(4);
-			break;*/
+			break;
 		/*case SDLK_1:
 			transform->setVx(0);
 			animation->setStateSuccess((int)SDLK_1);
@@ -174,17 +172,17 @@ void Madara::LRUDController()
 			transform->setVx(0);
 			animation->setFinished(false);
 			break;
-		/*case SDLK_l:
+		case SDLK_l:
 			transform->setVx(0);
-			animation->setStateSuccess((attrib->onGround) ? (int)SDLK_c : (int)SDLK_q);
+			animation->setStateSuccess((int)SDLK_c);
 			animation->setFinished(false);
-			break;*/
-		/*case SDLK_RCTRL:
+			break;
+		case SDLK_RCTRL:
 			transform->setVx(4 * sprite->getROL());
 			animation->setStateSuccess((int)SDLK_f);
 			animation->setFinished(false);
 			Game::playSound(4);
-			break;*/
+			break;
 		/*case SDLK_SLASH:
 			transform->setVx(0);
 			animation->setStateSuccess((int)SDLK_1);

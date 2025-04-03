@@ -1,6 +1,4 @@
-﻿#include <iostream>
-
-#include "Animation.h"
+﻿#include "Animation.h"
 
 Animation::Animation(Attribute* attribute, Vector2D* vel,
 	SDL_Rect* rect, const std::map<int, std::vector<int>>& FIGURE)
@@ -58,8 +56,14 @@ std::vector<int> Animation::getEffectInfor(int state)
 
 void Animation::update()
 {
-	// nếu dính sát thương thì sẽ chuyển hoạt hình
-	if (attrib->isHitting)
+	if (attrib->hp < 0 && animFinished)
+	{
+		this->setStateSuccess(0);
+		velocity->x = 0;
+		velocity->y = 0;
+		animFinished = false;
+	}
+	else if (attrib->isHitting)
 	{
 		// Nhận sát thương (không di chuyển, không tiếp nhận điều khiển)
 		this->setStateSuccess(-4);
@@ -79,27 +83,30 @@ void Animation::update()
 		srcRect->x += srcRect->w;
 
 		if (currentFrame >= frames) {
-			if (attrib->state != (int)SDLK_d)
+			if (attrib->state == 0)
+			{
+				srcRect->x = figure.at(0)[2] + (frames - 1) * srcRect->w;
+				attrib->isDie = true;
+			}
+			else if (attrib->state != (int)SDLK_d)
 			{
 				this->setStateSuccess(-1);
 				velocity->x = 0;
 				velocity->y = 0;
+				animFinished = true;
 			}
 			else
 			{
 				currentFrame = 0;	// nếu đang chạy -> chạy tiếp
 				srcRect->x = figure.at(attrib->state)[2];
+				animFinished = true;
 			}
-			animFinished = true;
-			//entity->attrib.isHitting = false;
 		}
 	}
 
 	srcRect->y = figure.at(attrib->state)[3];
 	srcRect->w = figure.at(attrib->state)[4];
 	srcRect->h = figure.at(attrib->state)[5];
-
-	//std::cout << srcRect->x;
 }
 
 Animation::~Animation()

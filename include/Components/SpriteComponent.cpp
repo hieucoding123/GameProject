@@ -38,6 +38,7 @@ void SpriteComponent::setScale(int s)
 void SpriteComponent::setFlip(SDL_RendererFlip f)
 {
 	spriteFlip = f;
+	ROL = ((int)spriteFlip * -2 + 1);
 }
 
 SDL_RendererFlip SpriteComponent::getFlip() const

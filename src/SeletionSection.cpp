@@ -25,31 +25,25 @@ void SelectionSection::selectionLoad()
 	destRect = { SELECT_X, SELECT_Y, SELECT_W, SELECT_H };
 }
 
-std::vector<int> SelectionSection::Selection()
+std::vector<int> SelectionSection::Selection(int players)
 {
     // tạo 2 id cho chế độ 2 người
-    std::vector<int> ID(2, 0);
+    std::vector<int> ID(players, 0);
 
-    // chờ cho đến khi chọn được 2 nhân vật
-    while (!handleEvent(ID[0]))
+    // chờ cho đến khi chọn được nhân vật
+    for (int i = 0; i < players; i++)
     {
-        destRect.x = SELECT_X + (ID[0] % AVATAR_COL) * SELECT_W;
-        destRect.y = SELECT_Y + (ID[0] / AVATAR_COL) * SELECT_H;
-        SDL_RenderClear(Game::renderer);
-        SDL_RenderCopy(Game::renderer, background, NULL, NULL);
-        SDL_RenderCopy(Game::renderer, selectTexture, NULL, &destRect);
-        SDL_RenderPresent(Game::renderer);
-    }
-    destRect.x = SELECT_X;
-    destRect.y = SELECT_Y;
-    while (!handleEvent(ID[1]))
-    {
-        destRect.x = SELECT_X + (ID[1] % AVATAR_COL) * SELECT_W;
-        destRect.y = SELECT_Y + (ID[1] / AVATAR_COL) * SELECT_H;
-        SDL_RenderClear(Game::renderer);
-        SDL_RenderCopy(Game::renderer, background, NULL, NULL);
-        SDL_RenderCopy(Game::renderer, selectTexture, NULL, &destRect);
-        SDL_RenderPresent(Game::renderer);
+        while (!handleEvent(ID[i]))
+        {
+            destRect.x = SELECT_X + (ID[i] % AVATAR_COL) * SELECT_W;
+            destRect.y = SELECT_Y + (ID[i] / AVATAR_COL) * SELECT_H;
+            SDL_RenderClear(Game::renderer);
+            SDL_RenderCopy(Game::renderer, background, NULL, NULL);
+            SDL_RenderCopy(Game::renderer, selectTexture, NULL, &destRect);
+            SDL_RenderPresent(Game::renderer);
+        }
+        destRect.x = SELECT_X;
+        destRect.y = SELECT_Y;
     }
     return ID;
 }

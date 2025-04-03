@@ -6,6 +6,10 @@ class SpriteComponent
 {
 public:
 	SpriteComponent();
+	/*
+	* @param path đường dẫn đến ảnh
+	* @param rect hình chữ nhật chứa đối tượng
+	*/
 	SpriteComponent(const char* path, std::unique_ptr<SDL_Rect>& rect);
 
 	void update();

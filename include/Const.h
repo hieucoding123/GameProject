@@ -5,7 +5,13 @@
 #include <map>
 #include <vector>
 
-constexpr const char* SELECT_BG_IMG = "assets/selectBackground.png";
+constexpr const char* INTERFACE_PATH = "assets/interface.png";
+constexpr const char* BUTTONS_PATH = "assets/buttons.png";
+
+const int BUTTON_W = 100;
+const int BUTTON_H = 34;
+
+constexpr const char* SELECT_BG_IMG = "assets/selectBackground1.png";
 constexpr const char* AVARTARS_IMG = "assets/avatars.png";
 constexpr const char* SELECT_FRAME_IMG = "assets/selectFrame.png";
 const int SELECT_X = 284;		// vị trí ban đầu của khung chọn
@@ -46,9 +52,22 @@ const double HP = 500;
 const double ENERGY = 300;
 const int DEFENSE = 10;
 
-// chiều dài và rộng thanh máu
+// chiều dài và rộng thanh máu nhân vật
 const int HP_W = 500;
 const int HP_H = 30;
+
+// máu bot
+const double BOT_HP = 40;
+
+// chiều dài và rộng thanh máu bot
+const int BOT_HP_W = 100;
+const int BOT_HP_H = 8;
+
+const double BOSS_HP = 1000;
+const int BOSS_HP_W = 300;
+const int BOSS_HP_H = 20;
+
+const int MAX_BOT = 3;
 
 // màu nền và màu thanh máu và thanh năng lượng
 const SDL_Color HPBG_COLOR = { 255, 0, 0, 255 };
@@ -60,6 +79,8 @@ const SDL_Color ENG_COLOR = { 73, 222, 255, 255 };
 constexpr const char* SASUKE_IMG_PATH = "assets/sasuke.png";
 constexpr const char* AKAINU_IMG_PATH = "assets/akainu_stand.png";
 constexpr const char* MADARA_IMG_PATH = "assets/madara.png";
+constexpr const char* BOT_IMG_PATH = "assets/bot.png";
+constexpr const char* BOSS_IMG_PATH = "assets/boss.png";
 
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
 constexpr const char* tileMapPath = "assets/TileMap.txt";
@@ -78,13 +99,16 @@ const std::vector<const char*> SOUND_PAHTS =
 	"assets/audio/hurt.wav",					// 0
 	"assets/audio/step3.wav",					
 	"assets/audio/ping.wav",					// 2
-	"assets/audio/exactly.wav",
+	"assets/audio/select.wav",
 	"assets/audio/teleport.wav",				// 4
 	"assets/audio/jump.wav",
 	"assets/audio/fire.wav",					// 6
 	"assets/audio/chidori.wav",
 	"assets/audio/chooseContinue.wav",			// 8
-	"assets/audio/sharingan.wav"
+	"assets/audio/sharingan.wav",
+	"assets/audio/ready.wav",					// 10
+	"assets/audio/ko.wav",
+	"assets/audio/gameover.wav"					// 12
 };
 
 const std::vector<const char*> MASKS = 
@@ -108,7 +132,7 @@ const std::map<int, std::vector<int>> SASUKE = {
 	{ (int)SDLK_e,      {3, 200, 0, 561, 107, 77, 0, 15}},		// cận chiến(bay)
 	{ (int)SDLK_r,		{8, 100, 0, 446, 60, 77, 60, 0}},		// skill 1
 	{ -3,				{7, 140, 242, 0, 86, 57, 0, 20} },		// effect 1
-	{ (int)SDLK_t,      {3, 200, 0, 638, 62, 82, 0, 0}},		// skill 1 (bay)
+	{ (int)SDLK_t,      {3, 200, 0, 638, 62, 82, 60, 0}},		// skill 1 (bay)
 	{-8,                {1, 1000, 471, 151, 46, 46, 0, 10}},	// effect 1 (bay)
 	{ -4,				{3, 250, 450, 77, 57, 73, 0, 0} },		// get damage
 	{ (int)SDLK_f,		{4, 200, 643, 83, 69, 67, 0, 0 } },		// dịch chuyển
@@ -116,7 +140,8 @@ const std::map<int, std::vector<int>> SASUKE = {
 	{ -5,				{5, 300, 0, 524, 171, 26, 0, 90}},		// effect 2.1
 	{(int)SDLK_1,		{4, 250, 179, 150, 73, 72, 200, 0}},		// skill 3
 	{-6,				{6, 300, 945, 0, 330, 255, 0, 150}},		// effect 3
-	{-7,				{6, 170, 664, 327, 241, 196, 0, 0}}		// effect 2.2
+	{-7,				{6, 170, 664, 327, 241, 196, 0, 0}},		// effect 2.2
+	{0,                 {6, 140, 0, 720, 77, 73, 0, 0}}				// die
 };
 
 const std::map<int, std::vector<int>> AKAINU = {
@@ -131,7 +156,8 @@ const std::map<int, std::vector<int>> AKAINU = {
 		{-2,			{1, 10, 806, 85, 84, 79, 0, 0}},
 		{(int)SDLK_c,	{2, 450, 595, 165, 75, 78, 0, 0}},
 		{(int)SDLK_q,	{2, 450, 753, 165, 76, 77, 0, 0}},
-		{(int)SDLK_f,	{3, 180, 227, 257, 92, 70, 0, 0}}
+		{(int)SDLK_f,	{3, 180, 227, 257, 92, 70, 0, 0}},
+		{0,             {4, 210, 0, 404, 78, 76, 0, 0}}
 };
 
 const std::map<int, std::vector<int>> MADARA = {
@@ -147,10 +173,32 @@ const std::map<int, std::vector<int>> MADARA = {
 	{ (int)SDLK_2,		{5, 400, 0, 314, 93, 112, 200, 0}},		// skill 2
 	{ -3,				{6, 200, 0, 426, 525, 172, 1, 35} },		// effect 1
 	{ -4,				{2, 340, 183, 2, 69, 87, 0, 0} },		// get damage
-	//{ (int)SDLK_f,		{4, 200, 643, 83, 69, 67, 0, 0 } },		// dịch chuyển
+	{ (int)SDLK_f,		{4, 165, 1199, 89, 111, 95, 0, 0 } },		// dịch chuyển
 	//{ (int)SDLK_1,		{7, 180, 0, 523, 298, 222, 0, 0} },		// skill 1
 	{ -5,				{2, 1100, 733, 89, 233, 267, 0, 0}},		// effect 2.1
 	{-7,				{3, 500, 0, 598, 187, 187, 1, 110}},		// effect 2.2
-	{(int)SDLK_r,		{4, 400, 216, 89, 71, 91, 60, 0}}		// skill 1
+	{(int)SDLK_r,		{4, 400, 216, 89, 71, 91, 60, 0}},		// skill 1
 	//{-6,				{6, 300, 945, 0, 330, 255, 0, 150}}		// effect 3
+	{ 0,				{ 4, 210, 388, 869, 96, 95, 0, 0 }}
+};
+
+const std::map<int, std::vector<int>> BOT = {
+	{0,		{1, 2000, 0, 0, 51, 91, 0, 0}},			// idle
+	{1,		{6, 180, 51, 0, 51, 91, 0, 0}},			// walk
+	{2,		{6, 180, 0, 91, 66, 73, 0, 0}},			// run
+	{3,     {4, 200, 0, 164, 59, 86, 0, 10}},		// hit
+	{4,     {4, 200, 236, 164, 59, 86, 0, 0}},		// throw weapon
+	{5,     {2, 320, 357, 12, 66, 79, 0, 0}},		// hurt
+	{6,     {9, 100, 0, 328, 30, 30, 0, 7}},		// weapon
+	{7,     {3, 400, 0, 250, 88, 78, 0, 0}}			// die
+};
+
+const std::map<int, std::vector<int>> BOSS = {
+	{0,		{1, 2000, 0, 0, 161, 272, 0, 0}},			// idle
+	{1,		{6, 300, 0, 272, 193, 273, 0, 10}},			// walk
+	{2,		{1, 300, 161, 0, 161, 272, 0, 0}},		// defend
+	{3,     {7, 250, 0, 818, 255, 302, 0, 100}},		// hit
+	{4,     {3, 1000, 0, 1120, 281, 278, 0, 0}},		// throw weapon
+	{5,     {2, 550, 0, 545, 193, 273, 0, 0}},		// hurt
+	{6,     {4, 300, 0, 1398, 64, 256, 0, 100}}		// weapon
 };

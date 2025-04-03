@@ -60,11 +60,6 @@ int Effect::getDamage() const
 	return damage;
 }
 
-void Effect::setDamage()
-{
-	damage = 0;
-}
-
 int Effect::getID() const
 {
 	return ID;

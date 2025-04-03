@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "GameObjects/Sasuke.h"
 #include "GameObjects/Akainu.h"
+#include "Interface.h"
 #include "SelectionSection.h"
 #include "PlaySection.h"
 #include "GameOver.h"
@@ -10,6 +11,7 @@
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
 
+Interface* itf = new Interface;
 PlaySection* playSection = new PlaySection;
 GameOver* gameOver = new GameOver;
 
@@ -59,16 +61,35 @@ void Game::play()
 	// Khi game chạy
 	while (isRunning)
 	{
+		// Phần chọn chế độ và số người chơi
+		int mode, players = 2;
+		itf->init();
+		mode = itf->selectMode();
+		if (!itf->success())
+		{
+			isRunning = false;
+			return;
+		}
+		if (mode != 0)						// chế độ survival
+		{
+			players = itf->selectNumOfPlayers();
+			if (!itf->success())
+			{
+				isRunning = false;
+				return;
+			}
+		}
+
 		// Phần chọn nhân vật
 		SelectionSection::selectionLoad();
-		std::vector<int> ID = SelectionSection::Selection();
+		std::vector<int> ID = SelectionSection::Selection(players);
 		
 
 		// Khởi tạo nhân vật và game
 		PlaySection::gameObjects.clear();
 
 		playSection->playLoad();
-		playSection->init(ID);
+		playSection->init(ID, mode);
 
 		playSection->setPlaying(true);
 
@@ -87,8 +108,10 @@ void Game::play()
 				SDL_Delay(frameDelay - frameTime);
 			}
 		}
+		playSection->clean();
 		
 		// Kết thúc game
+		playSound(12);		// âm thanh kết thúc
 		if (!gameOver->continueGame())
 		{
 			isRunning = false;
@@ -99,7 +122,8 @@ void Game::play()
 
 void Game::clean()
 {
-	playSection->clean();
+	delete itf;
+	itf = nullptr;
 	delete playSection;
 	playSection = nullptr;
 	delete gameOver;

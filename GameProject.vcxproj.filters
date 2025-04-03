@@ -75,6 +75,15 @@
     <ClCompile Include="src\GameOver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\GameObjects\Bot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\GameObjects\Boss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game.h">
@@ -140,6 +149,15 @@
     <ClInclude Include="include\GameOver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\GameObjects\Bot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjects\Boss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\CollisionsMap.txt" />
@@ -192,6 +210,18 @@
     <Image Include="assets\madara.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\selectBackground1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\bot.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\buttons.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\boss.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\audio\background.mp3" />
@@ -224,6 +254,18 @@
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="assets\audio\exactly.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\ready.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\select.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\gameover.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\ko.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>

@@ -7,7 +7,6 @@ class Sasuke : public GameObject
 {
 public:
 	Sasuke();
-	// khởi tạo
 	void init() override;
 	void update() override;
 	void draw() override;
