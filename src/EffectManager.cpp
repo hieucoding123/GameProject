@@ -44,7 +44,10 @@ void EffectManager::checkVar(Attribute* attrib,SDL_Rect* rect)
 				attrib->isHitting = (damage > 0);		// bị đánh
 
 				if (attrib->isHitting)
+				{
 					Game::playSound(0);
+					Game::playSound(13);
+				}
 				e->disableDamage();
 			}
 		}

@@ -65,6 +65,7 @@ void GameObject::update()
 				object->attrib->damage = 0;
 				object->attrib->energy += 32;
 				Game::playSound(0);
+				Game::playSound(14);
 			}
 		}
 	}
@@ -80,12 +81,14 @@ void GameObject::update()
 				bot->attrib->isHitting = true;
 				attrib->damage = 0;
 				attrib->energy += 18;
+				Game::playSound(14);
 			}
 			// Để bot đánh trúng
 			attrib->hp -= bot->attrib->damage;
 			if (bot->attrib->damage > 0)
 			{
 				Game::playSound(0);
+				Game::playSound(14);
 				attrib->isHitting = true;
 			}
 			bot->attrib->damage = 0;

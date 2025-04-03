@@ -9,8 +9,6 @@
 class EffectManager
 {
 public:
-	EffectManager() = default;
-
 	/*
 	* Thêm effect mới
 	* @param e Con trỏ unique tới effect muốn thêm

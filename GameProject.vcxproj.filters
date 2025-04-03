@@ -222,6 +222,9 @@
     <Image Include="assets\boss.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\generalEffect.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\audio\background.mp3" />
@@ -266,6 +269,12 @@
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="assets\audio\ko.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\hit.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\audio\punch.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>

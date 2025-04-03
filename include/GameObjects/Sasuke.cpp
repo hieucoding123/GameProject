@@ -20,7 +20,7 @@ void Sasuke::init()
 void Sasuke::update()
 {
 	GameObject::update();
-	// cập nhật vị trí trên màn hình
+	// Không cho đối tượng ra thoát khỏi map
 
 	if (transform->getYPos() + rect->h >= (GROUND * PlaySection::MAP_SCALE))
 	{

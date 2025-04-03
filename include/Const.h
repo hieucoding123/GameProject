@@ -85,6 +85,7 @@ constexpr const char* BOSS_IMG_PATH = "assets/boss.png";
 constexpr const char* imageTilePath = "assets/imageTileMap.png";
 constexpr const char* tileMapPath = "assets/TileMap.txt";
 constexpr const char* collisionImgPath = "assets/collisionImage.png";
+constexpr const char* GENERAL_EFFECT_PATH = "assets/generalEffect.png";
 
 constexpr const char* GAME_OVER_IMG = "assets/gameOver.png";
 const int GAME_OVER_W = 784;
@@ -108,7 +109,9 @@ const std::vector<const char*> SOUND_PAHTS =
 	"assets/audio/sharingan.wav",
 	"assets/audio/ready.wav",					// 10
 	"assets/audio/ko.wav",
-	"assets/audio/gameover.wav"					// 12
+	"assets/audio/gameover.wav",				// 12
+	"assets/audio/hit.wav",
+	"assets/audio/punch.wav"					// 14
 };
 
 const std::vector<const char*> MASKS = 
@@ -119,6 +122,12 @@ const std::vector<const char*> MASKS =
 
 const int MASK_W = 39;
 const int MASK_H = 55;
+
+const int GENERAL_EFFECT_ID = -2;
+
+const std::map<int, std::vector<int>> GENERAL_EFFECT = {
+	{0,		{9, 120, 0, 0, 155, 153, 0, 0}}				// explosion
+};
 
 const std::map<int, std::vector<int>> SASUKE = {
 	// state - f - s - x - y- w - h - costEnegy - damage
@@ -133,7 +142,7 @@ const std::map<int, std::vector<int>> SASUKE = {
 	{ (int)SDLK_r,		{8, 100, 0, 446, 60, 77, 60, 0}},		// skill 1
 	{ -3,				{7, 140, 242, 0, 86, 57, 0, 20} },		// effect 1
 	{ (int)SDLK_t,      {3, 200, 0, 638, 62, 82, 60, 0}},		// skill 1 (bay)
-	{-8,                {1, 1000, 471, 151, 46, 46, 0, 10}},	// effect 1 (bay)
+	{-8,                {1, 1000, 471, 151, 46, 46, 0, 12}},	// effect 1 (bay)
 	{ -4,				{3, 250, 450, 77, 57, 73, 0, 0} },		// get damage
 	{ (int)SDLK_f,		{4, 200, 643, 83, 69, 67, 0, 0 } },		// dịch chuyển
 	{ (int)SDLK_2,		{4, 250, 179, 150, 73, 72, 100, 0} },		// skill 2
@@ -166,7 +175,7 @@ const std::map<int, std::vector<int>> MADARA = {
 	{ (int)SDLK_d,		{6, 110, 321, 0, 83, 89, 0, 0}},			// walk
 	{ (int)SDLK_w,		{2, 250, 0, 89, 72, 92, 0, 0}},		// jump
 	{ -2,				{1, 1, 0, 226, 74, 88, 0, 0} },			// fall
-	{ (int)SDLK_c,		{4, 200, 81, 195, 106, 119, 0, 0}},			// thủ (đất)
+	{ (int)SDLK_c,		{1, 700, 1740, 94, 69, 89, 0, 0}},			// thủ (đất)
 	//{ (int)SDLK_q,		{1, 1000, 0, 296, 58, 74, 0, 0}},			// thủ (trên không)
 	{ (int)SDLK_u,		{5, 200, 819, 0, 127, 89, 0, 15}},		// cận chiến
 	{(int)SDLK_e,       {4, 180, 0, 869, 97, 95, 0, 15}},		// cận chiến (bay)
@@ -178,6 +187,8 @@ const std::map<int, std::vector<int>> MADARA = {
 	{ -5,				{2, 1100, 733, 89, 233, 267, 0, 0}},		// effect 2.1
 	{-7,				{3, 500, 0, 598, 187, 187, 1, 110}},		// effect 2.2
 	{(int)SDLK_r,		{4, 400, 216, 89, 71, 91, 60, 0}},		// skill 1
+	{ (int)SDLK_t,      {2, 200, 1454, 8, 82, 81, 60, 0}},		// skill 1 (bay)
+	{-8,                {5, 200, 1618, 60, 29, 29, 0, 10}},	// effect 1 (bay)
 	//{-6,				{6, 300, 945, 0, 330, 255, 0, 150}}		// effect 3
 	{ 0,				{ 4, 210, 388, 869, 96, 95, 0, 0 }}
 };

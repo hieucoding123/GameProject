@@ -50,15 +50,6 @@ public:
 	void clean();
 
 	/*
-	* Cài đặt và khởi tạo nhân vật qua ID
-	* @param ID ID của nhân vật
-	* @param xpos vị trí x đặt nhân vật
-	* @param ypos vị trí y đặt nhân vật
-	* @param camera có camera không
-	*/
-	void setCharacter(const int& ID, int xpos, int ypos);
-
-	/*
 	* Kiểm tra xem phần chơi còn chạy không
 	*/
 	bool playing() const { return isPlaying; };
@@ -89,10 +80,29 @@ public:
 	*/
 	static void setCameraY(int y);
 private:
+	/*
+	* Cài đặt và khởi tạo nhân vật qua ID
+	* @param ID ID của nhân vật
+	* @param xpos vị trí x đặt nhân vật
+	* @param ypos vị trí y đặt nhân vật
+	* @param camera có camera không
+	*/
+	void setCharacter(const int& ID, int xpos, int ypos);
+	void survivalModeInit();
+	void soloModeUpdate();
+	void survivalModeUpdate();
+	void onePlayerInit();
+	void onePlayerUpdate();
+	void onePlayerDraw();
+	void twoPlayersInit();
+	void twoPlayersUpdate();
+	void twoPlayersDraw();
+
 	SDL_Texture* p1Texture;
 	SDL_Texture* p2Texture;
 	SDL_Rect destRect1;
 	SDL_Rect destRect2;
+	std::vector<int> id;
 	// chế độ chơi và số người chơi
 	int mode, players;
 	bool isPlaying = true;

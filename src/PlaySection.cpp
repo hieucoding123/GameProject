@@ -40,6 +40,7 @@ void PlaySection::playLoad()
 
 void PlaySection::init(std::vector<int> ID, const int& m)
 {
+	id = ID;
 	mode = m;
 	players = ID.size();
 
@@ -51,20 +52,11 @@ void PlaySection::init(std::vector<int> ID, const int& m)
 	map = new Map;
 	map->LoadMap(tileMapPath);
 
-	// Khởi tạo nhân vật
-	gameObjects.push_back(new GameObject);
-	setCharacter(ID[0], camera.x + 100, GROUND * MAP_SCALE);
-	if (players == 2)
-	{
-		gameObjects.push_back(new GameObject);
-		setCharacter(ID[1], camera.x + camera.w - 100, GROUND * MAP_SCALE);
-	}
+	// Khởi tạo nhân vật, mode
+	if (mode == 1) survivalModeInit();
 
-	p1Texture = TextureManager::LoadTexture(MASKS[0]);
-	p2Texture = TextureManager::LoadTexture(MASKS[1]);
-
-	destRect1.w = destRect2.w = MASK_W;
-	destRect1.h = destRect2.h = MASK_H;
+	if (players == 1) onePlayerInit();
+	else twoPlayersInit();
 
 	isPlaying = true;
 
@@ -73,21 +65,6 @@ void PlaySection::init(std::vector<int> ID, const int& m)
 
 	// phát đoạn nhạc sẵn sàng
 	Game::playSound(10);
-	
-	if (mode == 1)
-	{
-		for (int i = 0; i < MAX_BOT - 1; i++)
-		{
-			Bot* bot = new Bot;
-			bot->init();
-			bot->setPosition(100, GROUND * MAP_SCALE);
-			bots.push_back(bot);
-		}
-		Boss* boss = new Boss;
-		boss->init();
-		boss->setPosition(400, GROUND * MAP_SCALE);
-		bots.push_back(boss);
-	}
 }
 
 void PlaySection::handleEvents()
@@ -109,59 +86,14 @@ void PlaySection::update()
 	// Phần cập nhật game
 	map->update();
 	
-	gameObjects[0]->update();
-	gameObjects[0]->ADWSController();
-
-	if (players == 2)
-	{
-		gameObjects[1]->update();
-		gameObjects[1]->LRUDController();
-		if (gameObjects[1]->isDie())
-		{
-			isPlaying = false;
-		}
-	}
-
-	// Cập nhật vị trí của nhãn đánh dấu
-	destRect1.x = gameObjects[0]->getXpos() - camera.x + (gameObjects[0]->getWidth() - destRect1.w) / 2;
-	destRect1.y = gameObjects[0]->getYpos() - destRect1.h - camera.y;
-
-	if (players == 2)
-	{
-		destRect2.x = gameObjects[1]->getXpos() - camera.x + (gameObjects[1]->getWidth() - destRect1.w) / 2;
-		destRect2.y = gameObjects[1]->getYpos() - destRect2.h - camera.y;
-	}
+	if (players == 1) onePlayerUpdate();
+	else twoPlayersUpdate();
 
 	// Cập nhật kết thúc
-	if (gameObjects[0]->isDie())
-	{
-		isPlaying = false;
-	}
+	if (mode == 0) soloModeUpdate();
+	else survivalModeUpdate();
 
 	effectManager.update();
-
-	for (auto& bot : bots)
-	{
-		bot->update();
-	}
-
-	bots.erase(std::remove_if(std::begin(bots), std::end(bots),
-		[](const GameObject* bot)
-		{
-			return bot->isDie();
-		}), std::end(bots));
-
-	if (mode == 1)
-	{
-		for (int i = 0; i < MAX_BOT - bots.size(); i++)
-		{
-			Bot* bot = new Bot;
-			bot->init();
-			int randomXPos = rand() % camera.w + camera.x;
-			bot->setPosition(randomXPos, GROUND * MAP_SCALE);
-			bots.push_back(bot);
-		}
-	}
 }
 
 void PlaySection::render()
@@ -180,23 +112,10 @@ void PlaySection::render()
 	{
 		bot->draw();
 	}
-
-	TextureManager::DrawHP(SELECT_W, 0, (gameObjects[0]->getHP() * HP_W) / HP, HP_H, HP_W, HPBG_COLOR, HP_COLOR);
-	TextureManager::DrawEnergy(SELECT_W, HP_H,
-		(gameObjects[0]->getEnergy() * (HP_W - 20)) / ENERGY, HP_H, HP_W, ENGBG_COLOR, ENG_COLOR);
-
-	TextureManager::Draw(p1Texture, NULL, &destRect1, SDL_FLIP_NONE);
-
-	if (players == 2)
-	{
-		TextureManager::DrawHP(camera.w - HP_W - SELECT_W, 0,
-			((HP - gameObjects[1]->getHP()) * HP_W) / HP, HP_H, HP_W, HP_COLOR, HPBG_COLOR);
-		TextureManager::DrawEnergy(camera.w - HP_W - SELECT_W + 20, HP_H,
-			((ENERGY - gameObjects[1]->getEnergy()) * (HP_W - 20)) / ENERGY, HP_H, HP_W, ENG_COLOR, ENGBG_COLOR);
-
-		TextureManager::Draw(p2Texture, NULL, &destRect2, SDL_FLIP_NONE);
-	}
 	
+	if (players == 1) onePlayerDraw();
+	else twoPlayersDraw();
+		
 	effectManager.draw();
 
 	SDL_RenderPresent(Game::renderer);
@@ -283,4 +202,140 @@ void PlaySection::setCameraY(int y)
 	{
 		camera.y += y;
 	}
+}
+
+void PlaySection::survivalModeInit()
+{
+	for (int i = 0; i < MAX_BOT - 1; i++)
+	{
+		Bot* bot = new Bot;
+		bot->init();
+		bot->setPosition(100, GROUND * MAP_SCALE);
+		bots.push_back(bot);
+	}
+	Boss* boss = new Boss;
+	boss->init();
+	boss->setPosition(400, GROUND * MAP_SCALE);
+	bots.push_back(boss);
+}
+
+void PlaySection::soloModeUpdate()
+{
+	if (gameObjects[0]->isDie() || gameObjects[1]->isDie())
+		isPlaying = false;
+}
+
+void PlaySection::survivalModeUpdate()
+{
+	switch (players)
+	{
+	case 1:
+		if (gameObjects[0]->isDie())
+			isPlaying = false;
+		break;
+	case 2:
+		if (gameObjects[0]->isDie() && gameObjects[1]->isDie())
+			isPlaying = false;
+		break;
+	default:
+		break;
+	}
+
+	for (auto& bot : bots)
+		bot->update();
+
+	bots.erase(std::remove_if(std::begin(bots), std::end(bots),
+		[](const GameObject* bot)
+		{
+			return bot->isDie();
+		}), std::end(bots));
+
+	for (int i = 0; i < MAX_BOT - bots.size(); i++)
+	{
+		Bot* bot = new Bot;
+		bot->init();
+		int randomXPos = rand() % camera.w + camera.x;
+		bot->setPosition(randomXPos, GROUND * MAP_SCALE);
+		bots.push_back(bot);
+	}
+}
+
+void PlaySection::onePlayerInit()
+{
+	gameObjects.push_back(new GameObject);
+	setCharacter(id[0], camera.x + camera.w / 2, GROUND * MAP_SCALE);
+
+	p1Texture = TextureManager::LoadTexture(MASKS[0]);
+
+	destRect1.w = MASK_W;
+	destRect1.h = MASK_H;
+}
+
+void PlaySection::onePlayerUpdate()
+{
+	gameObjects[0]->update();
+	gameObjects[0]->LRUDController();
+
+	// Camera đi theo 1 nhân vật
+	camera.x = gameObjects[0]->getXpos() - camera.w / 2;
+	if (camera.x < 0) camera.x = 0;
+	if (camera.x + camera.w >= WIDTH * MAP_SCALE) camera.x = WIDTH * MAP_SCALE - camera.w;
+
+	destRect1.x = gameObjects[0]->getXpos() - camera.x + (gameObjects[0]->getWidth() - destRect1.w) / 2;
+	destRect1.y = gameObjects[0]->getYpos() - destRect1.h - camera.y;
+}
+
+void PlaySection::onePlayerDraw()
+{
+	TextureManager::DrawHP(SELECT_W, 0, (gameObjects[0]->getHP() * HP_W) / HP, HP_H, HP_W, HPBG_COLOR, HP_COLOR);
+	TextureManager::DrawEnergy(SELECT_W, HP_H,
+		(gameObjects[0]->getEnergy() * (HP_W - 20)) / ENERGY, HP_H, HP_W, ENGBG_COLOR, ENG_COLOR);
+
+	TextureManager::Draw(p1Texture, NULL, &destRect1, SDL_FLIP_NONE);
+}
+
+void PlaySection::twoPlayersInit()
+{
+	gameObjects.push_back(new GameObject);
+	setCharacter(id[0], camera.x + 100, GROUND * MAP_SCALE);
+	gameObjects.push_back(new GameObject);
+	setCharacter(id[1], camera.x + camera.w - 100, GROUND * MAP_SCALE);
+
+	p1Texture = TextureManager::LoadTexture(MASKS[0]);
+	p2Texture = TextureManager::LoadTexture(MASKS[1]);
+
+	destRect1.w = destRect2.w = MASK_W;
+	destRect1.h = destRect2.h = MASK_H;
+}
+
+void PlaySection::twoPlayersUpdate()
+{
+	gameObjects[0]->update();
+	gameObjects[0]->ADWSController();
+
+	gameObjects[1]->update();
+	gameObjects[1]->LRUDController();
+
+	destRect1.x = gameObjects[0]->getXpos() - camera.x + (gameObjects[0]->getWidth() - destRect1.w) / 2;
+	destRect1.y = gameObjects[0]->getYpos() - destRect1.h - camera.y;
+
+	destRect2.x = gameObjects[1]->getXpos() - camera.x + (gameObjects[1]->getWidth() - destRect1.w) / 2;
+	destRect2.y = gameObjects[1]->getYpos() - destRect2.h - camera.y;
+
+}
+
+void PlaySection::twoPlayersDraw()
+{
+	TextureManager::DrawHP(SELECT_W, 0, (gameObjects[0]->getHP() * HP_W) / HP, HP_H, HP_W, HPBG_COLOR, HP_COLOR);
+	TextureManager::DrawEnergy(SELECT_W, HP_H,
+		(gameObjects[0]->getEnergy() * (HP_W - 20)) / ENERGY, HP_H, HP_W, ENGBG_COLOR, ENG_COLOR);
+
+	TextureManager::Draw(p1Texture, NULL, &destRect1, SDL_FLIP_NONE);
+
+	TextureManager::DrawHP(camera.w - HP_W - SELECT_W, 0,
+		((HP - gameObjects[1]->getHP()) * HP_W) / HP, HP_H, HP_W, HP_COLOR, HPBG_COLOR);
+	TextureManager::DrawEnergy(camera.w - HP_W - SELECT_W + 20, HP_H,
+		((ENERGY - gameObjects[1]->getEnergy()) * (HP_W - 20)) / ENERGY, HP_H, HP_W, ENG_COLOR, ENGBG_COLOR);
+
+	TextureManager::Draw(p2Texture, NULL, &destRect2, SDL_FLIP_NONE);
 }
