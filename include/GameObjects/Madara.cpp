@@ -218,14 +218,14 @@ void Madara::LRUDController()
 			animation->setFinished(false);
 			Game::playSound(4);
 			break;
-		/*case SDLK_SLASH:
+		/*case SDLK_KP_1:
 			transform->setVx(0);
 			animation->setStateSuccess((int)SDLK_1);
 			animation->setFinished(false);
 			PlaySection::effectManager.addEffect(std::make_unique<Effect>(sprite->shareTexture(), attrib->ID, animation->getEffectInfor(-6),
 				9, 0, 2, sprite->getFlip(), rect->x + rect->w * sprite->getROL(), rect->y - 300));
 			break;*/
-		case SDLK_PERIOD:
+		case SDLK_KP_2:
 			if (animation->setStateSuccess((int)SDLK_2))
 			{
 				transform->setVx(0);

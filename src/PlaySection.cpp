@@ -30,7 +30,6 @@ PlaySection::~PlaySection()
 
 void PlaySection::playLoad()
 {
-	std::vector<std::unique_ptr<Tile>> tiles;
 	EffectManager effectManager;
 	MAP_SCALE = 2;
 	SDL_Rect camera = { 0, 0, WIDTH, HIGH };
@@ -206,17 +205,20 @@ void PlaySection::setCameraY(int y)
 
 void PlaySection::survivalModeInit()
 {
-	for (int i = 0; i < MAX_BOT - 1; i++)
-	{
-		Bot* bot = new Bot;
-		bot->init();
-		bot->setPosition(100, GROUND * MAP_SCALE);
-		bots.push_back(bot);
-	}
+	int randomXPos;
+	randomXPos = rand() % (WIDTH * MAP_SCALE);
 	Boss* boss = new Boss;
 	boss->init();
-	boss->setPosition(400, GROUND * MAP_SCALE);
+	boss->setPosition(randomXPos, GROUND * MAP_SCALE);
 	bots.push_back(boss);
+	for (int i = 0; i < MAX_BOT - 1; i++)
+	{
+		randomXPos = rand() % (WIDTH * MAP_SCALE);
+		Bot* bot = new Bot;
+		bot->init();
+		bot->setPosition(rand() % WIDTH * MAP_SCALE, GROUND * MAP_SCALE);
+		bots.push_back(bot);
+	}
 }
 
 void PlaySection::soloModeUpdate()
@@ -243,6 +245,11 @@ void PlaySection::survivalModeUpdate()
 
 	for (auto& bot : bots)
 		bot->update();
+	// boss bị tiêu diệt
+	if (bots[0]->isDie())
+	{
+		isPlaying = false;
+	}
 
 	bots.erase(std::remove_if(std::begin(bots), std::end(bots),
 		[](const GameObject* bot)
@@ -274,7 +281,7 @@ void PlaySection::onePlayerInit()
 void PlaySection::onePlayerUpdate()
 {
 	gameObjects[0]->update();
-	gameObjects[0]->LRUDController();
+	gameObjects[0]->ADWSController();
 
 	// Camera đi theo 1 nhân vật
 	camera.x = gameObjects[0]->getXpos() - camera.w / 2;

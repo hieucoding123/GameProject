@@ -228,7 +228,7 @@ void Sasuke::LRUDController()
 				Game::playSound(4);
 			}
 			break;
-		case SDLK_SLASH:
+		case SDLK_KP_1:
 			if (animation->setStateSuccess((int)SDLK_1))
 			{
 				transform->setVx(0);
@@ -238,7 +238,7 @@ void Sasuke::LRUDController()
 				Game::playSound(9);
 			}
 			break;
-		case SDLK_PERIOD:
+		case SDLK_KP_2:
 			if (animation->setStateSuccess((int)SDLK_1))
 			{
 				transform->setVx(0);

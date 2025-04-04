@@ -32,7 +32,7 @@ void EffectManager::checkVar(Attribute* attrib,SDL_Rect* rect)
 	for (auto& e : effects)
 	{
 		// không tính chạm đối tượng tạo ra hiệu ứng
-		if (attrib->ID != e->getID() &&  PlaySection::AABB(*rect, e->getRect()))
+		if (!attrib->isDie && attrib->ID != e->getID() &&  PlaySection::AABB(*rect, e->getRect()))
 		{
 			int damage = e->getDamage();
 			if (damage > 0 && PlaySection::AABB(*rect, e->getRect()))

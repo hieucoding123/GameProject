@@ -56,7 +56,8 @@ void GameObject::update()
 	// Kiểm tra va chạm với đối tượng khác
 	for (auto& object : PlaySection::gameObjects)
 	{
-		if (object->attrib->ID != attrib->ID && PlaySection::AABB(*rect, *object->rect.get()))
+		if (object->attrib->ID != attrib->ID && !attrib->isDie && !object->attrib->isDie && 
+			PlaySection::AABB(*rect, *object->rect.get()))
 		{
 			if (object->attrib->damage > 0) 
 			{
@@ -71,27 +72,30 @@ void GameObject::update()
 	}
 
 	// Va chạm với bot
-	for (auto& bot : PlaySection::bots)
+	if (!attrib->isDie)
 	{
-		if (PlaySection::AABB(*bot->rect, *rect))
+		for (auto& bot : PlaySection::bots)
 		{
-			if (attrib->damage > 0)
+			if (PlaySection::AABB(*bot->rect, *rect))
 			{
-				bot->attrib->hp -= attrib->damage;
-				bot->attrib->isHitting = true;
-				attrib->damage = 0;
-				attrib->energy += 18;
-				Game::playSound(14);
+				if (attrib->damage > 0)
+				{
+					bot->attrib->hp -= attrib->damage;
+					bot->attrib->isHitting = true;
+					attrib->damage = 0;
+					attrib->energy += 18;
+					Game::playSound(14);
+				}
+				// Để bot đánh trúng
+				attrib->hp -= bot->attrib->damage;
+				if (bot->attrib->damage > 0)
+				{
+					Game::playSound(0);
+					Game::playSound(14);
+					attrib->isHitting = true;
+				}
+				bot->attrib->damage = 0;
 			}
-			// Để bot đánh trúng
-			attrib->hp -= bot->attrib->damage;
-			if (bot->attrib->damage > 0)
-			{
-				Game::playSound(0);
-				Game::playSound(14);
-				attrib->isHitting = true;
-			}
-			bot->attrib->damage = 0;
 		}
 	}
 }
