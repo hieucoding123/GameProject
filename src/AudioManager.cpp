@@ -23,12 +23,11 @@ bool AudioManager::init(int freq, int chunkSize)
 		return false;
 	}
 
-	// Thiết lập số lượng kênh âm thanh (16 kênh mặc định)
+	// Thiết lập số lượng kênh âm thanh
 	Mix_AllocateChannels(16);
 
 	m_initialized = true;
 
-	// giải phóng nhạc nền hiện tại nếu có
 	if (m_music)
 	{
 		Mix_FreeMusic(m_music);
@@ -91,50 +90,6 @@ bool AudioManager::playMusic(int loops)
 	return true;
 }
 
-void AudioManager::stopMusic()
-{
-	if (m_initialized)
-	{
-		Mix_HaltMusic();
-	}
-}
-
-void AudioManager::stopSound(int channel)
-{
-	if (m_initialized)
-	{
-		Mix_HaltChannel(channel);
-	}
-}
-
-void AudioManager::pauseMusic()
-{
-	if (m_initialized)
-		Mix_PausedMusic();
-}
-
-void AudioManager::resumeMusic()
-{
-	if (m_initialized)
-		Mix_ResumeMusic();
-}
-
-void AudioManager::setSoundVolume(int volume)
-{
-	m_soundVolume = (volume < 0) ? 0 : ((volume > MIX_MAX_VOLUME) ? MIX_MAX_VOLUME : volume);
-
-	// thiết lập volume cho tất các các kênh
-	Mix_Volume(-1, m_soundVolume);
-}
-
-void AudioManager::setMusicVolume(int volume)
-{
-	m_musicVolume = (volume < 0) ? 0 : ((volume > MIX_MAX_VOLUME) ? MIX_MAX_VOLUME : volume);
-
-	// Thiết lập volume cho nhạc nền
-	Mix_VolumeMusic(m_musicVolume);
-}
-
 void AudioManager::clean()
 {
 	if (m_initialized)
@@ -145,13 +100,11 @@ void AudioManager::clean()
 		}
 		m_soundEffects.clear();
 
-		// giải phóng nhạc nền
 		if (m_music)
 		{
 			Mix_FreeMusic(m_music);
 		}
 
-		// đóng audio
 		Mix_CloseAudio();
 		m_initialized = false;
 	}
