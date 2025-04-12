@@ -4,7 +4,7 @@
 Phạm Trần Hiếu - 24020129
 
 ## Mô tả dự án game
-Game đối kháng giữa hai người chơi. Mỗi người chơi trong game được quyền lựa chọn một nhân vật, hai người chơi chiến đấu nhân vật của người chơi nào hết máu trước sẽ thua và game sẽ kết thúc.
+Game có hai chế độ chơi. Chế độ đối kháng giữa hai người chơi. Mỗi người chơi trong game được quyền lựa chọn một nhân vật, hai người chơi chiến đấu nhân vật của người chơi nào hết máu trước sẽ thua và game sẽ kết thúc. Chế độ sinh tồn người chơi chọn nhân vật và chiến đấu chống lại các quái vật để sống sót.
 
 ## Ngưỡng điểm mong muốn
 **8.0 - 9.0**
@@ -20,4 +20,4 @@ Lý do:
   - Tham khảo cách tổ chức chương trình phần bắt đầu : *https://www.youtube.com/playlist?list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx*
 
   ## Demo
-  Link video demo: *https://youtu.be/C5vcAYJ38Uw*
+  Link video demo: *https://youtu.be/YjUJOVz9IuM*
